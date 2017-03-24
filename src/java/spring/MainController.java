@@ -24,7 +24,12 @@ public class MainController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {
-        map.put("membriList", MembriDao.retrieveAll());
-        return "membriList";
+        return "index";
+    }
+    
+    @RequestMapping(value = "/doRegistration", method = RequestMethod.GET)
+    public String registration(ModelMap map)
+    {
+        return "index";
     }
 }
