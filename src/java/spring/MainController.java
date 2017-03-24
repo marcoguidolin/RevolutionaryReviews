@@ -1,6 +1,6 @@
 package spring;
 
-import CRUD.CRUDMembri;
+import dao.MembriDao;
 import hibernate.HibernateUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +24,7 @@ public class MainController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {
-        map.put("membriList", new CRUDMembri(HibernateUtil.getSessionFactory()).retrieveAll());
+        map.put("membriList", MembriDao.retrieveAll());
         return "membriList";
     }
 }

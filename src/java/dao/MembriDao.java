@@ -3,29 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CRUD;
+package dao;
 
+import hibernate.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import pojo.Membri;
 
 /**
  *
  * @author FSEVERI\parlato2889
  */
-public class CRUDMembri
+public class MembriDao
 {
-    private static SessionFactory factory;
-    
-    public CRUDMembri(SessionFactory factory)
-    {
-        CRUDMembri.factory = factory;
-    }
     
     public static List<Membri> retrieveAll()
     {
-        Session session = factory.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         
         List<Membri> membriList = session.createQuery("from Membri").list();
         
