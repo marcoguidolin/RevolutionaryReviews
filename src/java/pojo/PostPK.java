@@ -14,24 +14,28 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author FSEVERI\parlato2889
+ * @author matte
  */
 @Embeddable
 public class PostPK implements Serializable
 {
+
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "Membro")
     private String membro;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 4)
     @Column(name = "Evento")
-    private int evento;
+    private String evento;
 
     public PostPK()
     {
     }
 
-    public PostPK(String membro, int evento)
+    public PostPK(String membro, String evento)
     {
         this.membro = membro;
         this.evento = evento;
@@ -47,12 +51,12 @@ public class PostPK implements Serializable
         this.membro = membro;
     }
 
-    public int getEvento()
+    public String getEvento()
     {
         return evento;
     }
 
-    public void setEvento(int evento)
+    public void setEvento(String evento)
     {
         this.evento = evento;
     }
@@ -62,7 +66,7 @@ public class PostPK implements Serializable
     {
         int hash = 0;
         hash += (membro != null ? membro.hashCode() : 0);
-        hash += (int) evento;
+        hash += (evento != null ? evento.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +83,7 @@ public class PostPK implements Serializable
         {
             return false;
         }
-        if (this.evento != other.evento)
+        if ((this.evento == null && other.evento != null) || (this.evento != null && !this.evento.equals(other.evento)))
         {
             return false;
         }

@@ -8,7 +8,7 @@ package dao;
 import hibernate.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
-import pojo.Membri;
+import pojo.Membro;
 
 /**
  *
@@ -17,14 +17,27 @@ import pojo.Membri;
 public class MembriDao
 {
     
-    public static List<Membri> retrieveAll()
+    public static List<Membro> retrieveAll()
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
-        List<Membri> membriList = session.createQuery("from Membri").list();
+        List<Membro> membriList = session.createQuery("from Membro").list();
         
         return membriList;
     }
     
-    
+    public static Membro checkLogin(String username, String password)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        List<Membro> membriList = session.createQuery("from Membro").list();
+        for(Membro m : membriList)
+        {
+            if(username.equals(m.getNome()) && password.equals(m.getPassword()))
+            {
+                return m;
+            }
+        }
+        return null;
+    }
 }

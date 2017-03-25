@@ -26,14 +26,15 @@ public class HibernateUtil
         {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = new AnnotationConfiguration().configure()
+            sessionFactory = new AnnotationConfiguration()
                     .addPackage("pojo")
-                    .addAnnotatedClass(Artisti.class)
-                    .addAnnotatedClass(Categorie.class)
-                    .addAnnotatedClass(Eventi.class)
-                    .addAnnotatedClass(Membri.class)
+                    .addAnnotatedClass(Artista.class)
+                    .addAnnotatedClass(Categoria.class)
+                    .addAnnotatedClass(Evento.class)
+                    .addAnnotatedClass(Membro.class)
                     .addAnnotatedClass(Post.class)
                     .addAnnotatedClass(PostPK.class)
+                    .configure()
                     .buildSessionFactory();
         }
         catch (Throwable ex)

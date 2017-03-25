@@ -18,36 +18,38 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FSEVERI\parlato2889
+ * @author matte
  */
 @Entity
-@Table(name = "POST")
+@Table(name = "post")
+@NamedQueries(
+{
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
+})
 public class Post implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
-    
     @EmbeddedId
     protected PostPK postPK;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 1000)
     @Column(name = "Commento")
     private String commento;
-    
+    @Basic(optional = false)
     @NotNull
     @Column(name = "Voto")
     private int voto;
-    
     @JoinColumn(name = "Membro", referencedColumnName = "Nickname", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Membri membri;
-    
+    private Membro membro1;
     @JoinColumn(name = "Evento", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Eventi eventi;
+    private Evento evento1;
 
     public Post()
     {
@@ -65,7 +67,7 @@ public class Post implements Serializable
         this.voto = voto;
     }
 
-    public Post(String membro, int evento)
+    public Post(String membro, String evento)
     {
         this.postPK = new PostPK(membro, evento);
     }
@@ -100,24 +102,24 @@ public class Post implements Serializable
         this.voto = voto;
     }
 
-    public Membri getMembri()
+    public Membro getMembro1()
     {
-        return membri;
+        return membro1;
     }
 
-    public void setMembri(Membri membri)
+    public void setMembro1(Membro membro1)
     {
-        this.membri = membri;
+        this.membro1 = membro1;
     }
 
-    public Eventi getEventi()
+    public Evento getEvento1()
     {
-        return eventi;
+        return evento1;
     }
 
-    public void setEventi(Eventi eventi)
+    public void setEvento1(Evento evento1)
     {
-        this.eventi = eventi;
+        this.evento1 = evento1;
     }
 
     @Override

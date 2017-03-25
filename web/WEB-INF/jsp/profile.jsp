@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 24-mar-2017, 17.25.56
+    Document   : profile
+    Created on : 25-mar-2017, 12.33.20
     Author     : matte
 --%>
 
@@ -17,7 +17,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Home | SoundZone</title>
+        <title>Profilo | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -120,8 +120,48 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Home</span> <small>Home di SoundZone</small></h1>
+                        <h1><span class="popcolor">#Profilo</span> <small>Gestisci il tuo profilo su SoundZone</small></h1>
                     </div>
+                </div>
+                <div class="row">
+                    <%
+                        if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
+                    %>
+                    <p>Per poter visualizzare il contenuto di questa pagina devi prima effettuare l'accesso.
+                    <%
+                        } else {
+                    %>
+                    <div class="col-xs-12 col-md-9">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large">
+                            </div>
+                            <div class="col-md-7">
+                                <h2>Le tue informazioni</h2>
+                                Nickname: ${userinfo.nickname}
+                                <br>
+                                Email: ${userinfo.mail}
+                                <br>
+                                Nome: ${userinfo.nome}
+                                <br>
+                                Cognome: ${userinfo.cognome}
+                                <br>
+                            </div>
+                        </div>
+                                
+                        <br>
+                        <br>
+                        <h2>I tuoi interessi</h2>
+                        (nessun interesse)
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#">Modifica password</a>
+                        <br>
+                        <a href="#">Elimina il tuo account</a>
+                    </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </div>
