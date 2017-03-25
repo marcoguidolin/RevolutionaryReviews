@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pojo;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,12 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -29,40 +20,31 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "membri")
-@NamedQueries(
-{
-    @NamedQuery(name = "Membro.findAll", query = "SELECT m FROM Membro m")
-})
 public class Membro implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Nickname")
     private String nickname;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "Password")
     private String password;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Cognome")
     private String cognome;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 50)
     @Column(name = "Mail")
     private String mail;
+    
     @JoinTable(name = "membro_categoria", joinColumns =
     {
         @JoinColumn(name = "Membro", referencedColumnName = "Nickname")
@@ -72,6 +54,7 @@ public class Membro implements Serializable
     })
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Categoria> categoriaList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER)
     private List<Post> postList;
 
@@ -192,5 +175,6 @@ public class Membro implements Serializable
     {
         return "Membro{" + "nickname=" + nickname + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
     }
+    
 
 }

@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pojo;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,27 +18,22 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "categorie")
-@NamedQueries(
-{
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
-})
 public class Categoria implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 4)
     @Column(name = "Id")
     private String id;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
+    
     @ManyToMany(mappedBy = "categoriaList", fetch = FetchType.EAGER)
     private List<Membro> membroList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.EAGER)
     private List<Evento> eventoList;
 
@@ -133,7 +119,8 @@ public class Categoria implements Serializable
     @Override
     public String toString()
     {
-        return "pojo.Categoria[ id=" + id + " ]";
+        return "Categoria{" + "id=" + id + ", nome=" + nome + ", membroList=" + membroList + ", eventoList=" + eventoList + '}';
     }
+
     
 }

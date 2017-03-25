@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pojo;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -25,28 +16,22 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "artisti")
-@NamedQueries(
-{
-    @NamedQuery(name = "Artista.findAll", query = "SELECT a FROM Artista a")
-})
 public class Artista implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 4)
     @Column(name = "Id")
     private String id;
-    @Basic(optional = false)
+    
     @NotNull
-    @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
-    @Size(max = 30)
+    
     @Column(name = "Cognome")
     private String cognome;
+    
     @ManyToMany(mappedBy = "artistaList", fetch = FetchType.EAGER)
     private List<Evento> eventoList;
 
@@ -132,7 +117,8 @@ public class Artista implements Serializable
     @Override
     public String toString()
     {
-        return "pojo.Artista[ id=" + id + " ]";
+        return "Artista{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", eventoList=" + eventoList + '}';
     }
+
     
 }
