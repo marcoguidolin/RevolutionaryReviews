@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -21,41 +23,42 @@ public class Artista implements Serializable
     private static final long serialVersionUID = 1L;
     
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @NotNull
     @Column(name = "Nome")
     private String nome;
     
+    @Size(max = 30)
     @Column(name = "Cognome")
     private String cognome;
     
-    @ManyToMany(mappedBy = "artistaList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "artistaList")
     private List<Evento> eventoList;
 
     public Artista()
     {
     }
 
-    public Artista(String id)
+    public Artista(Integer id)
     {
         this.id = id;
     }
 
-    public Artista(String id, String nome)
+    public Artista(Integer id, String nome)
     {
         this.id = id;
         this.nome = nome;
     }
 
-    public String getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
@@ -119,6 +122,5 @@ public class Artista implements Serializable
     {
         return "Artista{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", eventoList=" + eventoList + '}';
     }
-
     
 }

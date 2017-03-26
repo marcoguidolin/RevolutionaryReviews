@@ -5,7 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -23,41 +24,41 @@ public class Categoria implements Serializable
     private static final long serialVersionUID = 1L;
     
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @NotNull
     @Column(name = "Nome")
     private String nome;
     
-    @ManyToMany(mappedBy = "categoriaList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "categoriaList")
     private List<Membro> membroList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
     private List<Evento> eventoList;
 
     public Categoria()
     {
     }
 
-    public Categoria(String id)
+    public Categoria(Integer id)
     {
         this.id = id;
     }
 
-    public Categoria(String id, String nome)
+    public Categoria(Integer id, String nome)
     {
         this.id = id;
         this.nome = nome;
     }
 
-    public String getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
@@ -121,6 +122,5 @@ public class Categoria implements Serializable
     {
         return "Categoria{" + "id=" + id + ", nome=" + nome + ", membroList=" + membroList + ", eventoList=" + eventoList + '}';
     }
-
     
 }

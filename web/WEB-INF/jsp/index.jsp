@@ -45,13 +45,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/WebCommunity/">SoundZone</a>
+                    <a class="navbar-brand" href="#">SoundZone</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/WebCommunity/">Home</a></li>
+                        <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">Categorie</a></li>
                         <li><a href="#">Artisti</a></li>
                         <li><a href="#">Eventi</a></li>
@@ -97,7 +97,7 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.nickname}
+                                            Ciao ${userinfo.username}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>

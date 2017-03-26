@@ -12,20 +12,19 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class PostPK implements Serializable
 {
-
     @NotNull
     @Column(name = "Membro")
     private String membro;
     
     @NotNull
     @Column(name = "Evento")
-    private String evento;
+    private int evento;
 
     public PostPK()
     {
     }
 
-    public PostPK(String membro, String evento)
+    public PostPK(String membro, int evento)
     {
         this.membro = membro;
         this.evento = evento;
@@ -41,12 +40,12 @@ public class PostPK implements Serializable
         this.membro = membro;
     }
 
-    public String getEvento()
+    public int getEvento()
     {
         return evento;
     }
 
-    public void setEvento(String evento)
+    public void setEvento(int evento)
     {
         this.evento = evento;
     }
@@ -56,7 +55,7 @@ public class PostPK implements Serializable
     {
         int hash = 0;
         hash += (membro != null ? membro.hashCode() : 0);
-        hash += (evento != null ? evento.hashCode() : 0);
+        hash += (int) evento;
         return hash;
     }
 
@@ -73,7 +72,7 @@ public class PostPK implements Serializable
         {
             return false;
         }
-        if ((this.evento == null && other.evento != null) || (this.evento != null && !this.evento.equals(other.evento)))
+        if (this.evento != other.evento)
         {
             return false;
         }
@@ -85,7 +84,5 @@ public class PostPK implements Serializable
     {
         return "PostPK{" + "membro=" + membro + ", evento=" + evento + '}';
     }
-
-    
     
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,8 +25,8 @@ public class Membro implements Serializable
     
     @Id
     @NotNull
-    @Column(name = "Nickname")
-    private String nickname;
+    @Column(name = "Username")
+    private String username;
     
     @NotNull
     @Column(name = "Password")
@@ -47,43 +46,43 @@ public class Membro implements Serializable
     
     @JoinTable(name = "membro_categoria", joinColumns =
     {
-        @JoinColumn(name = "Membro", referencedColumnName = "Nickname")
+        @JoinColumn(name = "Membro", referencedColumnName = "Username")
     }, inverseJoinColumns =
     {
         @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     })
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Categoria> categoriaList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1")
     private List<Post> postList;
 
     public Membro()
     {
     }
 
-    public Membro(String nickname)
+    public Membro(String username)
     {
-        this.nickname = nickname;
+        this.username = username;
     }
 
-    public Membro(String nickname, String password, String nome, String cognome, String mail)
+    public Membro(String username, String password, String nome, String cognome, String mail)
     {
-        this.nickname = nickname;
+        this.username = username;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
         this.mail = mail;
     }
 
-    public String getNickname()
+    public String getUsername()
     {
-        return nickname;
+        return username;
     }
 
-    public void setNickname(String nickname)
+    public void setUsername(String username)
     {
-        this.nickname = nickname;
+        this.username = username;
     }
 
     public String getPassword()
@@ -150,7 +149,7 @@ public class Membro implements Serializable
     public int hashCode()
     {
         int hash = 0;
-        hash += (nickname != null ? nickname.hashCode() : 0);
+        hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
@@ -163,7 +162,7 @@ public class Membro implements Serializable
             return false;
         }
         Membro other = (Membro) object;
-        if ((this.nickname == null && other.nickname != null) || (this.nickname != null && !this.nickname.equals(other.nickname)))
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username)))
         {
             return false;
         }
@@ -173,8 +172,7 @@ public class Membro implements Serializable
     @Override
     public String toString()
     {
-        return "Membro{" + "nickname=" + nickname + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
+        return "Membro{" + "username=" + username + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
     }
     
-
 }
