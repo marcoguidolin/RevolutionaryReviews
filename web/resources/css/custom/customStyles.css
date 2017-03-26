@@ -42,15 +42,12 @@ body{
 .btn{
     border-radius: 45px;
     border: 0px;
-    background: -webkit-linear-gradient(45deg, rgba(231,53,139,1) 0%, rgba(247,130,25,1) 100%);
-    -webkit-transition: background-image 0.2s ease-in-out;
-    transition: background-image 0.2s ease-in-out;
+    background-image: url("../../gradient.PNG");
+    transition: all 0.2s ease-in-out;
 }
 
 .btn:hover{
-    background: -webkit-linear-gradient(45deg, rgba(21,111,187,1) 0%, rgba(231,53,139,1) 100%);
-    -webkit-transition: background-image 0.2s ease-in-out;
-    transition: background-image 0.2s ease-in-out;
+    background-position: -330px 0px;
 }
 
 .form-control {
