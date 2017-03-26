@@ -33,7 +33,7 @@ public class MembriDao
         List<Membro> membriList = session.createQuery("from Membro").list();
         for(Membro m : membriList)
         {
-            if(username.equals(m.getNome()) && password.equals(m.getPassword()))
+            if(username.equals(m.getUsername()) && password.equals(m.getPassword()))
             {
                 return m;
             }

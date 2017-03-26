@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,12 +30,12 @@ public class Post implements Serializable
     @Column(name = "Voto")
     private int voto;
     
-    @JoinColumn(name = "Membro", referencedColumnName = "Nickname", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "Membro", referencedColumnName = "Username", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Membro membro1;
     
     @JoinColumn(name = "Evento", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Evento evento1;
 
     public Post()
@@ -55,7 +54,7 @@ public class Post implements Serializable
         this.voto = voto;
     }
 
-    public Post(String membro, String evento)
+    public Post(String membro, int evento)
     {
         this.postPK = new PostPK(membro, evento);
     }

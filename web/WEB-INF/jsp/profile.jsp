@@ -97,7 +97,7 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.nickname}
+                                            Ciao ${userinfo.username}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -138,7 +138,7 @@
                             </div>
                             <div class="col-md-7">
                                 <h2>Le tue informazioni</h2>
-                                Nickname: ${userinfo.nickname}
+                                Nickname: ${userinfo.username}
                                 <br>
                                 Email: ${userinfo.mail}
                                 <br>

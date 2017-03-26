@@ -6,7 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -29,9 +30,9 @@ public class Evento implements Serializable
     private static final long serialVersionUID = 1L;
     
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    private String id;
+    private Integer id;
     
     @NotNull
     @Column(name = "Titolo")
@@ -53,26 +54,26 @@ public class Evento implements Serializable
     {
         @JoinColumn(name = "Artista", referencedColumnName = "Id")
     })
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Artista> artistaList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1")
     private List<Post> postList;
     
     @JoinColumn(name = "Categoria", referencedColumnName = "Id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false)
     private Categoria categoria;
 
     public Evento()
     {
     }
 
-    public Evento(String id)
+    public Evento(Integer id)
     {
         this.id = id;
     }
 
-    public Evento(String id, String titolo, String luogo, Date data)
+    public Evento(Integer id, String titolo, String luogo, Date data)
     {
         this.id = id;
         this.titolo = titolo;
@@ -80,12 +81,12 @@ public class Evento implements Serializable
         this.data = data;
     }
 
-    public String getId()
+    public Integer getId()
     {
         return id;
     }
 
-    public void setId(String id)
+    public void setId(Integer id)
     {
         this.id = id;
     }
@@ -180,6 +181,4 @@ public class Evento implements Serializable
         return "Evento{" + "id=" + id + ", titolo=" + titolo + ", luogo=" + luogo + ", data=" + data + ", artistaList=" + artistaList + ", postList=" + postList + ", categoria=" + categoria + '}';
     }
 
-    
-    
 }
