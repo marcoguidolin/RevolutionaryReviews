@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
  * @author matte
  */
 @Entity
-@Table(name = "eventi")
+@Table(name = "EVENTI")
 public class Evento implements Serializable
 {
     private static final long serialVersionUID = 1L;
