@@ -1,17 +1,43 @@
+@font-face {
+    font-family: 'SEGOEUIL';
+    src: url('../../fonts/SEGOEUIL.eot');
+    src: local('SEGOEUIL'), url('../../fonts/SEGOEUIL.woff') format('woff'), url('../../fonts/SEGOEUIL.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Segoe UI'), url('../../fonts/segoeui.woff') format('woff');
+}
+
+html{
+    background-image: linear-gradient(to bottom right,rgb(32, 3, 24) 0%,rgb(7, 24, 41) 76.1%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
 body{
-    background: #383838;
     color: white;
+    background: transparent;
+    font-family: 'Segoe UI';
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'SEGOEUIL';
 }
 
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
     overflow: hidden;
-    color: black;
+    background: #32313D;
+    box-shadow: 0px 10px 50px -24px rgba(120,120,120,1);
 }
 
 #login-dp .bottom{
-    background-color: #080808;
+    background-image: linear-gradient(to bottom,rgba(239, 99, 60, 0.6) 0%,rgba(241, 26, 147, 0.6) 100%);
     clear: both;
     color: white;
     padding: 14px;
@@ -42,12 +68,14 @@ body{
 .btn{
     border-radius: 45px;
     border: 0px;
-    background-image: url("../../gradient.PNG");
+    background: #F7F7F7;
     transition: all 0.2s ease-in-out;
+    color: black;
 }
 
 .btn:hover{
-    background-position: -330px 0px;
+    color: black;
+    background: #D4D4D4;
 }
 
 .form-control {
@@ -55,9 +83,10 @@ body{
 }
 
 .form-control:focus {
-    border-color: rgb(21,111,187);
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075) !important;
     border-radius: 45px;
-    box-shadow: inset 0 1px 1px rgba(21,111,187, 0.075), 0 0 8px rgba(21,111,187, 0.6);
+    box-shadow: none !important;
 }
 
 .navbar-inverse .navbar-brand{
@@ -79,34 +108,48 @@ body{
 }
 
 .popcolor{
-    background-image: -webkit-linear-gradient(45deg, rgba(231,53,139,1) 0%, rgba(247,130,25,1) 100%);
+    background-image: linear-gradient(to bottom,rgb(239, 99, 60) 0%,rgb(241, 26, 147) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .page-header {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(94,89,93,0.6);
 }
 
 .user-img-circle-large{
     margin-top: 20px;
     width: 128px;
     height: 128px;
+    box-shadow: 0px 0px 0px 15px rgba(120,120,120,0.5);
 }
 
 .user-img-circle-small{
-    margin-top: 20px;
+    margin: 20px;
     width: 64px;
     height: 64px;
+    box-shadow: 0px 0px 0px 15px rgba(120,120,120,0.5);
 }
 
 a, a:link{
-    color: rgba(231,53,139,1);
+    color: white;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
 }
 
 a:hover{
-    color: rgba(247,130,25,1);
+    color: white;
 }
 
+.navbar-inverse{
+    background-color: rgba(94,89,93,0.2);
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover{
+    background-color: rgba(94,89,93,0.3);
+    box-shadow: inset 0px -1px 0px 0px rgb(241, 26, 147);
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+    background-color: rgba(94,89,93,0.3);
+    box-shadow: inset 0px 1px 0px 0px rgb(241, 26, 147);
+}

@@ -17,7 +17,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Profilo | SoundZone</title>
+        <title>Profilo | NomeSito</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/WebCommunity/">SoundZone</a>
+                    <a class="navbar-brand" href="/WebCommunity/">NomeSito</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,11 +97,9 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
-                                            <br>
-                                            <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
+                                            <h4>Ciao ${userinfo.username}</h4>
                                         </div>
-                                        <br>
+                                        <br> 
                                         <div class="bottom">
                                             <a href="/WebCommunity/doLogout"><b>Disconnetti</b></a>
                                         </div>
@@ -120,14 +118,15 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Profilo</span> <small>Gestisci il tuo profilo su SoundZone</small></h1>
+                        <h1><span class="popcolor">#Profilo</span> <small>Gestisci il tuo profilo</small></h1>
                     </div>
                 </div>
                 <div class="row">
                     <%
                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
                     %>
-                    <p>Per poter visualizzare il contenuto di questa pagina devi prima effettuare l'accesso.
+                    <h2>Per poter visualizzare il contenuto di questa pagina devi prima effettuare l'accesso.</h2>
+                    <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
                     <%
                         } else {
                     %>

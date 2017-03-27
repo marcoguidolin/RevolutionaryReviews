@@ -17,7 +17,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Home | SoundZone</title>
+        <title>Home | NomeSito</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +45,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">SoundZone</a>
+                    <a class="navbar-brand" href="#">NomeSito</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -97,8 +97,7 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
-                                            <br>
+                                            <h4>Ciao ${userinfo.username}</h4>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
                                         <br>
@@ -120,7 +119,7 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Home</span> <small>Home di SoundZone</small></h1>
+                        <h1><span class="popcolor">#Home</span> <small>Benvenuto</small></h1>
                     </div>
                 </div>
             </div>
