@@ -110,17 +110,21 @@ public class MainController
         return "categories";
     }
     
-    @RequestMapping(value = "/event",
+    @RequestMapping(value = "/events",
             params = {
                 "category"
             },
             method = RequestMethod.GET)
-    public String event(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
+    public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
     {
-        CategorieDao mapping = new CategorieDao();
-        List<Evento> eventoList = EventiDao.retrieveByCat(category);
-        request.setAttribute("eventList", eventoList);
-        return "event";
+        if((category != null) && (!category.equals("0"))){
+            List<Evento> eventoList = EventiDao.retrieveByCat(category);
+            request.setAttribute("eventList", eventoList);
+        }else{
+            List<Evento> eventoList = EventiDao.retrieveAll();
+            request.setAttribute("eventList", eventoList);
+        }
+        return "events";
     }
     
     @RequestMapping(value = "/eventDetail",

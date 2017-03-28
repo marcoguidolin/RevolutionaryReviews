@@ -127,7 +127,7 @@
                 <div class="row">
                     <ul>
                     <c:forEach items="${catList}" var="catItem">
-                        <li><a href="event?category=${catItem.id}">${catItem.nome}</a></li>
+                        <li><a href="events?category=${catItem.id}">${catItem.nome}</a></li>
                     </c:forEach>
                     </ul>
                 </div>

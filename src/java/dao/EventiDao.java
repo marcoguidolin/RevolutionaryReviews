@@ -35,4 +35,12 @@ public class EventiDao {
         }
         return null;
     }
+
+    public static List<Evento> retrieveAll() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        List<Evento> eventoList = session.createQuery("from Evento").list();
+        
+        return eventoList;
+    }
 }
