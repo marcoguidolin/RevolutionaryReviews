@@ -18,7 +18,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Categorie | SoundZone</title>
+        <title>Eventi | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -121,7 +121,7 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Categorie</span> <small>Home di SoundZone</small></h1>
+                        <h1><span class="popcolor">#Eventi</span> <small>Home di SoundZone</small></h1>
                     </div>
                 </div>
                 <div class="row">
