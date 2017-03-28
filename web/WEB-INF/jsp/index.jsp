@@ -52,7 +52,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Categorie</a></li>
+                        <li><a href="/WebCommunity/categories">Categorie</a></li>
                         <li><a href="#">Artisti</a></li>
                         <li><a href="#">Eventi</a></li>
                     </ul>

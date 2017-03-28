@@ -9,6 +9,7 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
@@ -44,11 +45,14 @@ public class MembriDao
         Membro membro = new Membro(username, password, name, surname, mail);
         List<Categoria> catList = session.createQuery("from Categoria").list();
         List<Categoria> newList;
-        newList = new ArrayList<Categoria>();
+    newList = new ArrayList<>();
         for(int i = 0; i<catList.size(); i++){
             for(int j = 0; j<cat.size(); j++){
                 if(Objects.equals(catList.get(i).getId(), cat.get(j)))
+                {
                     newList.add(catList.get(i));
+                    cat.remove(j);
+                }
             }
         }
         membro.setCategoriaList(newList);
@@ -58,4 +62,16 @@ public class MembriDao
         
         
     }
+    
+    public static void remove(String m){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Query q = session.createQuery("delete Membro where username = " + m);
+        q.executeUpdate();
+        
+        session.getTransaction().commit();
+    }
+    
+    
 }

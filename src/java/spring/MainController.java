@@ -1,7 +1,9 @@
 package spring;
 
 import dao.CategorieDao;
+import dao.EventiDao;
 import dao.MembriDao;
+import dao.PostDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,5 +88,54 @@ public class MainController
         session.setAttribute("username", null);
         session.invalidate();
         return "redirect:./";
+    }
+    
+    @RequestMapping(value = "/doRemove", method = RequestMethod.GET)
+    public String doRemove(ModelMap map, HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String s = (String) session.getAttribute("username");
+        MembriDao.remove(s);
+        session.setAttribute("username", null);
+        session.invalidate();
+        return "redirect:./";
+    }
+    
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public String categories(ModelMap map, HttpServletRequest request)
+    {
+        CategorieDao mapping = new CategorieDao();
+        List<Categoria> categoriaList = CategorieDao.retrieveAll();
+        request.setAttribute("catList", categoriaList);
+        return "categories";
+    }
+    
+    @RequestMapping(value = "/event",
+            params = {
+                "category"
+            },
+            method = RequestMethod.GET)
+    public String event(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
+    {
+        CategorieDao mapping = new CategorieDao();
+        List<Evento> eventoList = EventiDao.retrieveByCat(category);
+        request.setAttribute("eventList", eventoList);
+        return "event";
+    }
+    
+    @RequestMapping(value = "/eventDetail",
+            params = {
+                "id"
+            },
+            method = RequestMethod.GET)
+    public String eventDetail(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+    {
+        CategorieDao mapping = new CategorieDao();
+        Evento evento = EventiDao.retrieveSingle(id);
+        request.setAttribute("eventDetail", evento);
+        Integer idInt = Integer.parseInt(id);
+        List<Post> postList = PostDao.retrieveByEvent(idInt);
+        request.setAttribute("postList", postList);
+        return "eventDetail";
     }
 }

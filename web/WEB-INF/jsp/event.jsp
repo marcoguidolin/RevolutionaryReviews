@@ -1,9 +1,10 @@
 <%-- 
-    Document   : profile
-    Created on : 25-mar-2017, 12.33.20
+    Document   : index
+    Created on : 24-mar-2017, 17.25.56
     Author     : matte
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +18,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Profilo | NomeSito</title>
+        <title>Categorie | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -45,14 +46,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/WebCommunity/">NomeSito</a>
+                    <a class="navbar-brand" href="#">SoundZone</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/WebCommunity/">Home</a></li>
-                        <li><a href="#">Categorie</a></li>
+                        <li><a href="/WebCommunity">Home</a></li>
+                        <li class="active"><a href="#">Categorie</a></li>
                         <li><a href="#">Artisti</a></li>
                         <li><a href="#">Eventi</a></li>
                     </ul>
@@ -97,9 +98,11 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            <h4>Ciao ${userinfo.username}</h4>
+                                            Ciao ${userinfo.username}
+                                            <br>
+                                            <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
-                                        <br> 
+                                        <br>
                                         <div class="bottom">
                                             <a href="/WebCommunity/doLogout"><b>Disconnetti</b></a>
                                         </div>
@@ -118,49 +121,15 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Profilo</span> <small>Gestisci il tuo profilo</small></h1>
+                        <h1><span class="popcolor">#Categorie</span> <small>Home di SoundZone</small></h1>
                     </div>
                 </div>
                 <div class="row">
-                    <%
-                        if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
-                    %>
-                    <h2>Per poter visualizzare il contenuto di questa pagina devi prima effettuare l'accesso.</h2>
-                    <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
-                    <%
-                        } else {
-                    %>
-                    <div class="col-xs-12 col-md-9">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large">
-                            </div>
-                            <div class="col-md-7">
-                                <h2>Le tue informazioni</h2>
-                                Nickname: ${userinfo.username}
-                                <br>
-                                Email: ${userinfo.mail}
-                                <br>
-                                Nome: ${userinfo.nome}
-                                <br>
-                                Cognome: ${userinfo.cognome}
-                                <br>
-                            </div>
-                        </div>
-                                
-                        <br>
-                        <br>
-                        <h2>I tuoi interessi</h2>
-                        (nessun interesse)
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <a href="#">Modifica password</a>
-                        <br>
-                        <a href="doRemove">Elimina il tuo account</a>
-                    </div>
-                    <%
-                        }
-                    %>
+                    <ul>
+                    <c:forEach items="${eventList}" var="eventItem">
+                        <li><a href="eventDetail?id=${eventItem.id}">${eventItem.titolo}</a></li>
+                    </c:forEach>
+                    </ul>
                 </div>
             </div>
         </div>
