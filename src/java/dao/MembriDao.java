@@ -8,6 +8,8 @@ package dao;
 import hibernate.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.Categoria;
 import pojo.Membro;
 
 /**
@@ -16,15 +18,6 @@ import pojo.Membro;
  */
 public class MembriDao
 {
-    
-    public static List<Membro> retrieveAll()
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        
-        List<Membro> membriList = session.createQuery("from Membro").list();
-        
-        return membriList;
-    }
     
     public static Membro checkLogin(String username, String password)
     {
@@ -39,5 +32,18 @@ public class MembriDao
             }
         }
         return null;
+    }
+    
+    public static void register(String username, String password, String name, String surname, String mail){
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        
+        Membro membro = new Membro(username, password, name, surname, mail);
+        session.save(membro);
+
+        session.getTransaction().commit();
+        
+        
     }
 }

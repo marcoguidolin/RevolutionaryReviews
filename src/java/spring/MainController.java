@@ -50,10 +50,13 @@ public class MainController
     
     @RequestMapping(value = "/doRegistration",
             params = {
-                "username", "password", "rPassword", "name", "surname"
-            }, method = RequestMethod.GET)
-    public String doRegistration(ModelMap map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rPassword") String rPassword, @RequestParam(value = "surname") String surname, @RequestParam(value = "name") String name)
+                "username", "password", "rePassword", "name", "surname", "mail"
+            }, method = RequestMethod.POST)
+    public String doRegistration(ModelMap map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rePassword") String rePassword, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
     {
+        if(password.equals(rePassword)){
+            MembriDao.register(username, password, name, surname, mail);
+        }
         return "index";
     }
     

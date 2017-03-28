@@ -124,7 +124,7 @@
                         <h1><span class="popcolor">Registrati</span> <small>SoundZone</small></h1>
                     </div>
                     <div class="col-sm-6 col-xs-8">
-                        <form class="form" method="POST" action="/WebCommunity/doRegister" id="login-nav">
+                        <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
                             <div class="form-group">
                                 <label>Nome</label>
                                 <input type="text" class="form-control" name="name" placeholder="Nome" required>
