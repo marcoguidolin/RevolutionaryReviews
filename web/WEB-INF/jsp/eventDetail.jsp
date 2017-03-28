@@ -125,13 +125,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <ul>
-                        <li>id=${eventDetail.id}</li>
-                        <li>titolo=${eventDetail.titolo}</li>
-                        <li>luogo=${eventDetail.luogo}</li>
-                        <li>data=${eventDetail.data}</li>
-                        <li>descrizione=?</li>
-                    </ul>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">${eventDetail.titolo}</h3>
+                        </div>
+                        <div class="panel-body" style="color:black;">
+                            Luogo: ${eventDetail.luogo}<br>
+                            Data: ${eventDetail.data}<br>
+                            Descrizione;
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <%
@@ -145,7 +148,7 @@
                             <input type="text" class="form-control" name="comment" placeholder="Inserisci il tuo commento qui" required>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Registrati</button>
+                            <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Commenta</button>
                         </div>
                     </form>
                     <%}%>

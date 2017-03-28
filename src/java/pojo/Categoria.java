@@ -37,6 +37,8 @@ public class Categoria implements Serializable
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
     private List<Evento> eventoList;
+    
+    //private Integer eventoLength = 0;
 
     public Categoria()
     {
@@ -81,6 +83,7 @@ public class Categoria implements Serializable
     public void setMembroList(List<Membro> membroList)
     {
         this.membroList = membroList;
+        //eventoLength = this.membroList.size();
     }
 
     public List<Evento> getEventoList()

@@ -125,11 +125,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <ul>
+                    <div class="list-group">
                     <c:forEach items="${catList}" var="catItem">
-                        <li><a href="events?category=${catItem.id}">${catItem.nome}</a></li>
+                        <a style="color:black;" href="events?category=${catItem.id}" class="list-group-item">
+                            <span class="badge">${catItem.getEventoList().size()}</span>
+                            ${catItem.nome}
+                        </a>
                     </c:forEach>
-                    </ul>
+                    </div>
                 </div>
             </div>
         </div>
