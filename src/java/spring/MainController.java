@@ -94,10 +94,10 @@ public class MainController
     public String doRemove(ModelMap map, HttpServletRequest request)
     {
         HttpSession session = request.getSession();
-        String s = (String) session.getAttribute("username");
-        MembriDao.remove(s);
-        session.setAttribute("username", null);
-        session.invalidate();
+        Membro m = (Membro) session.getAttribute("userinfo");
+        MembriDao.remove(m);
+        //session.setAttribute("username", null);
+        //session.invalidate();
         return "redirect:./";
     }
     

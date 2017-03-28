@@ -63,12 +63,13 @@ public class MembriDao
         
     }
     
-    public static void remove(String m){
+    public static void remove(Membro m){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
-        Query q = session.createQuery("delete Membro where username = " + m);
-        q.executeUpdate();
+        List<Categoria> catList = session.createQuery("from Categoria c where c.membroList = '" + m + "'").list();
+        
+        
         
         session.getTransaction().commit();
     }
