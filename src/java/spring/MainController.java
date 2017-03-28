@@ -50,12 +50,12 @@ public class MainController
     
     @RequestMapping(value = "/doRegistration",
             params = {
-                "username", "password", "rePassword", "name", "surname", "mail"
+                "username", "password", "rePassword", "name", "surname", "mail", "cat"
             }, method = RequestMethod.POST)
-    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rePassword") String rePassword, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
+    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rePassword") String rePassword, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail, @RequestParam(value = "cat") List<Integer> cat)
     {
         if(password.equals(rePassword)){
-            MembriDao.register(username, password, name, surname, mail);
+            MembriDao.register(username, password, name, surname, mail, cat);
         }else{
             return registration(map, request);
         }

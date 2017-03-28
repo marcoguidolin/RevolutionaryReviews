@@ -6,7 +6,9 @@
 package dao;
 
 import hibernate.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
@@ -34,12 +36,22 @@ public class MembriDao
         return null;
     }
     
-    public static void register(String username, String password, String name, String surname, String mail){
+    public static void register(String username, String password, String name, String surname, String mail, List<Integer> cat){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
         Membro membro = new Membro(username, password, name, surname, mail);
+        List<Categoria> catList = session.createQuery("from Categoria").list();
+        List<Categoria> newList;
+        newList = new ArrayList<Categoria>();
+        for(int i = 0; i<catList.size(); i++){
+            for(int j = 0; j<cat.size(); j++){
+                if(Objects.equals(catList.get(i).getId(), cat.get(j)))
+                    newList.add(catList.get(i));
+            }
+        }
+        membro.setCategoriaList(newList);
         session.save(membro);
 
         session.getTransaction().commit();
