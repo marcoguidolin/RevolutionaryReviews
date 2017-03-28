@@ -1,7 +1,10 @@
 package spring;
 
+import dao.CategorieDao;
 import dao.MembriDao;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,8 +34,11 @@ public class MainController
     }
     
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(ModelMap map)
+    public String registration(ModelMap map, HttpServletRequest request)
     {
+        CategorieDao mapping = new CategorieDao();
+        List<Categoria> categoriaList = CategorieDao.retrieveAll();
+        request.setAttribute("categoriaList", categoriaList);
         return "registration";
     }
     
@@ -42,8 +48,11 @@ public class MainController
         return "profile";
     }
     
-    @RequestMapping(value = "/doRegistration", method = RequestMethod.GET)
-    public String doRegistration(ModelMap map)
+    @RequestMapping(value = "/doRegistration",
+            params = {
+                "username", "password", "rPassword", "name", "surname"
+            }, method = RequestMethod.GET)
+    public String doRegistration(ModelMap map, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rPassword") String rPassword, @RequestParam(value = "surname") String surname, @RequestParam(value = "name") String name)
     {
         return "index";
     }
