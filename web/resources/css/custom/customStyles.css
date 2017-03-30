@@ -12,10 +12,10 @@
 }
 
 html{
-    background-image: linear-gradient(to bottom right,rgb(32, 3, 24) 0%,rgb(7, 24, 41) 76.1%);
+    height: 100%;
+    background: linear-gradient(to bottom right,rgb(32, 3, 24) 0%,rgb(7, 24, 41) 76.1%) no-repeat center center fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
 }
 
 body{
@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .body-container{
-    margin-top: 75px;
+    padding-top: 75px;
 }
 
 .navbar-nav > li > a, .navbar-brand {
@@ -152,4 +152,12 @@ a:hover{
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
     background-color: rgba(94,89,93,0.3);
     box-shadow: inset 0px 1px 0px 0px rgb(241, 26, 147);
+}
+
+.error{
+    border-width: 0px 0 0px 5px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, rgb(239, 99, 60), rgb(241, 26, 147)) 1 100%;
+    margin-left: 20px;
+    padding-left: 20px;
 }

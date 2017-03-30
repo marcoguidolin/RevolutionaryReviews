@@ -37,7 +37,7 @@
     <body>
         <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid centered-content">
-                
+
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -63,7 +63,8 @@
                             <ul id="login-dp" class="dropdown-menu">
                                 <li>
                                     <%
-                                        if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
+                                        if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))
+                                        {
                                     %>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -91,7 +92,8 @@
                                         </div>
                                     </div>
                                     <%
-                                        } else {
+                                    } else
+                                    {
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
@@ -121,54 +123,79 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">Registrati</span> <small>SoundZone</small></h1>
+                        <h1><span class="popcolor">Registrati</span> <small>Entra a far parte della community!</small></h1>
                     </div>
-                    <div class="col-sm-6 col-xs-8">
-                        <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
-                            <div class="form-group">
-                                <label>Nome</label>
-                                <input type="text" class="form-control" name="name" placeholder="Nome" required>
+                    <div class="row">
+                        <%
+                            if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))
+                            {
+                        %>
+                        <div class="col-xs-12 col-md-7">
+                            <div class="row">
+                                <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Nome" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cognome</label>
+                                        <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ripetere password</label>
+                                        <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mail</label>
+                                        <input type="mail" class="form-control" name="mail" placeholder="Mail" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Categorie</label>
+                                        <ul>
+                                            <c:forEach items="${categoriaList}" var="catItem">
+                                                <li style="display:inline;">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" name="cat" value="${catItem.id}">
+                                                            ${catItem.nome}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </c:forEach>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Registrati</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label>Cognome</label>
-                                <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+                        </div>
+                        <div class="col-xs-6 col-md-4 error">
+                            <div class="row">
+                                <c:if test="${error}">
+                                    <h4>Attenzione</h4>
+                                    <p>${messageError}</p>
+                                </c:if>
                             </div>
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Username" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Ripetere password</label>
-                                <input type="password" class="form-control" name="rePassword" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Mail</label>
-                                <input type="mail" class="form-control" name="mail" placeholder="Mail" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Categorie</label>
-                                <ul>
-                                    <c:forEach items="${categoriaList}" var="catItem">
-                                        <li style="display:inline;">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="checkbox" class="form-check-input" name="cat" value="${catItem.id}">
-                                                ${catItem.nome}
-                                            </label>
-                                        </div>
-                                    </li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Registrati</button>
-                            </div>
-                        </form>
+                        </div>
+                        <%
+                        } else
+                        {
+                        %>
                     </div>
+                    <h2>Ti sei già registrato.</h2>
+                    <h4>Puoi gestire il tuo profilo <a href="/WebCommunity/profile" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
         </div>

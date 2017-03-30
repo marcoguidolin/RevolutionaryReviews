@@ -130,7 +130,7 @@
                     <%
                         } else {
                     %>
-                    <div class="col-xs-12 col-md-9">
+                    <div class="col-xs-12 col-md-8">
                         <div class="row">
                             <div class="col-md-3">
                                 <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large">
@@ -153,7 +153,7 @@
                         <h2>I tuoi interessi</h2>
                         (nessun interesse)
                     </div>
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-6 col-md-4">
                         <a href="#">Modifica password</a>
                         <br>
                         <a href="doRemove">Elimina il tuo account</a>
