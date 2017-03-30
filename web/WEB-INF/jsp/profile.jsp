@@ -54,7 +54,7 @@
                         <li><a href="/WebCommunity/">Home</a></li>
                         <li><a href="categories">Categorie</a></li>
                         <li><a href="artists">Artisti</a></li>
-                        <li><a href="events">Eventi</a></li>
+                        <li><a href="events?category=0">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

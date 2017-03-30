@@ -45,7 +45,7 @@ public class MembriDao
         Membro membro = new Membro(username, password, name, surname, mail);
         List<Categoria> catList = session.createQuery("from Categoria").list();
         List<Categoria> newList;
-    newList = new ArrayList<>();
+        newList = new ArrayList<>();
         for(int i = 0; i<catList.size(); i++){
             for(int j = 0; j<cat.size(); j++){
                 if(Objects.equals(catList.get(i).getId(), cat.get(j)))

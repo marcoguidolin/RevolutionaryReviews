@@ -44,7 +44,7 @@ public class Membro implements Serializable
     @Column(name = "Mail")
     private String mail;
     
-    @JoinTable(name = "membro_categoria", joinColumns =
+    @JoinTable(name = "MEMBRO_CATEGORIA", joinColumns =
     {
         @JoinColumn(name = "Membro", referencedColumnName = "Username")
     }, inverseJoinColumns =

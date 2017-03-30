@@ -47,7 +47,7 @@ public class Evento implements Serializable
     @Temporal(TemporalType.DATE)
     private Date data;
     
-    @JoinTable(name = "evento_artista", joinColumns =
+    @JoinTable(name = "EVENTO_ARTISTA", joinColumns =
     {
         @JoinColumn(name = "Evento", referencedColumnName = "Id")
     }, inverseJoinColumns =
