@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.hibernate.Query;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
@@ -21,59 +16,107 @@ import pojo.Membro;
  */
 public class MembriDao
 {
-    
+
     public static Membro checkLogin(String username, String password)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
-        List<Membro> membriList = session.createQuery("from Membro").list();
-        for(Membro m : membriList)
+        Membro registered = (Membro) session.get(Membro.class, username);
+
+        if (registered != null && (username.equals(registered.getUsername()) && password.equals(registered.getPassword())))
         {
-            if(username.equals(m.getUsername()) && password.equals(m.getPassword()))
-            {
-                return m;
-            }
+            return registered;
         }
         return null;
     }
-    
-    public static Membro register(String username, String password, String name, String surname, String mail, List<Integer> cat){
-        
+
+    public static void setInterests(List<Integer> selectedCategories, String username)
+    {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Transaction transaction = null;
         
-        Membro membro = new Membro(username, password, name, surname, mail);
-        List<Categoria> catList = session.createQuery("from Categoria").list();
-        List<Categoria> newList;
-        newList = new ArrayList<>();
-        for(int i = 0; i<catList.size(); i++){
-            for(int j = 0; j<cat.size(); j++){
-                if(Objects.equals(catList.get(i).getId(), cat.get(j)))
+        try
+        {
+            transaction = session.beginTransaction();
+
+            Membro membro = (Membro) session.get(Membro.class, username);
+
+            List<Categoria> categoriesList = session.createQuery("from Categoria").list();
+            List<Categoria> newInterestsList = new ArrayList<>();
+            for (int i = 0; i < categoriesList.size(); i++)
+            {
+                for (int j = 0; j < selectedCategories.size(); j++)
                 {
-                    newList.add(catList.get(i));
-                    cat.remove(j);
+                    if (Objects.equals(categoriesList.get(i).getId(), selectedCategories.get(j)))
+                    {
+                        newInterestsList.add(categoriesList.get(i));
+                        selectedCategories.remove(j);
+                    }
                 }
             }
-        }
-        membro.setCategoriaList(newList);
-        session.save(membro);
+            membro.setCategoriaList(newInterestsList);
+            session.update(membro);
 
-        session.getTransaction().commit();
-        
-        return membro;
-        
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
     }
-    
-    public static void remove(Membro m){
+
+    public static Membro register(String username, String password, String name, String surname, String mail)
+    {   
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Transaction transaction = null;
         
-        List<Categoria> catList = session.createQuery("from Categoria c where c.membroList = '" + m + "'").list();
+        Membro m = null;
         
-        
-        
-        session.getTransaction().commit();
+        try
+        {
+            transaction = session.beginTransaction();
+
+            m = new Membro(username, password, name, surname, mail);
+            
+            session.save(m);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return m;
     }
-    
-    
+
+    public static void remove(String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+
+            Membro membro = (Membro) session.get(Membro.class, username);
+            session.delete(membro);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+    }
+
 }

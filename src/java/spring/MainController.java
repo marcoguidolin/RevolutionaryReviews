@@ -7,14 +7,11 @@ import dao.PostDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import pojo.*;
 
 /**
@@ -38,10 +35,30 @@ public class MainController
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(ModelMap map, HttpServletRequest request)
+    public String registration(ModelMap map)
     {
-        request.setAttribute("categoriaList", CategorieDao.retrieveAll());
         return "registration";
+    }
+    
+    @RequestMapping(value = "/selectInterests", method = RequestMethod.GET)
+    public String selectInterests(ModelMap map, HttpServletRequest request)
+    {
+        request.setAttribute("categoriesList", CategorieDao.retrieveAll());
+        return "selectInterests";
+    }
+    
+    @RequestMapping(value = "/doInterests",
+            params
+            =
+            {
+                "categories"
+            }, method = RequestMethod.POST)
+    public String doInterests(ModelMap map, HttpServletRequest request, @RequestParam(value = "categories") List<Integer> categories)
+    {
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        MembriDao.setInterests(categories, user.getUsername());
+        request.setAttribute("categoriaList", CategorieDao.retrieveAll());
+        return "profile";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -54,21 +71,21 @@ public class MainController
             params
             =
             {
-                "username", "password", "passwordCheck", "name", "surname", "mail", "cat"
+                "username", "password", "passwordCheck", "name", "surname", "mail"
             }, method = RequestMethod.POST)
-    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "passwordCheck") String passwordCheck, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail, @RequestParam(value = "cat") List<Integer> cat)
+    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "passwordCheck") String passwordCheck, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
     {
         if (password.equals(passwordCheck))
         {
-            Membro user = MembriDao.register(username, password, name, surname, mail, cat);
+            Membro user = MembriDao.register(username, password, name, surname, mail);
             request.getSession().setAttribute("userinfo", user);
         } else
         {
             request.setAttribute("error", true);
             request.setAttribute("messageError", "Le password che hai inserito non coincidono. Verifica i dati inseriti e riprova.");
-            return registration(map, request);
+            return registration(map);
         }
-        return "redirect:index";
+        return "redirect:selectInterests";
     }
 
     @RequestMapping(value = "/doLogin", params
@@ -95,18 +112,18 @@ public class MainController
         HttpSession session = request.getSession();
         session.setAttribute("username", null);
         session.invalidate();
-        return "redirect:index";
+        return "redirect:./";
     }
 
     @RequestMapping(value = "/doRemove", method = RequestMethod.GET)
     public String doRemove(ModelMap map, HttpServletRequest request)
     {
         HttpSession session = request.getSession();
-        Membro m = (Membro) session.getAttribute("userinfo");
-        MembriDao.remove(m);
-        //session.setAttribute("username", null);
-        //session.invalidate();
-        return "redirect:index";
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        MembriDao.remove(user.getUsername());
+        session.setAttribute("username", null);
+        session.invalidate();
+        return "redirect:./";
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)

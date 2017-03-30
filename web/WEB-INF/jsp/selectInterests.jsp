@@ -1,7 +1,7 @@
 <%-- 
-    Document   : registration
-    Created on : 24-mar-2017, 11.29.17
-    Author     : FSEVERI\guglielmo3238
+    Document   : selectInterests
+    Created on : 30-mar-2017, 20.06.00
+    Author     : matte
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -123,59 +123,43 @@
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">Registrati</span> <small>Entra a far parte della community!</small></h1>
+                        <h1><span class="popcolor">Hai quasi fatto...</span> <small>Seleziona i tuoi interessi</small></h1>
                     </div>
                     <div class="row">
                         <%
                             if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))
                             {
                         %>
-                        <div class="col-xs-12 col-md-7">
-                            <div class="row">
-                                <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
-                                    <div class="form-group">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Nome" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cognome</label>
-                                        <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ripetere password</label>
-                                        <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mail</label>
-                                        <input type="mail" class="form-control" name="mail" placeholder="Mail" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px; float: right;">Registrati</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-md-4 error">
-                            <div class="row">
-                                <c:if test="${error}">
-                                    <h4>Attenzione</h4>
-                                    <p>${messageError}</p>
-                                </c:if>
-                            </div>
-                        </div>
+                        <h2>Per poter visualizzare il contenuto di questa pagina devi prima effettuare l'accesso.</h2>
+                        <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
                         <%
                         } else
                         {
                         %>
                     </div>
-                    <h2>Ti sei già registrato.</h2>
-                    <h4>Puoi gestire il tuo profilo <a href="/WebCommunity/profile" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row">
+                            <form class="form" method="POST" action="/WebCommunity/doInterests" id="login-nav">
+                                <div class="form-group">
+                                    <label>Categorie</label>
+                                    <ul>
+                                        <c:forEach items="${categoriesList}" var="categoriesItem">
+                                            <li style="display:inline;">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="categories" value="${catItem.id}">
+                                                        ${categoriesItem.nome}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                    <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Continua</button>
+                                    <button type="button" onclick="location.href='./profile'" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Ignora</button>
+                                </div>                                    
+                            </form>
+                        </div>
+                    </div>
                     <%
                         }
                     %>
@@ -190,4 +174,3 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 </html>
-
