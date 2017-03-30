@@ -127,7 +127,24 @@
                 <div class="row">
                     <ul>
                     <c:forEach items="${eventList}" var="eventItem">
-                        <li><a href="eventDetail?id=${eventItem.id}">${eventItem.titolo}</a></li>
+                        <div class="card" style="width: 20rem;">
+                            <img class="card-img-top" src="
+                                <c:choose>
+                                    <c:when test="eventItem.immagine != null">
+                                        ${eventItem.immagine}
+                                    </c:when>
+                                    <c:otherwise>
+                                        /WebCommunity/resources/eventDefault.jpg
+                                    </c:otherwise>
+
+                                </c:choose>
+                                 " alt="Card image cap">
+                            <div class="card-block">
+                                <h4 class="card-title">${eventItem.titolo}</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
                     </c:forEach>
                     </ul>
                 </div>
