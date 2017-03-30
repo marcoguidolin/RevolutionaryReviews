@@ -57,7 +57,8 @@ public class MainController
     public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "rePassword") String rePassword, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail, @RequestParam(value = "cat") List<Integer> cat)
     {
         if(password.equals(rePassword)){
-            MembriDao.register(username, password, name, surname, mail, cat);
+            Membro membro = MembriDao.register(username, password, name, surname, mail, cat);
+            request.setAttribute("userinfo", membro);
         }else{
             return registration(map, request);
         }

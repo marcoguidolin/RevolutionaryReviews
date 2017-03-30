@@ -37,7 +37,7 @@ public class MembriDao
         return null;
     }
     
-    public static void register(String username, String password, String name, String surname, String mail, List<Integer> cat){
+    public static Membro register(String username, String password, String name, String surname, String mail, List<Integer> cat){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -60,6 +60,7 @@ public class MembriDao
 
         session.getTransaction().commit();
         
+        return membro;
         
     }
     
