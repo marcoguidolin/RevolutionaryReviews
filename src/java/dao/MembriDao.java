@@ -35,6 +35,8 @@ public class MembriDao
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
+        System.out.println(selectedCategories);
+        
         try
         {
             transaction = session.beginTransaction();

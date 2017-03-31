@@ -124,6 +124,21 @@ h1, h2, h3, h4, h5, h6{
     box-shadow: 0px 0px 0px 15px rgba(120,120,120,0.5);
 }
 
+.user-img-circle-camera{
+    z-index: 1;
+    position: fixed;
+    margin-top: 20px;
+    width: 128px;
+    height: 128px;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.user-img-circle-camera:hover{
+    box-shadow: inset 0px 0px 0px 70px rgba(120,120,120,0.8);
+    opacity: 1;
+}
+
 .user-img-circle-small{
     margin: 20px;
     width: 64px;
@@ -155,9 +170,21 @@ a:hover{
 }
 
 .error{
-    border-width: 0px 0 0px 5px;
+    border-width: 0px 0px 0px 5px;
     border-style: solid;
     border-image: linear-gradient(to bottom, rgb(239, 99, 60), rgb(241, 26, 147)) 1 100%;
     margin-left: 20px;
     padding-left: 20px;
+}
+
+.modal-content{
+    color: black;
+}
+
+body.modal-open .supreme-container{
+    -webkit-filter: blur(4px);
+    -moz-filter: blur(4px);
+    -o-filter: blur(4px);
+    -ms-filter: blur(4px);
+    filter: blur(4px);
 }

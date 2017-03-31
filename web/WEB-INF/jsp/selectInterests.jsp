@@ -147,7 +147,7 @@
                                             <li style="display:inline;">
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="categories" value="${catItem.id}">
+                                                        <input type="checkbox" class="form-check-input" name="categories" value="${categoriesItem.id}">
                                                         ${categoriesItem.nome}
                                                     </label>
                                                 </div>

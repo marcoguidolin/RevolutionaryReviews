@@ -33,8 +33,8 @@
         <![endif]-->
     </head>
 
-    <body>
-        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation">
+    <body class="background-container">
+        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse supreme-container" role="navigation">
             <div class="container-fluid centered-content">
                 
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -114,7 +114,7 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <div class="body-container">
+        <div class="body-container supreme-container">
             <div class="container bs-docs-container">
                 <div class="row">
                     <div class="page-header">
@@ -133,7 +133,8 @@
                     <div class="col-xs-12 col-md-8">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large">
+                                <a href="#" data-toggle="modal" data-target="#changeProfilePicture"><img src="/WebCommunity/resources/camera.png" alt="user-picture" class="img-circle user-img-circle-camera"></a>
+                                <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large"/>
                             </div>
                             <div class="col-md-7">
                                 <h2>Le tue informazioni</h2>
@@ -151,17 +152,75 @@
                         <br>
                         <br>
                         <h2>I tuoi interessi</h2>
-                        (nessun interesse)
+                        <ul>
+                            <c:forEach items="${userinfo.categoriaList}" var="categoriesItem">
+                                <li style="display:inline;">
+                                    ${categoriesItem.nome}
+                                </li>
+                            </c:forEach>
+                        </ul>
                     </div>
                     <div class="col-xs-6 col-md-4">
                         <a href="#">Modifica password</a>
                         <br>
-                        <a href="doRemove">Elimina il tuo account</a>
+                        <a <a href="#" data-toggle="modal" data-target="#deleteProfile">Elimina il tuo account</a>
                     </div>
                     <%
                         }
                     %>
                 </div>
+            </div>
+        </div>
+                
+        <!-- Modal -->
+        <div class="modal fade" id="changeProfilePicture" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Cambia immagine profilo</h4>
+                    </div>
+                    <form method="POST" action="/WebCommunity/uploadFile" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <center>    
+                                Seleziona l'immagine da caricare poi fai click su Cambia immagine
+                                <br><br>
+                                <input type="file" class="btn btn-default" name="file"/>
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn btn-default">Cambia immagine</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="deleteProfile" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Elimina account</h4>
+                    </div>
+                    <form action="/WebCommunity/doRemove" method="GET">
+                        <div class="modal-body">
+                            Eliminando il tuo account verranno eliminati anche tutti i post pubblicati e gli interessi che stai seguendo. Sei sicuro di voler continuare?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn btn-default">Elimina</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </body>

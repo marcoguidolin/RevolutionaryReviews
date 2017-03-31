@@ -1,10 +1,11 @@
 package spring;
 
-import dao.CategorieDao;
-import dao.EventiDao;
-import dao.MembriDao;
-import dao.PostDao;
+import utils.FTPUtil;
+import dao.*;
+import java.io.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import pojo.*;
 
 /**
@@ -58,7 +60,7 @@ public class MainController
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         MembriDao.setInterests(categories, user.getUsername());
         request.setAttribute("categoriaList", CategorieDao.retrieveAll());
-        return "profile";
+        return "redirect:profile";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -168,5 +170,42 @@ public class MainController
         List<Post> postList = PostDao.retrieveByEvent(idInt);
         request.setAttribute("postList", postList);
         return "eventDetail";
+    }
+    
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    String uploadFileHandler(ModelMap map, HttpServletRequest request, @RequestParam("file") MultipartFile file)
+    {
+        if (!file.isEmpty())
+        {
+            try
+            {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String rootPath = System.getProperty("user.home");
+                File dir = new File(rootPath + File.separator + "temp");
+                if (!dir.exists())
+                {
+                    dir.mkdirs();
+                }
+
+                // Create the file on server
+                File tempFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename().hashCode());
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(tempFile));
+                stream.write(bytes);
+                stream.close();
+
+                System.out.print(tempFile.getAbsolutePath());
+
+                FTPUtil.upload(tempFile.getAbsolutePath(), tempFile.getName());
+            } catch (IOException ex)
+            {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else
+        {
+            //
+        }
+        return "redirect:profile";
     }
 }
