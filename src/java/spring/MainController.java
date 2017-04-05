@@ -198,14 +198,23 @@ public class MainController
                 System.out.print(tempFile.getAbsolutePath());
 
                 FTPUtil.upload(tempFile.getAbsolutePath(), tempFile.getName());
-            } catch (IOException ex)
+                
+                Membro user = (Membro) request.getSession().getAttribute("userinfo");
+                
+                user = MembriDao.setAvatar(user.getUsername(), "ftp://10.0.1.252/" + tempFile.getName());
+                
+                request.getSession().removeAttribute("userinfo");
+                request.getSession().setAttribute("userinfo", user);
+            }
+            catch (IOException ex)
             {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else
+        }
+        else
         {
             //
         }
-        return "redirect:profile";
+        return "profile";
     }
 }

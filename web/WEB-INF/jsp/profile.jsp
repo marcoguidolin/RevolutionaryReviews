@@ -134,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <a href="#" data-toggle="modal" data-target="#changeProfilePicture"><img src="/WebCommunity/resources/camera.png" alt="user-picture" class="img-circle user-img-circle-camera"></a>
-                                <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-large"/>
+                                <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-large"/>
                             </div>
                             <div class="col-md-7">
                                 <h2>Le tue informazioni</h2>

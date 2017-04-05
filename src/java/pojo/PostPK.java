@@ -1,21 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pojo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author matte
+ * @author FSEVERI\parlato2889
  */
 @Embeddable
 public class PostPK implements Serializable
 {
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "Membro")
     private String membro;
-    
+    @Basic(optional = false)
     @NotNull
     @Column(name = "Evento")
     private int evento;
@@ -82,7 +91,7 @@ public class PostPK implements Serializable
     @Override
     public String toString()
     {
-        return "PostPK{" + "membro=" + membro + ", evento=" + evento + '}';
+        return "pojo.PostPK[ membro=" + membro + ", evento=" + evento + " ]";
     }
     
 }

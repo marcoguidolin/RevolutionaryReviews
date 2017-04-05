@@ -1,8 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pojo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,40 +19,51 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author matte
+ * @author FSEVERI\parlato2889
  */
 @Entity
 @Table(name = "EVENTI")
+@NamedQueries(
+{
+    @NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e")
+})
 public class Evento implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "Titolo")
     private String titolo;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "Luogo")
     private String luogo;
-    
+    @Basic(optional = false)
     @NotNull
     @Column(name = "Data")
     @Temporal(TemporalType.DATE)
     private Date data;
-    
+    @Size(max = 100)
+    @Column(name = "Immagine")
+    private String immagine;
     @JoinTable(name = "EVENTO_ARTISTA", joinColumns =
     {
         @JoinColumn(name = "Evento", referencedColumnName = "Id")
@@ -56,13 +73,11 @@ public class Evento implements Serializable
     })
     @ManyToMany
     private List<Artista> artistaList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1")
-    private List<Post> postList;
-    
     @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Categoria categoria;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1")
+    private List<Post> postList;
 
     public Evento()
     {
@@ -121,6 +136,16 @@ public class Evento implements Serializable
         this.data = data;
     }
 
+    public String getImmagine()
+    {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine)
+    {
+        this.immagine = immagine;
+    }
+
     public List<Artista> getArtistaList()
     {
         return artistaList;
@@ -131,16 +156,6 @@ public class Evento implements Serializable
         this.artistaList = artistaList;
     }
 
-    public List<Post> getPostList()
-    {
-        return postList;
-    }
-
-    public void setPostList(List<Post> postList)
-    {
-        this.postList = postList;
-    }
-
     public Categoria getCategoria()
     {
         return categoria;
@@ -149,6 +164,16 @@ public class Evento implements Serializable
     public void setCategoria(Categoria categoria)
     {
         this.categoria = categoria;
+    }
+
+    public List<Post> getPostList()
+    {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList)
+    {
+        this.postList = postList;
     }
 
     @Override
@@ -178,7 +203,7 @@ public class Evento implements Serializable
     @Override
     public String toString()
     {
-        return "Evento{" + "id=" + id + ", titolo=" + titolo + ", luogo=" + luogo + ", data=" + data + ", artistaList=" + artistaList + ", postList=" + postList + ", categoria=" + categoria + '}';
+        return "pojo.Evento[ id=" + id + " ]";
     }
-
+    
 }

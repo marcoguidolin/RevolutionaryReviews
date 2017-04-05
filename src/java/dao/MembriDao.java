@@ -120,5 +120,31 @@ public class MembriDao
             session.close();
         }
     }
+    
+    public static Membro setAvatar(String username, String path)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        Membro membro = null;
+        try
+        {
+            transaction = session.beginTransaction();
+
+            membro = (Membro) session.get(Membro.class, username);
+            membro.setAvatar(path);
+            session.update(membro);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+        return membro;
+    }
 
 }

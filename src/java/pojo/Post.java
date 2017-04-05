@@ -1,39 +1,50 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pojo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author matte
+ * @author FSEVERI\parlato2889
  */
 @Entity
 @Table(name = "POST")
+@NamedQueries(
+{
+    @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p")
+})
 public class Post implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    
     @EmbeddedId
     protected PostPK postPK;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 1000)
     @Column(name = "Commento")
     private String commento;
-    
+    @Basic(optional = false)
     @NotNull
     @Column(name = "Voto")
     private int voto;
-    
     @JoinColumn(name = "Membro", referencedColumnName = "Username", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Membro membro1;
-    
     @JoinColumn(name = "Evento", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Evento evento1;
@@ -136,7 +147,7 @@ public class Post implements Serializable
     @Override
     public String toString()
     {
-        return "Post{" + "postPK=" + postPK + ", commento=" + commento + ", voto=" + voto + ", membro1=" + membro1 + ", evento1=" + evento1 + '}';
+        return "pojo.Post[ postPK=" + postPK + " ]";
     }
     
 }

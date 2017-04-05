@@ -22,9 +22,9 @@ public class FTPUtil
     public static void upload(String sourceFilePath, String sourceFileName)
     {
         String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
-        String host = "localhost";
-        String user = "test";
-        String pass = "12345";
+        String host = "10.0.1.252";
+        String user = "cl_5ib20";
+        String pass = "YawRa&r8";
         String filePath = sourceFilePath;
         String uploadPath = "/" + sourceFileName;
 

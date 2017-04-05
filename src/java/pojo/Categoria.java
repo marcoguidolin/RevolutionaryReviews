@@ -1,7 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,36 +15,43 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author matte
+ * @author FSEVERI\parlato2889
  */
 @Entity
 @Table(name = "CATEGORIE")
+@NamedQueries(
+{
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
+})
 public class Categoria implements Serializable
 {
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
-    
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
-    
+    @Size(max = 100)
+    @Column(name = "Immagine")
+    private String immagine;
     @ManyToMany(mappedBy = "categoriaList")
     private List<Membro> membroList;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
     private List<Evento> eventoList;
-    
-    //private Integer eventoLength = 0;
 
     public Categoria()
     {
@@ -75,6 +88,16 @@ public class Categoria implements Serializable
         this.nome = nome;
     }
 
+    public String getImmagine()
+    {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine)
+    {
+        this.immagine = immagine;
+    }
+
     public List<Membro> getMembroList()
     {
         return membroList;
@@ -83,7 +106,6 @@ public class Categoria implements Serializable
     public void setMembroList(List<Membro> membroList)
     {
         this.membroList = membroList;
-        //eventoLength = this.membroList.size();
     }
 
     public List<Evento> getEventoList()
@@ -123,7 +145,7 @@ public class Categoria implements Serializable
     @Override
     public String toString()
     {
-        return "Categoria{" + "id=" + id + ", nome=" + nome + ", membroList=" + membroList + ", eventoList=" + eventoList + '}';
+        return "pojo.Categoria[ id=" + id + " ]";
     }
     
 }
