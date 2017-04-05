@@ -127,7 +127,7 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Categorie</span> <small>Home di </small></h1>
+                        <h1><span class="popcolor">#Categorie</span> <small><!----></small></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -145,7 +145,7 @@
         
         <script>
             $(document).ready(function () {
-                $('div.transition-page').fadeIn(500).removeClass('transition-page');
+                $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
         </script>
     </body>

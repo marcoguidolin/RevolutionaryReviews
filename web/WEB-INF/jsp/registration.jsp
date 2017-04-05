@@ -192,7 +192,7 @@
                 
         <script>
             $(document).ready(function () {
-                $('div.transition-page').fadeIn(500).removeClass('transition-page');
+                $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
         </script>
     </body>
