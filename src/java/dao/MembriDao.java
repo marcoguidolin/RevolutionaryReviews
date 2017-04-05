@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
 import pojo.Membro;
+import pojo.Post;
 
 /**
  *
@@ -109,6 +111,15 @@ public class MembriDao
 
             Membro membro = (Membro) session.get(Membro.class, username);
             session.delete(membro);
+            
+            List<Post> list = session.createCriteria(Post.class).list();
+            for(Post p : list)
+            {
+                if(p.getMembro1().equals(username))
+                {
+                    session.delete(p);
+                }
+            }
 
             transaction.commit();
         } catch (HibernateException e)
