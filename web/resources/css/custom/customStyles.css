@@ -185,11 +185,11 @@ a:hover, a:focus{
 }
 
 body.modal-open .supreme-container{
-    -webkit-filter: blur(4px);
-    -moz-filter: blur(4px);
-    -o-filter: blur(4px);
-    -ms-filter: blur(4px);
-    filter: blur(4px);
+    -webkit-filter: blur(14px);
+    -moz-filter: blur(14px);
+    -o-filter: blur(14px);
+    -ms-filter: blur(14px);
+    filter: blur(14px);
 }
 
 .transition-page{
