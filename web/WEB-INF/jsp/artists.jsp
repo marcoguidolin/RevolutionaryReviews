@@ -1,9 +1,10 @@
 <%-- 
-    Document   : index
+    Document   : events
     Created on : 24-mar-2017, 17.25.56
-    Author     : matte
+    Author     : guglielmo
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,20 +18,20 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Home | SoundZone</title>
+        <title>Eventi | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
-
+        
         <!-- JQuery Core -->
         <script src="/WebCommunity/resources/jquery-3.2.0.min.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
-    
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -51,15 +52,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">SoundZone</a>
+                    <a class="navbar-brand" href="/WebCommunity/">SoundZone</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="/WebCommunity/">Home</a></li>
                         <li><a href="/WebCommunity/categories">Categorie</a></li>
-                        <li><a href="/WebCommunity/artists">Artisti</a></li>
+                        <li class="active"><a href="#">Artisti</a></li>
                         <li><a href="/WebCommunity/events?category=0">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -85,7 +86,7 @@
                                                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn  btn-block">Accedi</button>
+                                                    <button type="submit" class="btn btn-block">Accedi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -103,7 +104,8 @@
                                             <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            <h4>Ciao ${userinfo.username}</h4>
+                                            Ciao ${userinfo.username}
+                                            <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
                                         <br>
@@ -125,8 +127,22 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Home</span> <small><!----></small></h1>
+                        <h1><span class="popcolor">#Artisti</span> <small><!----></small></h1>
                     </div>
+                </div>
+                <div class="row">
+                    <ul>
+                    <c:forEach items="${artistsList}" var="artistItem">
+                        <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
+                            <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="/WebCommunity/resources/artist.png" alt="Card image cap">
+                            <div class="card-block">
+                                <h4 class="card-title">${artistItem.nome} ${artistItem.cognome}</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn ">Go somewhere</a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -136,6 +152,6 @@
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
         </script>
-    </body>    
+    </body>
 </html>
 

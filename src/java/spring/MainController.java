@@ -135,6 +135,14 @@ public class MainController
         request.setAttribute("catList", categoriaList);
         return "categories";
     }
+    
+    @RequestMapping(value = "/artists", method = RequestMethod.GET)
+    public String artists(ModelMap map, HttpServletRequest request)
+    {
+        List<Artista> artistiList = ArtistiDao.retrieveAll();
+        request.setAttribute("artistsList", artistiList);
+        return "artists";
+    }
 
     @RequestMapping(value = "/events", params =
     {
