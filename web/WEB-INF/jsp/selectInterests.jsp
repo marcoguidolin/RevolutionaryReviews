@@ -18,13 +18,19 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Home | SoundZone</title>
+        <title>Interessi | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
+        
+        <!-- JQuery Core -->
+        <script src="/WebCommunity/resources/jquery-3.2.0.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +52,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">SoundZone</a>
+                    <a class="navbar-brand" href="/WebCommunity/">SoundZone</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,7 +87,7 @@
                                                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+                                                    <button type="submit" class="btn  btn-block">Accedi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -120,7 +126,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div class="body-container">
-            <div class="container bs-docs-container">
+            <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
                         <h1><span class="popcolor">Hai quasi fatto...</span> <small>Seleziona i tuoi interessi</small></h1>
@@ -154,8 +160,8 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Continua</button>
-                                    <button type="button" onclick="location.href='./profile'" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Ignora</button>
+                                    <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px;">Continua</button>
+                                    <button type="button" onclick="location.href='./profile'" class="btn " style="padding-left: 50px; padding-right: 50px;">Ignora</button>
                                 </div>                                    
                             </form>
                         </div>
@@ -166,11 +172,11 @@
                 </div>
             </div>
         </div>
+                
+        <script>
+            $(document).ready(function () {
+                $('div.transition-page').fadeIn(500).removeClass('transition-page');
+            });
+        </script>
     </body>
-
-    <!-- JQuery Core -->
-    <script src="/WebCommunity/resources/jquery-3.1.1.slim.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 </html>
