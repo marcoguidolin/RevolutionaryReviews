@@ -154,10 +154,10 @@
                     %>
                     <h3>Accedi o <a href="registration">registrati</a> per inserire un commento</h3>
                     <%}else{%>
-                    <form class="form" method="POST" action="/WebCommunity/commento">
+                    <form class="form" method="GET" action="/WebCommunity/commento">
                         <div class="form-group">
                             <label>Inserisci il tuo commento</label>
-                            <input type="text" class="form-control" name="post" placeholder="Inserisci il tuo commento qui" required>
+                            <input type="text" class="form-control" name="comm" placeholder="Inserisci il tuo commento qui" required>
                             <input type="hidden" name="evento" value="${eventDetail.id}" />
                         </div>
                         <div class="form-group">

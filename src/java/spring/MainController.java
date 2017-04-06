@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -180,6 +181,7 @@ public class MainController
             method = RequestMethod.GET)
     public String eventDetail(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
     {
+        System.out.println("Provaasdf");
         Evento evento = EventiDao.retrieveSingle(id);
         request.setAttribute("eventDetail", evento);
         Integer idInt = Integer.parseInt(id);
@@ -190,22 +192,24 @@ public class MainController
     
     @RequestMapping(value = "/commento", params =
             {
-                "post",
+                "comm",
                 "evento",
                 "voto"
             },
-            method = RequestMethod.POST)
-    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "post") String post, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
+            method = RequestMethod.GET)
+    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto, BindingResult bindingResult)
     {
         
+        System.out.println("Prova");
+        /*
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         
         Integer eventoI = Integer.parseInt(evento);
         Integer votoI = Integer.parseInt(voto);
         
-        PostDao.addPost(post, votoI, eventoI, user.getUsername());
-        
-        return "events";
+        PostDao.addPost(comm, votoI, eventoI, user.getUsername());
+                */
+        return "redirect:events";
     }
     
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
