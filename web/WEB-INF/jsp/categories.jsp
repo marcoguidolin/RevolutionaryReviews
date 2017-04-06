@@ -18,7 +18,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Categorie | </title>
+        <title>Categorie | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
