@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -28,12 +29,9 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MEMBRI")
-@NamedQueries(
-{
-    @NamedQuery(name = "Membro.findAll", query = "SELECT m FROM Membro m")
-})
-public class Membro implements Serializable
-{
+@NamedQueries({
+    @NamedQuery(name = "Membro.findAll", query = "SELECT m FROM Membro m")})
+public class Membro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -64,29 +62,22 @@ public class Membro implements Serializable
     @Size(max = 100)
     @Column(name = "Avatar")
     private String avatar;
-    @JoinTable(name = "MEMBRO_CATEGORIA", joinColumns =
-    {
-        @JoinColumn(name = "Membro", referencedColumnName = "Username")
-    }, inverseJoinColumns =
-    {
-        @JoinColumn(name = "Categoria", referencedColumnName = "Id")
-    })
-    @ManyToMany
+    @JoinTable(name = "MEMBRO_CATEGORIA", joinColumns = {
+        @JoinColumn(name = "Membro", referencedColumnName = "Username")}, inverseJoinColumns = {
+        @JoinColumn(name = "Categoria", referencedColumnName = "Id")})
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Categoria> categoriaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER)
     private List<Post> postList;
 
-    public Membro()
-    {
+    public Membro() {
     }
 
-    public Membro(String username)
-    {
+    public Membro(String username) {
         this.username = username;
     }
 
-    public Membro(String username, String password, String nome, String cognome, String mail)
-    {
+    public Membro(String username, String password, String nome, String cognome, String mail) {
         this.username = username;
         this.password = password;
         this.nome = nome;
@@ -94,113 +85,92 @@ public class Membro implements Serializable
         this.mail = mail;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password)
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getNome()
-    {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome)
-    {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getCognome()
-    {
+    public String getCognome() {
         return cognome;
     }
 
-    public void setCognome(String cognome)
-    {
+    public void setCognome(String cognome) {
         this.cognome = cognome;
     }
 
-    public String getMail()
-    {
+    public String getMail() {
         return mail;
     }
 
-    public void setMail(String mail)
-    {
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
-    public String getAvatar()
-    {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar)
-    {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
-    public List<Categoria> getCategoriaList()
-    {
+    public List<Categoria> getCategoriaList() {
         return categoriaList;
     }
 
-    public void setCategoriaList(List<Categoria> categoriaList)
-    {
+    public void setCategoriaList(List<Categoria> categoriaList) {
         this.categoriaList = categoriaList;
     }
 
-    public List<Post> getPostList()
-    {
+    public List<Post> getPostList() {
         return postList;
     }
 
-    public void setPostList(List<Post> postList)
-    {
+    public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Membro))
-        {
+        if (!(object instanceof Membro)) {
             return false;
         }
         Membro other = (Membro) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username)))
-        {
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "pojo.Membro[ username=" + username + " ]";
     }
     

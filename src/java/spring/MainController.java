@@ -241,7 +241,7 @@ public class MainController
                 
                 Membro user = (Membro) request.getSession().getAttribute("userinfo");
                 
-                user = MembriDao.setAvatar(user.getUsername(), "ftp://10.0.1.252/" + tempFile.getName());
+                user = MembriDao.setAvatar(user.getUsername(), "http://webcommunityproject.altervista.org/" + tempFile.getName());
                 
                 request.getSession().removeAttribute("userinfo");
                 request.getSession().setAttribute("userinfo", user);

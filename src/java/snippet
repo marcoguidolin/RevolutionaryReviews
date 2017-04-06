@@ -1,0 +1,11 @@
+<img class="card-img-top" src="
+                                <c:choose>
+                                    <c:when test="eventItem.immagine != null">
+                                        ${eventItem.immagine}
+                                    </c:when>
+                                    <c:otherwise>
+                                        /WebCommunity/resources/eventDefault.jpg
+                                    </c:otherwise>
+
+                                </c:choose>
+                                        " alt="Card image cap" width="100" height="100">

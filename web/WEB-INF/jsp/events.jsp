@@ -101,7 +101,7 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             Ciao ${userinfo.username}
@@ -131,28 +131,33 @@
                     </div>
                 </div>
                 <div class="row">
-                    <ul>
-                    <c:forEach items="${eventList}" var="eventItem">
-                        <div class="card" style="width: 20rem; float: left; margin-bottom: 20px;">
-                            <img class="card-img-top" src="
-                                <c:choose>
-                                    <c:when test="eventItem.immagine != null">
-                                        ${eventItem.immagine}
-                                    </c:when>
-                                    <c:otherwise>
-                                        /WebCommunity/resources/eventDefault.jpg
-                                    </c:otherwise>
+                    <div class="card-deck">
+                        <c:forEach items="${eventList}" var="eventItem">
+                            <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
+                                <center>
+                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;"
+                                        src="
+                                        <c:choose>
+                                            <c:when test="eventItem.immagine != null">
+                                                ${eventItem.immagine}
+                                            </c:when>
+                                            <c:otherwise>
+                                                /WebCommunity/resources/ticket.png
+                                            </c:otherwise>
 
-                                </c:choose>
-                                        " alt="Card image cap" width="100" height="100">
-                            <div class="card-block">
-                                <h4 class="card-title">${eventItem.titolo}</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="eventDetail?id=${eventItem.id}" class="btn btn-primary" style=" color:black;">Go to event</a>
+                                        </c:choose>
+                                    " alt="Event picture">
+                                </center>
+                                <div class="card-block">
+                                    <h4 class="card-title">${eventItem.titolo}</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <center><a href="eventDetail?id=${eventItem.id}" class="btn">Guarda</a></center>
+                                </div>
                             </div>
-                        </div>
-                    </c:forEach>
-                    </ul>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

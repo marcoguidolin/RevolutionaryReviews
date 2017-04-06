@@ -107,7 +107,7 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             Ciao ${userinfo.username}
@@ -141,7 +141,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">${eventDetail.titolo}</h3>
                         </div>
-                        <div class="panel-body" style="color:black;">
+                        <div class="panel-body">
                             Luogo: ${eventDetail.luogo}<br>
                             Data: ${eventDetail.data}<br>
                             Descrizione;
@@ -171,7 +171,16 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${postList}" var="post">
-                    ${post.commento}
+                        <div class="media" style="margin-bottom: 20px;">
+                            <div class="media-left">
+                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">${post.membro1.username}</h4>
+                                <p>${post.commento}</p>
+                                Voto: ${post.voto}
+                            </div>
+                        </div>
                     </c:forEach>
                 </div>
             </div>
