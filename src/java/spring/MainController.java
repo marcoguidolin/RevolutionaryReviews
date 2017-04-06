@@ -188,6 +188,26 @@ public class MainController
         return "eventDetail";
     }
     
+    @RequestMapping(value = "/commento", params =
+            {
+                "post",
+                "evento",
+                "voto"
+            },
+            method = RequestMethod.POST)
+    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "post") String post, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
+    {
+        
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        
+        Integer eventoI = Integer.parseInt(evento);
+        Integer votoI = Integer.parseInt(voto);
+        
+        PostDao.addPost(post, votoI, eventoI, user.getUsername());
+        
+        return "events";
+    }
+    
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     String uploadFileHandler(ModelMap map, HttpServletRequest request, @RequestParam("file") MultipartFile file)
     {
@@ -234,15 +254,4 @@ public class MainController
         return "profile";
     }
     
-    @RequestMapping(value = "/post", params =
-            {
-                "post",
-                "evento"
-            },
-            method = RequestMethod.GET)
-    public String post (ModelMap map, HttpServletRequest request, @RequestParam(value = "post") String post,  @RequestParam(value = "evento") String evento)
-    {
-        
-        return "";
-    }
 }
