@@ -7,16 +7,16 @@ package dao;
 
 import hibernate.HibernateUtil;
 import java.util.List;
-import pojo.Categoria;
+import pojo.Artista;
 
 /**
  *
- * @author alb07y
+ * @author matte
  */
-public class CategorieDao {
-    
-    public static List<Categoria> retrieveAll()
+public class ArtistiDao
+{
+    public static List<Artista> retrieveAll()
     {
-        return HibernateUtil.getSessionFactory().openSession().createCriteria(Categoria.class).list();
+        return HibernateUtil.getSessionFactory().openSession().createCriteria(Artista.class).list();
     }
 }

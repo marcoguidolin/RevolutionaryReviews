@@ -117,6 +117,13 @@ h1, h2, h3, h4, h5, h6{
     border-bottom: 1px solid rgba(94,89,93,0.6);
 }
 
+.artist-img-circle-large{
+    margin-top: 20px;
+    width: 140px;
+    height: 140px;
+    box-shadow: 0px 0px 0px 15px rgba(120,120,120,0.5);
+}
+
 .user-img-circle-large{
     margin-top: 20px;
     width: 128px;
@@ -146,13 +153,16 @@ h1, h2, h3, h4, h5, h6{
     box-shadow: 0px 0px 0px 15px rgba(120,120,120,0.5);
 }
 
-a, a:link{
+a, a:link, a:hover, a:focus{
     color: white;
     text-decoration: none;
+    transition: all 0.25s ease-in-out;
 }
 
-a:hover{
+a:hover, a:focus{
     color: white;
+    text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+    transition: all 0.25s ease-in-out;
 }
 
 .navbar-inverse{
@@ -182,9 +192,13 @@ a:hover{
 }
 
 body.modal-open .supreme-container{
-    -webkit-filter: blur(4px);
-    -moz-filter: blur(4px);
-    -o-filter: blur(4px);
-    -ms-filter: blur(4px);
-    filter: blur(4px);
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+.transition-page{
+    display: none;
 }

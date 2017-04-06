@@ -60,8 +60,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/WebCommunity/">Home</a></li>
                         <li><a href="/WebCommunity/categories">Categorie</a></li>
-                        <li><a href="/WebCommunity/artists">Artisti</a></li>
-                        <li class="active"><a href="#">Eventi</a></li>
+                        <li class="active"><a href="#">Artisti</a></li>
+                        <li><a href="/WebCommunity/events?category=0">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -86,7 +86,7 @@
                                                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn  btn-block">Accedi</button>
+                                                    <button type="submit" class="btn btn-block">Accedi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -127,28 +127,18 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Eventi</span> <small><!----></small></h1>
+                        <h1><span class="popcolor">#Artisti</span> <small><!----></small></h1>
                     </div>
                 </div>
                 <div class="row">
                     <ul>
-                    <c:forEach items="${eventList}" var="eventItem">
-                        <div class="card" style="width: 20rem; float: left; margin-bottom: 20px;">
-                            <img class="card-img-top" src="
-                                <c:choose>
-                                    <c:when test="eventItem.immagine != null">
-                                        ${eventItem.immagine}
-                                    </c:when>
-                                    <c:otherwise>
-                                        /WebCommunity/resources/eventDefault.jpg
-                                    </c:otherwise>
-
-                                </c:choose>
-                                        " alt="Card image cap" width="100" height="100">
+                    <c:forEach items="${artistsList}" var="artistItem">
+                        <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
+                            <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="/WebCommunity/resources/artist.png" alt="Card image cap">
                             <div class="card-block">
-                                <h4 class="card-title">${eventItem.titolo}</h4>
+                                <h4 class="card-title">${artistItem.nome} ${artistItem.cognome}</h4>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="eventDetail?id=${eventItem.id}" class="btn btn-primary" style=" color:black;">Go to event</a>
+                                <a href="#" class="btn ">Go somewhere</a>
                             </div>
                         </div>
                     </c:forEach>

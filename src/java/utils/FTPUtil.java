@@ -24,7 +24,7 @@ public class FTPUtil
         String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
         String host = "10.0.1.252";
         String user = "cl_5ib20";
-        String pass = "YawRa&r8";
+        String pass = "";
         String filePath = sourceFilePath;
         String uploadPath = "/" + sourceFileName;
 

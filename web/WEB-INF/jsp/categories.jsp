@@ -18,13 +18,19 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Categorie | SoundZone</title>
+        <title>Categorie | </title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
+        
+        <!-- JQuery Core -->
+        <script src="/WebCommunity/resources/jquery-3.2.0.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,16 +52,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">SoundZone</a>
+                    <a class="navbar-brand" href="/WebCommunity/">SoundZone</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/WebCommunity">Home</a></li>
+                        <li><a href="/WebCommunity/">Home</a></li>
                         <li class="active"><a href="#">Categorie</a></li>
-                        <li><a href="#">Artisti</a></li>
-                        <li><a href="events?category=0">Eventi</a></li>
+                        <li><a href="/WebCommunity/artists">Artisti</a></li>
+                        <li><a href="/WebCommunity/events?category=0">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -118,10 +124,10 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div class="body-container">
-            <div class="container bs-docs-container">
+            <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Categorie</span> <small>Home di SoundZone</small></h1>
+                        <h1><span class="popcolor">#Categorie</span> <small><!----></small></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -136,12 +142,12 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            $(document).ready(function () {
+                $('div.transition-page').fadeIn(250).removeClass('transition-page');
+            });
+        </script>
     </body>
-
-    <!-- JQuery Core -->
-    <script src="/WebCommunity/resources/jquery-3.1.1.slim.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 </html>
 
