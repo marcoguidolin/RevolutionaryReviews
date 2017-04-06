@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 24-mar-2017, 17.25.56
-    Author     : matte
+    Author     : guglielmo
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -67,7 +67,7 @@
                         <li><a href="/WebCommunity/">Home</a></li>
                         <li><a href="/WebCommunity/categories">Categorie</a></li>
                         <li><a href="/WebCommunity/artists">Artisti</a></li>
-                        <li class="active"><a href="#">Eventi</a></li>
+                        <li class="active"><a href="/WebCommunity/events?category=0">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -152,8 +152,12 @@
                     <%
                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
                     %>
-                    <h3>Accedi o <a href="registration">registrati</a> per inserire un commento</h3>
-                    <%}else{%>
+                    <h2>Per rilasciare un commento devi essere un utente registrato.</h2>
+                    <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                    <br/>
+                    <%
+                        } else {
+                    %>
                     <form class="form" method="GET" action="/WebCommunity/commento">
                         <div class="form-group">
                             <label>Inserisci il tuo commento</label>
@@ -167,7 +171,14 @@
                             <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px;">Commenta</button>
                         </div>
                     </form>
-                    <%}%>
+                    <%
+                        }
+                    %>
+                </div>
+                <div class="row">
+                    <div class="page-header">
+                        <h3><span class="popcolor">#Commenti</span> <small><!----></small></h3>
+                    </div>
                 </div>
                 <div class="row">
                     <c:forEach items="${postList}" var="post">
