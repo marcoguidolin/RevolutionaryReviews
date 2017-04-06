@@ -22,6 +22,11 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- StarRating -->
+        <link href="/WebCommunity/resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+        <script src="/WebCommunity/resources/js/star-rating.js" type="text/javascript"></script>
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
@@ -32,6 +37,7 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
     </head>
 
     <body>
@@ -55,7 +61,7 @@
                         <li><a href="/WebCommunity">Home</a></li>
                         <li><a href="categories">Categorie</a></li>
                         <li><a href="#">Artisti</a></li>
-                        <li class="active"><a href="#">Eventi</a></li>
+                        <li class="active"><a href="events">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -142,10 +148,14 @@
                     %>
                     <h3>Accedi o <a href="registration">registrati</a> per inserire un commento</h3>
                     <%}else{%>
-                    <form class="form" method="POST" action="comment">
+                    <form class="form" method="POST" action="post">
                         <div class="form-group">
                             <label>Inserisci il tuo commento</label>
-                            <input type="text" class="form-control" name="comment" placeholder="Inserisci il tuo commento qui" required>
+                            <input type="text" class="form-control" name="post" placeholder="Inserisci il tuo commento qui" required>
+                            <input type="hidden" name="evento" value="${eventDetail.id}" />
+                        </div>
+                        <div class="form-group">
+                            <input id="input-id" name="input-id" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="xs"/>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" style="padding-left: 50px; padding-right: 50px;">Commenta</button>
