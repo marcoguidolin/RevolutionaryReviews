@@ -20,13 +20,15 @@
 
         <title>Categorie | SoundZone</title>
 
-        <!-- Bootstrap Core CSS -->
-        <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- StarRating -->
         <link href="/WebCommunity/resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
         <script src="/WebCommunity/resources/js/star-rating.js" type="text/javascript"></script>
+        
+        <!-- Bootstrap Core CSS -->
+        <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
+        
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
@@ -36,6 +38,7 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
+        
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +46,11 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
+            <script type="text/javascript">
+        $(function(){
+            $('.container').rating();
+        });
+    </script>
     </head>
 
     <body>
@@ -161,7 +168,7 @@
                             <input type="hidden" name="evento" value="${eventDetail.id}" />
                         </div>
                         <div class="form-group">
-                            <input id="input-id" name="voto" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="xs"/>
+                            <input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px;">Commenta</button>
@@ -171,7 +178,22 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${postList}" var="post">
-                    ${post.commento}
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title">${post.postPK.membro}</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <div id="star-rating">
+                                        <input type="radio" name="example" class="rating" value="1" />
+                                        <input type="radio" name="example" class="rating" value="2" />
+                                        <input type="radio" name="example" class="rating" value="3" />
+                                        <input type="radio" name="example" class="rating" value="4" />
+                                        <input type="radio" name="example" class="rating" value="5" />
+                                    </div>
+                                </h6>
+                                <p class="card-text">${post.commento}</p>
+                                <a href="#" class="card-link">Modify</a>
+                            </div>
+                        </div>
                     </c:forEach>
                 </div>
             </div>

@@ -197,18 +197,18 @@ public class MainController
                 "voto"
             },
             method = RequestMethod.GET)
-    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto, BindingResult bindingResult)
+    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
     {
         
         System.out.println("Prova");
-        /*
+        
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         
         Integer eventoI = Integer.parseInt(evento);
         Integer votoI = Integer.parseInt(voto);
         
         PostDao.addPost(comm, votoI, eventoI, user.getUsername());
-                */
+        
         return "redirect:events";
     }
     
