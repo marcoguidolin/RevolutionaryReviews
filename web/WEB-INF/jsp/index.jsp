@@ -60,7 +60,7 @@
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="/WebCommunity/categories">Categorie</a></li>
                         <li><a href="/WebCommunity/artists">Artisti</a></li>
-                        <li><a href="/WebCommunity/events?category=0">Eventi</a></li>
+                        <li><a href="/WebCommunity/events">Eventi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

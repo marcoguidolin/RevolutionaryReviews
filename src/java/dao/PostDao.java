@@ -8,8 +8,12 @@ package dao;
 import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojo.Membro;
 import pojo.Post;
+import pojo.PostPK;
 
 /**
  *
@@ -29,5 +33,29 @@ public class PostDao {
             }
         }
         return newList;
+    }
+    
+    public static void addPost(String commento, Integer voto, Integer evento, String membro){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        PostPK postPK = new PostPK(membro, evento);
+        Post post = new Post(postPK, commento, voto);
+        
+        try
+        {
+            transaction = session.beginTransaction();
+            
+            session.save(post);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
     }
 }

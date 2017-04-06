@@ -151,7 +151,7 @@ public class MainController
             method = RequestMethod.GET)
     public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
     {
-        if ((category != null) && (!category.equals("0")))
+        if (!category.equals("0"))
         {
             List<Evento> eventoList = EventiDao.retrieveByCat(category);
             request.setAttribute("eventList", eventoList);
@@ -162,7 +162,15 @@ public class MainController
         }
         return "events";
     }
-
+        @RequestMapping(value = "/events",
+            method = RequestMethod.GET)
+    public String events(ModelMap map, HttpServletRequest request)
+    {
+        List<Evento> eventoList = EventiDao.retrieveAll();
+        request.setAttribute("eventList", eventoList);
+            
+        return "events";
+    }
     @RequestMapping(value = "/eventDetail",
             params
             =
@@ -224,5 +232,17 @@ public class MainController
             //
         }
         return "profile";
+    }
+    
+    @RequestMapping(value = "/post", params =
+            {
+                "post",
+                "evento"
+            },
+            method = RequestMethod.GET)
+    public String post (ModelMap map, HttpServletRequest request, @RequestParam(value = "post") String post,  @RequestParam(value = "evento") String evento)
+    {
+        
+        return "";
     }
 }
