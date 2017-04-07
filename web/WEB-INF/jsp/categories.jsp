@@ -18,7 +18,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Categorie | </title>
+        <title>Categorie | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
                                                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+                                                    <button type="submit" class="btn btn-block">Accedi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -101,7 +101,7 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             Ciao ${userinfo.username}
@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="list-group">
                     <c:forEach items="${catList}" var="catItem">
-                        <a style="color:black;" href="events?category=${catItem.id}" class="list-group-item">
+                        <a href="events?category=${catItem.id}" class="list-group-item">
                             <span class="badge">${catItem.getEventoList().size()}</span>
                             ${catItem.nome}
                         </a>

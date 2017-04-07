@@ -85,7 +85,7 @@
                                                     <input type="password" class="form-control" name="password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+                                                    <button type="submit" class="btn btn-block">Accedi</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -100,7 +100,7 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="/WebCommunity/resources/user.jpg" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             <h4>Ciao ${userinfo.username}</h4>
