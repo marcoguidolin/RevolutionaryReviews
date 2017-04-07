@@ -31,6 +31,9 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
+        
+        <!-- Bootstrap Validator -->
+        <script src="/WebCommunity/resources/js/validator.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -131,62 +134,57 @@
                     <div class="page-header">
                         <h1><span class="popcolor">#Registrati</span> <small>Entra a far parte della community!</small></h1>
                     </div>
-                    <div class="row">
-                        <%
-                            if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))
-                            {
-                        %>
-                        <div class="col-xs-12 col-md-7">
-                            <div class="row">
-                                <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
-                                    <div class="form-group">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Nome" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cognome</label>
-                                        <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ripetere password</label>
-                                        <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mail</label>
-                                        <input type="mail" class="form-control" name="mail" placeholder="Mail" required>
-                                    </div>
-                                    <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px; float: right;">Registrati</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Non modificare col-md-4 -->
-                        <div class="col-xs-6 col-md-4 error">
-                            <div class="row">
-                                <c:if test="${error}">
-                                    <h4>Attenzione</h4>
-                                    <p>${messageError}</p>
-                                </c:if>
-                            </div>
-                        </div>
-                        <%
-                        } else
-                        {
-                        %>
-                    </div>
-                    <h2>Ti sei già registrato.</h2>
-                    <h4>Puoi gestire il tuo profilo <a href="/WebCommunity/profile" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                </div>
+                <div class="row">
                     <%
-                        }
+                        if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))
+                        {
+                    %>
+                    <div class="col-xs-12 col-md-8 col-md-offset-2">
+                        <div class="row">
+                            <form action="/WebCommunity/doRegistration" method="POST" data-toggle="validator">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cognome</label>
+                                    <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                </div>
+                                <label>Password</label>
+                                <div class="form-inline row">
+                                    <div class="form-group col-sm-6">
+                                        <input type="password" data-minlength="6" class="form-control" id="password" name="password" placeholder="Password" required>
+                                        <div class="help-block">La password deve essere lunga almeno 6 caratteri.</div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <input type="password" class="form-control" data-match="#password" data-match-error="Le password inserite non corrispondono" placeholder="Conferma" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Mail</label>
+                                    <input type="email" class="form-control" name="mail" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <center><button type="submit" class="btn" style="padding-left: 50px; padding-right: 50px;">Registrati</button></center>
+                            </form>
+                        </div>
+                    </div>
+                    <%
+                    } else
+                    {
                     %>
                 </div>
+                <h2>Ti sei già registrato.</h2>
+                <h4>Puoi gestire il tuo profilo <a href="/WebCommunity/profile" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                <%
+                    }
+                %>
             </div>
         </div>
                 

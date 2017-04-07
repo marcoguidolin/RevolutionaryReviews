@@ -1,6 +1,6 @@
 package spring;
 
-import utils.FTPUtil;
+import utils.FTPUtils;
 import dao.*;
 import java.io.*;
 import java.util.List;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,25 +30,43 @@ public class MainController
         //
     }
 
+    // <editor-fold defaultstate="collapsed" desc="/">
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {
         return "index";
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Front-end">
+    // <editor-fold defaultstate="collapsed" desc="Registrazione">
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(ModelMap map)
     {
         return "registration";
     }
-    
+
+    @RequestMapping(value = "/doRegistration",
+            params
+            =
+            {
+                "username", "password", "name", "surname", "mail"
+            }, method = RequestMethod.POST)
+    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
+    {
+        Membro user = MembriDao.register(username, password, name, surname, mail);
+        request.getSession().setAttribute("userinfo", user);
+        return "redirect:selectInterests";
+    }
+
     @RequestMapping(value = "/selectInterests", method = RequestMethod.GET)
     public String selectInterests(ModelMap map, HttpServletRequest request)
     {
         request.setAttribute("categoriesList", CategorieDao.retrieveAll());
         return "selectInterests";
     }
-    
+
     @RequestMapping(value = "/doInterests",
             params
             =
@@ -64,33 +81,9 @@ public class MainController
         return "redirect:profile";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(ModelMap map)
-    {
-        return "profile";
-    }
-
-    @RequestMapping(value = "/doRegistration",
-            params
-            =
-            {
-                "username", "password", "passwordCheck", "name", "surname", "mail"
-            }, method = RequestMethod.POST)
-    public String doRegistration(ModelMap map, HttpServletRequest request, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password, @RequestParam(value = "passwordCheck") String passwordCheck, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
-    {
-        if (password.equals(passwordCheck))
-        {
-            Membro user = MembriDao.register(username, password, name, surname, mail);
-            request.getSession().setAttribute("userinfo", user);
-        } else
-        {
-            request.setAttribute("error", true);
-            request.setAttribute("messageError", "Le password che hai inserito non coincidono. Verifica i dati inseriti e riprova.");
-            return registration(map);
-        }
-        return "redirect:selectInterests";
-    }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Login e Logout">
     @RequestMapping(value = "/doLogin", params
             =
             {
@@ -118,6 +111,15 @@ public class MainController
         return "redirect:./";
     }
 
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Profilo">
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(ModelMap map)
+    {
+        return "profile";
+    }
+
     @RequestMapping(value = "/doRemove", method = RequestMethod.GET)
     public String doRemove(ModelMap map, HttpServletRequest request)
     {
@@ -128,90 +130,23 @@ public class MainController
         session.invalidate();
         return "redirect:./";
     }
-
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
-    public String categories(ModelMap map, HttpServletRequest request)
-    {
-        List<Categoria> categoriaList = CategorieDao.retrieveAll();
-        request.setAttribute("catList", categoriaList);
-        return "categories";
-    }
     
-    @RequestMapping(value = "/artists", method = RequestMethod.GET)
-    public String artists(ModelMap map, HttpServletRequest request)
-    {
-        List<Artista> artistiList = ArtistiDao.retrieveAll();
-        request.setAttribute("artistsList", artistiList);
-        return "artists";
-    }
-
-    @RequestMapping(value = "/events", params =
-    {
-        "category"
-    },
-            method = RequestMethod.GET)
-    public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
-    {
-        if (!category.equals("0"))
-        {
-            List<Evento> eventoList = EventiDao.retrieveByCat(category);
-            request.setAttribute("eventList", eventoList);
-        } else
-        {
-            List<Evento> eventoList = EventiDao.retrieveAll();
-            request.setAttribute("eventList", eventoList);
-        }
-        return "events";
-    }
-        @RequestMapping(value = "/events",
-            method = RequestMethod.GET)
-    public String events(ModelMap map, HttpServletRequest request)
-    {
-        List<Evento> eventoList = EventiDao.retrieveAll();
-        request.setAttribute("eventList", eventoList);
-            
-        return "events";
-    }
-    @RequestMapping(value = "/eventDetail",
+    
+    @RequestMapping(value = "/doChangePassword",
             params
             =
             {
-                "id"
-            },
-            method = RequestMethod.GET)
-    public String eventDetail(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+                "password"
+            }, method = RequestMethod.POST)
+    public String doChangePassword(ModelMap map, HttpServletRequest request, @RequestParam(value = "password") String password)
     {
-        System.out.println("Provaasdf");
-        Evento evento = EventiDao.retrieveSingle(id);
-        request.setAttribute("eventDetail", evento);
-        Integer idInt = Integer.parseInt(id);
-        List<Post> postList = PostDao.retrieveByEvent(idInt);
-        request.setAttribute("postList", postList);
-        return "eventDetail";
-    }
-    
-    @RequestMapping(value = "/commento", params =
-            {
-                "comm",
-                "evento",
-                "voto"
-            },
-            method = RequestMethod.GET)
-    public String commento (ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
-    {
-        
-        System.out.println("Prova");
-        
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
-        
-        Integer eventoI = Integer.parseInt(evento);
-        Integer votoI = Integer.parseInt(voto);
-        
-        PostDao.addPost(comm, votoI, eventoI, user.getUsername());
-        
-        return "redirect:events";
+        MembriDao.changePassword(password, user.getUsername());
+        request.getSession().removeAttribute("userinfo");
+        request.getSession().setAttribute("userinfo", user);
+        return "redirect:profile";
     }
-    
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     String uploadFileHandler(ModelMap map, HttpServletRequest request, @RequestParam("file") MultipartFile file)
     {
@@ -237,25 +172,119 @@ public class MainController
 
                 System.out.print(tempFile.getAbsolutePath());
 
-                FTPUtil.upload(tempFile.getAbsolutePath(), tempFile.getName());
-                
+                FTPUtils.upload(tempFile.getAbsolutePath(), tempFile.getName());
+
                 Membro user = (Membro) request.getSession().getAttribute("userinfo");
-                
+
                 user = MembriDao.setAvatar(user.getUsername(), "http://webcommunityproject.altervista.org/" + tempFile.getName());
-                
+
                 request.getSession().removeAttribute("userinfo");
                 request.getSession().setAttribute("userinfo", user);
-            }
-            catch (IOException ex)
+            } catch (IOException ex)
             {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else
+        } else
         {
             //
         }
-        return "profile";
+        return "redirect:profile";
     }
+
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Categorie">
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public String categories(ModelMap map, HttpServletRequest request)
+    {
+        List<Categoria> categoriaList = CategorieDao.retrieveAll();
+        request.setAttribute("catList", categoriaList);
+        return "categories";
+    }
+
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Artisti">
+    @RequestMapping(value = "/artists", method = RequestMethod.GET)
+    public String artists(ModelMap map, HttpServletRequest request)
+    {
+        List<Artista> artistiList = ArtistiDao.retrieveAll();
+        request.setAttribute("artistsList", artistiList);
+        return "artists";
+    }
+
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Eventi">
+    @RequestMapping(value = "/events", params =
+    {
+        "category"
+    },
+            method = RequestMethod.GET)
+    public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
+    {
+        if (!category.equals("0"))
+        {
+            List<Evento> eventoList = EventiDao.retrieveByCat(category);
+            request.setAttribute("eventList", eventoList);
+        } else
+        {
+            List<Evento> eventoList = EventiDao.retrieveAll();
+            request.setAttribute("eventList", eventoList);
+        }
+        return "events";
+    }
+
+    @RequestMapping(value = "/events",
+            method = RequestMethod.GET)
+    public String events(ModelMap map, HttpServletRequest request)
+    {
+        List<Evento> eventoList = EventiDao.retrieveAll();
+        request.setAttribute("eventList", eventoList);
+
+        return "events";
+    }
+
+    @RequestMapping(value = "/eventDetail",
+            params
+            =
+            {
+                "id"
+            },
+            method = RequestMethod.GET)
+    public String eventDetail(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+    {
+        System.out.println("Provaasdf");
+        Evento evento = EventiDao.retrieveSingle(id);
+        request.setAttribute("eventDetail", evento);
+        Integer idInt = Integer.parseInt(id);
+        List<Post> postList = PostDao.retrieveByEvent(idInt);
+        request.setAttribute("postList", postList);
+        return "eventDetail";
+    }
+
+    @RequestMapping(value = "/commento", params =
+    {
+        "comm",
+        "evento",
+        "voto"
+    },
+            method = RequestMethod.GET)
+    public String commento(ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
+    {
+
+        System.out.println("Prova");
+
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+
+        Integer eventoI = Integer.parseInt(evento);
+        Integer votoI = Integer.parseInt(voto);
+
+        PostDao.addPost(comm, votoI, eventoI, user.getUsername());
+
+        return "redirect:events";
+    }
+    // </editor-fold>
+    // </editor-fold>
     
 }

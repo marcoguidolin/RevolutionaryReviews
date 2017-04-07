@@ -17,7 +17,7 @@ import java.net.URLConnection;
  *
  * @author matte
  */
-public class FTPUtil
+public class FTPUtils
 {
     public static void upload(String sourceFilePath, String sourceFileName)
     {

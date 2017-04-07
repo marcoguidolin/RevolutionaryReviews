@@ -129,7 +129,7 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">Hai quasi fatto...</span> <small>Seleziona i tuoi interessi</small></h1>
+                        <h1><span class="popcolor">Hai quasi fatto...</span> <small><!-- --></small></h1>
                     </div>
                     <div class="row">
                         <%
@@ -143,11 +143,11 @@
                         {
                         %>
                     </div>
-                    <div class="col-xs-12 col-md-7">
+                    <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <div class="row">
-                            <form class="form" method="POST" action="/WebCommunity/doInterests" id="login-nav">
+                            <form action="/WebCommunity/doInterests" method="POST">
                                 <div class="form-group">
-                                    <label>Categorie</label>
+                                    <p>Seleziona le categorie di eventi a cui sei interessato:</p>
                                     <ul>
                                         <c:forEach items="${categoriesList}" var="categoriesItem">
                                             <li style="display:inline;">
@@ -160,8 +160,8 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px;">Continua</button>
-                                    <button type="button" onclick="location.href='./profile'" class="btn " style="padding-left: 50px; padding-right: 50px;">Ignora</button>
+                                    <button type="button" onclick="location.href='./profile'" class="btn " style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: left;">Ignora</button>
+                                    <button type="submit" class="btn" style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: right;">Continua</button>
                                 </div>                                    
                             </form>
                         </div>

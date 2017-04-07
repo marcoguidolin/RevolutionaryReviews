@@ -21,7 +21,7 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
-
+        
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
         
@@ -31,6 +31,9 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
 
+        <!-- Bootstrap Validator -->
+        <script src="/WebCommunity/resources/js/validator.js"></script>
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -154,20 +157,23 @@
                                 <br>
                             </div>
                         </div>
-                                
-                        <br>
-                        <br>
-                        <h2>I tuoi interessi</h2>
-                        <ul>
-                            <c:forEach items="${userinfo.categoriaList}" var="categoriesItem">
-                                <li style="display:inline;">
-                                    ${categoriesItem.nome}
-                                </li>
-                            </c:forEach>
-                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <div class="row col-md-offset-3">
+                            <br>
+                            <br>
+                            <h2>I tuoi interessi</h2>
+                            <ul>
+                                <c:forEach items="${categoriaList}" var="categoriesItem">
+                                    <li style="display:inline;">
+                                        ${categoriesItem.nome}
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-xs-6 col-md-4">
-                        <a href="#">Modifica password</a>
+                        <a href="#" data-toggle="modal" data-target="#changePassword">Modifica password</a>
                         <br>
                         <a <a href="#" data-toggle="modal" data-target="#deleteProfile">Elimina il tuo account</a>
                     </div>
@@ -193,12 +199,48 @@
                             <center>    
                                 Seleziona l'immagine da caricare poi fai click su Cambia immagine
                                 <br><br>
-                                <input type="file" class="btn btn-default" name="file"/>
+                                <input type="file" class="btn" name="file"/>
                             </center>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn btn-default">Cambia immagine</button>
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Cambia immagine</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="changePassword" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modifica password</h4>
+                    </div>
+                    <form action="/WebCommunity/doChangePassword" method="POST" data-toggle="validator">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="inputPassword" class="control-label">Password</label>
+                                <div class="form-inline row">
+                                    <div class="form-group col-sm-6">
+                                        <input type="password" data-minlength="6" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                                        <div class="help-block">La password deve essere lunaga almeno 6 caratteri.</div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Le password inserite non corrispondono" placeholder="Conferma" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Aggiorna</button>
                         </div>
                     </form>
                 </div>
@@ -221,8 +263,8 @@
                             Eliminando il tuo account verranno eliminati anche tutti i post pubblicati e gli interessi che stai seguendo. Sei sicuro di voler continuare?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn btn-default">Elimina</button>
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Elimina</button>
                         </div>
                     </form>
                 </div>

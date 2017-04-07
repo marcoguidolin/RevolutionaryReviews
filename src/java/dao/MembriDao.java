@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import pojo.Categoria;
 import pojo.Membro;
 import pojo.Post;
+import utils.SecurityUtils;
 
 /**
  *
@@ -21,6 +22,8 @@ public class MembriDao
 
     public static Membro checkLogin(String username, String password)
     {
+        password = SecurityUtils.getSha256(password);
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         Membro registered = (Membro) session.get(Membro.class, username);
@@ -36,8 +39,6 @@ public class MembriDao
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
-        
-        System.out.println(selectedCategories);
         
         try
         {
@@ -76,6 +77,8 @@ public class MembriDao
     {   
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
+        
+        password = SecurityUtils.getSha256(password);
         
         Membro m = null;
         
@@ -158,4 +161,29 @@ public class MembriDao
         return membro;
     }
 
+    public static void changePassword(String password, String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        password = SecurityUtils.getSha256(password);
+        
+        try
+        {
+            transaction = session.beginTransaction();
+
+            Membro membro = (Membro) session.get(Membro.class, username);
+            membro.setPassword(password);
+            session.update(membro);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+    }
 }

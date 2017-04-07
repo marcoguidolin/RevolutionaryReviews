@@ -184,14 +184,6 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${postList}" var="post">
-                        <div class="card">
-                            <div class="card-block">
-                                <p class="card-text">
-                                    User: <span style="font-size: 17px; margin-right:20px">${post.postPK.membro}</span>
-                                    Voto:<input type="hidden" class="rating" data-readonly value="${post.voto}"/>
-                                </p>
-                                <h4 class="card-title">${post.commento}</h4>
-                      </div>
                         <div class="media" style="margin-bottom: 20px;">
                             <div class="media-left">
                                 <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
@@ -199,7 +191,7 @@
                             <div class="media-body">
                                 <h4 class="media-heading">${post.membro1.username}</h4>
                                 <p>${post.commento}</p>
-                                Voto: ${post.voto}
+                                <input type="hidden" class="rating" data-readonly value="${post.voto}"/>
                             </div>
                         </div>
                     </c:forEach>
