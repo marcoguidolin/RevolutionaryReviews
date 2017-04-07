@@ -20,13 +20,11 @@
 
         <title>Categorie | SoundZone</title>
 
+        
+        
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
         
-        <!-- StarRating -->
-        <link href="/WebCommunity/resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-        <script src="/WebCommunity/resources/js/star-rating.js" type="text/javascript"></script>
 
         <!-- Custom CSS -->
         <link href="/WebCommunity/resources/css/custom/customStyles.css" rel="stylesheet">
@@ -36,6 +34,11 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
+        
+        <!-- StarRating -->
+        <link href="/WebCommunity/resources/css/bootstrap-rating.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+        <script src="/WebCommunity/resources/js/bootstrap-rating.js" type="text/javascript"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,7 +46,6 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
     </head>
 
     <body>
@@ -165,7 +167,7 @@
                             <input type="hidden" name="evento" value="${eventDetail.id}" />
                         </div>
                         <div class="form-group">
-                            <input id="input-id" name="voto" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="xs"/>
+                            <input type="hidden" class="rating" value="3" name="voto"/>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px;">Commenta</button>
@@ -182,6 +184,14 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${postList}" var="post">
+                        <div class="card">
+                            <div class="card-block">
+                                <p class="card-text">
+                                    User: <span style="font-size: 17px; margin-right:20px">${post.postPK.membro}</span>
+                                    Voto:<input type="hidden" class="rating" data-readonly value="${post.voto}"/>
+                                </p>
+                                <h4 class="card-title">${post.commento}</h4>
+                      </div>
                         <div class="media" style="margin-bottom: 20px;">
                             <div class="media-left">
                                 <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
