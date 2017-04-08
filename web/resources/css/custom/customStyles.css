@@ -11,16 +11,23 @@
     src: local('Segoe UI'), url('../../fonts/segoeui.woff') format('woff');
 }
 
+/*
 html{
     height: 100%;
     background: linear-gradient(to bottom right,rgb(32, 3, 24) 0%,rgb(7, 24, 41) 76.1%) no-repeat center center fixed;
     background-size: cover;
     background-repeat: no-repeat;
 }
-
+*/
 body{
+    /*****************/
+    height: 100%;
+    background: linear-gradient(to bottom right,rgb(32, 3, 24) 0%,rgb(7, 24, 41) 76.1%) no-repeat center center fixed;
+    background-size: cover;
+    background-repeat: no-repeat;    
+    /*****************/
     color: white;
-    background: transparent;
+    /*background: transparent;*/
     font-family: 'Segoe UI';
 }
 
@@ -126,7 +133,7 @@ h1, h2, h3, h4, h5, h6{
 
 .user-img-circle-camera{
     z-index: 1;
-    position: fixed;
+    position: absolute;
     margin-top: 20px;
     width: 128px;
     height: 128px;
@@ -209,4 +216,26 @@ body.modal-open .supreme-container{
 
 .panel-body{
     color: black;
+}
+
+.action-dropdown{
+    background: rgba(94,89,93,1);
+    color: white !important;
+}
+
+.action-dropdown:focus, .action-dropdown:hover{
+    color: black !important;
+}
+
+.progress{
+    border-radius: 90px;
+}
+
+.progress-bar{
+    background-color: rgba(94,89,93,1);
+}
+
+.progress-bar.active, .progress.active .progress-bar {
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 0.2s linear infinite;
 }

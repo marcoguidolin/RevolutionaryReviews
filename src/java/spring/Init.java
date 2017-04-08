@@ -27,7 +27,7 @@ public class Init implements WebApplicationInitializer
         Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
         servlet.addMapping("/");
         servlet.setLoadOnStartup(1);
-        servlet.setMultipartConfig(new MultipartConfigElement("/tmp", 1024*1024*1, 1024*1024*10, 1024*1024*15));
+        servlet.setMultipartConfig(new MultipartConfigElement("/tmp", 1024*1024*10, 1024*1024*10, 1024*1024*15));
     }
 
 }

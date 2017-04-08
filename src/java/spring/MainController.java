@@ -141,7 +141,24 @@ public class MainController
     public String doChangePassword(ModelMap map, HttpServletRequest request, @RequestParam(value = "password") String password)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
-        MembriDao.changePassword(password, user.getUsername());
+        user = MembriDao.changePassword(password, user.getUsername());
+        request.getSession().removeAttribute("userinfo");
+        request.getSession().setAttribute("userinfo", user);
+        return "redirect:profile";
+    }
+    
+    @RequestMapping(value = "/doChangePersonalInformations",
+            params
+            =
+            {
+                "name",
+                "surname",
+                "mail"
+            }, method = RequestMethod.POST)
+    public String doChangePersonalInformations(ModelMap map, HttpServletRequest request, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
+    {
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        user = MembriDao.updateProfileInformations(name, surname, mail, user.getUsername());
         request.getSession().removeAttribute("userinfo");
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";

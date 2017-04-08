@@ -41,7 +41,7 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-
+    
     <body class="background-container">
         <nav class="navbar navbar-fixed-top navbar-default navbar-inverse supreme-container" role="navigation">
             <div class="container-fluid centered-content">
@@ -128,6 +128,24 @@
                 <div class="row">
                     <div class="page-header">
                         <h1><span class="popcolor">#Profilo</span> <small>Gestisci il tuo profilo</small></h1>
+                        <%
+                            if (!(session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
+                        %>
+                        <div class="dropdown" style="float: right; z-index: 2; top: -6px;">
+                            <button class="btn btn-default dropdown-toggle action-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li><a href="#" data-toggle="modal" data-target="#changePassword">Modifica password</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#changeProfilePicture">Modifica immagine</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#changePersonalInformations">Modifica informazioni</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#deleteProfile">Elimina il tuo account</a></li>
+                            </ul>
+                        </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
                 <div class="row">
@@ -141,41 +159,32 @@
                     %>
                     <div class="col-xs-12 col-md-8">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-12 text-center" style="margin-bottom: 25px;">
                                 <a href="#" data-toggle="modal" data-target="#changeProfilePicture"><img src="/WebCommunity/resources/camera.png" alt="user-picture" class="img-circle user-img-circle-camera"></a>
                                 <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-large"/>
                             </div>
-                            <div class="col-md-7">
-                                <h2>Le tue informazioni</h2>
-                                Nickname: ${userinfo.username}
-                                <br>
-                                Email: ${userinfo.mail}
-                                <br>
-                                Nome: ${userinfo.nome}
-                                <br>
-                                Cognome: ${userinfo.cognome}
-                                <br>
+                            <div class="col-md-8" style="margin-left: 15px;">
+                                <div class="row">
+                                    <h2>Le tue informazioni</h2>
+                                    <h4>${userinfo.username}</h4>
+                                    <h5>${userinfo.mail}</h5>
+                                    <h5>${userinfo.nome} ${userinfo.cognome}</h5>
+                                    <h5></h5>
+                                </div>
+                                <div class="row">
+                                    <br>
+                                    <br>
+                                    <h2>I tuoi interessi</h2>
+                                    <ul>
+                                        <c:forEach items="${categoriaList}" var="categoriesItem">
+                                            <li style="display:inline;">
+                                                ${categoriesItem.nome}
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-md-8">
-                        <div class="row col-md-offset-3">
-                            <br>
-                            <br>
-                            <h2>I tuoi interessi</h2>
-                            <ul>
-                                <c:forEach items="${categoriaList}" var="categoriesItem">
-                                    <li style="display:inline;">
-                                        ${categoriesItem.nome}
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-md-4">
-                        <a href="#" data-toggle="modal" data-target="#changePassword">Modifica password</a>
-                        <br>
-                        <a <a href="#" data-toggle="modal" data-target="#deleteProfile">Elimina il tuo account</a>
                     </div>
                     <%
                         }
@@ -200,15 +209,20 @@
                                 Seleziona l'immagine da caricare poi fai click su Cambia immagine
                                 <br><br>
                                 <input type="file" class="btn" name="file"/>
+                                <br>
+                                <div class="progress progress-striped active" id="uploadState" style="width: 70%; visibility: collapse;">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"/>
+                                </div>
                             </center>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn">Cambia immagine</button>
+                            <button type="submit" class="btn" onclick="document.getElementById('uploadState').style.visibility = 'visible'">
+                                Cambia immagine
+                            </button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
         
@@ -225,7 +239,7 @@
                     <form action="/WebCommunity/doChangePassword" method="POST" data-toggle="validator">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="inputPassword" class="control-label">Password</label>
+                                <label>Password</label>
                                 <div class="form-inline row">
                                     <div class="form-group col-sm-6">
                                         <input type="password" data-minlength="6" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
@@ -236,6 +250,42 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Aggiorna</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="changePersonalInformations" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modifica informazioni personali</h4>
+                    </div>
+                    <form action="/WebCommunity/doChangePersonalInformations" method="POST" data-toggle="validator">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" class="form-control" name="name" value="${userinfo.nome}" placeholder="Nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Cognome</label>
+                                <input type="text" class="form-control" name="surname" value="${userinfo.cognome}" placeholder="Cognome" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mail</label>
+                                <input type="email" class="form-control" name="mail" value="${userinfo.mail}" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -260,7 +310,7 @@
                     </div>
                     <form action="/WebCommunity/doRemove" method="GET">
                         <div class="modal-body">
-                            Eliminando il tuo account verranno eliminati anche tutti i post pubblicati e gli interessi che stai seguendo. Sei sicuro di voler continuare?
+                            Eliminando il tuo account verranno eliminati anche tutti i post pubblicati e gli eventi da te creati. Sei sicuro di voler continuare?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn" data-dismiss="modal">Annulla</button>

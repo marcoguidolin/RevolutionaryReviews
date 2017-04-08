@@ -167,7 +167,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Mail</label>
+                                    <label>Mail</label>
                                     <input type="email" class="form-control" name="mail" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
                                     <div class="help-block with-errors"></div>
                                 </div>

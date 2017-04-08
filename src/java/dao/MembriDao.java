@@ -161,18 +161,19 @@ public class MembriDao
         return membro;
     }
 
-    public static void changePassword(String password, String username)
+    public static Membro changePassword(String password, String username)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
         password = SecurityUtils.getSha256(password);
+        Membro membro = null;
         
         try
         {
             transaction = session.beginTransaction();
 
-            Membro membro = (Membro) session.get(Membro.class, username);
+            membro = (Membro) session.get(Membro.class, username);
             membro.setPassword(password);
             session.update(membro);
 
@@ -185,5 +186,37 @@ public class MembriDao
         {
             session.close();
         }
+        
+        return membro;
+    }
+    
+    public static Membro updateProfileInformations(String name, String surname, String mail, String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        Membro membro = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+
+            membro = (Membro) session.get(Membro.class, username);
+            membro.setNome(name);
+            membro.setCognome(surname);
+            membro.setMail(mail);
+            session.update(membro);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+        
+        return membro;
     }
 }
