@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import pojo.*;
+import utils.MailUtils;
 
 /**
  * Classe MainController
@@ -38,7 +40,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Front-end">
     // <editor-fold defaultstate="collapsed" desc="Registrazione">
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -82,7 +83,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Login e Logout">
     @RequestMapping(value = "/doLogin", params
             =
@@ -112,7 +112,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Profilo">
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap map)
@@ -130,8 +129,7 @@ public class MainController
         session.invalidate();
         return "redirect:./";
     }
-    
-    
+
     @RequestMapping(value = "/doChangePassword",
             params
             =
@@ -146,7 +144,7 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
-    
+
     @RequestMapping(value = "/doChangePersonalInformations",
             params
             =
@@ -209,7 +207,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String categories(ModelMap map, HttpServletRequest request)
@@ -220,7 +217,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
     public String artists(ModelMap map, HttpServletRequest request)
@@ -231,7 +227,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Eventi">
     @RequestMapping(value = "/events", params =
     {
@@ -303,5 +298,38 @@ public class MainController
     }
     // </editor-fold>
     // </editor-fold>
-    
+
+    // <editor-fold defaultstate="collapsed" desc="Back-end">
+    @RequestMapping(value = "/administration", method = RequestMethod.GET)
+    public String administration(ModelMap map)
+    {
+        return "administration";
+    }
+
+    @RequestMapping(value = "/newsletter", method = RequestMethod.GET)
+    public String newsletter(ModelMap map)
+    {
+        return "newsletter";
+    }
+
+    @RequestMapping(value = "/sendNewsletters",
+            params =
+            {
+                "messageObject",
+                "messageBody"
+            }, method = RequestMethod.POST)
+    public String sendNewsletters(ModelMap map, @RequestParam("messageObject") String messageObject, @RequestParam("messageBody") String messageBody)
+    {
+        try
+        {
+            MailUtils.Send(messageObject, messageBody);
+        } catch (MessagingException ex)
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "redirect:newsletter";
+    }
+    // </editor-fold>
+
 }

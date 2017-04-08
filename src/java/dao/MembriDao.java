@@ -219,4 +219,9 @@ public class MembriDao
         
         return membro;
     }
+    
+    public static List<Membro> retrieveAll()
+    {
+        return HibernateUtil.getSessionFactory().openSession().createCriteria(Membro.class).list();
+    }
 }
