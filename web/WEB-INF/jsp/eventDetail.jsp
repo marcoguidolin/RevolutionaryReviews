@@ -37,7 +37,8 @@
         
         <!-- StarRating -->
         <link href="/WebCommunity/resources/css/bootstrap-rating.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+        
+        <!-- Rating Core -->
         <script src="/WebCommunity/resources/js/bootstrap-rating.js" type="text/javascript"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -186,7 +187,7 @@
                     <c:forEach items="${postList}" var="post">
                         <div class="media" style="margin-bottom: 20px;">
                             <div class="media-left">
-                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
+                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">${post.membro1.username}</h4>
@@ -202,6 +203,14 @@
         <script>
             $(document).ready(function () {
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
+            });
+            
+            $('.dropdown').on('show.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+            });
+
+            $('.dropdown').on('hide.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).fadeOut(200);
             });
         </script>
     </body>

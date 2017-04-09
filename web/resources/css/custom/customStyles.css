@@ -247,3 +247,14 @@ body.modal-open .supreme-container{
 .flip-items{
     margin-top: 20px;
 }
+
+.interests-button-dropdown-menu {
+    left: 50%;
+    right: auto;
+    text-align: center;
+    transform: translate(-50%, 0);
+    border-radius: 90px;
+    padding: 5px;
+    min-width: 50px;
+    background-color: rgba(94,89,93,1);
+}

@@ -224,4 +224,45 @@ public class MembriDao
     {
         return HibernateUtil.getSessionFactory().openSession().createCriteria(Membro.class).list();
     }
+
+    public static Membro deleteInterest(Integer id, String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        Membro membro = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+
+            membro = (Membro) session.get(Membro.class, username);
+            
+            List<Categoria> categories = membro.getCategoriaList();
+            
+            for(int i = 0; i < categories.size(); i++)
+            {
+                if(categories.get(i).getId().equals(id))
+                {
+                    categories.remove(i);
+                    break;
+                }
+            }
+            
+            membro.setCategoriaList(categories);
+            
+            session.update(membro);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+        
+        return membro;
+    }
 }

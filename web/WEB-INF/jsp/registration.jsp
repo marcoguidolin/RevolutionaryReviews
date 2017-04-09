@@ -192,6 +192,14 @@
             $(document).ready(function () {
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
+            
+            $('.dropdown').on('show.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+            });
+
+            $('.dropdown').on('hide.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).fadeOut(200);
+            });
         </script>
     </body>
 </html>
