@@ -30,6 +30,12 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
+        
+        <!-- Carousel Script -->
+        <script src="/WebCommunity/resources/js/jquery.flipster.min.js"></script>
+        
+        <!-- Carousel CSS -->
+        <link rel="stylesheet" href="/WebCommunity/resources/css/flipster.min.css">
     
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -128,11 +134,26 @@
                         <h1><span class="popcolor">#Home</span> <small><!----></small></h1>
                     </div>
                 </div>
+                <div class="row">
+                    <div id="coverflow">
+                        <ul class="flip-items" style="margin-top: 20px;">
+                            <li data-flip-title="Red">
+                                <img src="/WebCommunity/resources/user.png">
+                            </li>
+                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
+                                <img src="/WebCommunity/resources/user.png">
+                            </li>
+                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
+                                <img src="/WebCommunity/resources/user.png">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-                                
         <script>
             $(document).ready(function () {
+                $("#coverflow").flipster();
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
         </script>
