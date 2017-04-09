@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -65,8 +67,10 @@ public class Membro implements Serializable {
     @JoinTable(name = "MEMBRO_CATEGORIA", joinColumns = {
         @JoinColumn(name = "Membro", referencedColumnName = "Username")}, inverseJoinColumns = {
         @JoinColumn(name = "Categoria", referencedColumnName = "Id")})
+    @Fetch(FetchMode.SELECT)
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Categoria> categoriaList;
+    @Fetch(FetchMode.SELECT)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER)
     private List<Post> postList;
 
@@ -170,8 +174,9 @@ public class Membro implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "pojo.Membro[ username=" + username + " ]";
+    public String toString()
+    {
+        return "Membro{" + "username=" + username + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", avatar=" + avatar + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
     }
     
 }

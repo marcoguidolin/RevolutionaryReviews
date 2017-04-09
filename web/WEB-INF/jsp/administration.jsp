@@ -65,11 +65,11 @@
                         <li class="active"><a href="#">Dashboard <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav nav-sidebar">
-                        <li><a href="">Utenti</a></li>
-                        <li><a href="/WebCommunity/newsletter">Newsletter</a></li>
-                        <li><a href="">Categorie</a></li>
-                        <li><a href="">Artisti</a></li>
-                        <li><a href="">Eventi</a></li>
+                        <li><a href="/WebCommunity/administrationUsers">Utenti</a></li>
+                        <li><a href="/WebCommunity/administrationNewsletter">Newsletter</a></li>
+                        <li><a href="/WebCommunity/administrationCategories">Categorie</a></li>
+                        <li><a href="/WebCommunity/administrationArtists">Artisti</a></li>
+                        <li><a href="/WebCommunity/administrationEvents">Eventi</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

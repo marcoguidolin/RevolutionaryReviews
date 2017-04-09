@@ -160,8 +160,8 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <button type="button" onclick="location.href='./profile'" class="btn " style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: left;">Ignora</button>
-                                    <button type="submit" class="btn" style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: right;">Continua</button>
+                                    <button type="submit" class="btn" style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: left;">Continua</button>
+                                    <button type="button" onclick="location.href='./profile'" class="btn " style="padding-left: 50px; padding-right: 50px; margin-top: 25px; float: right;">Ignora</button>
                                 </div>                                    
                             </form>
                         </div>

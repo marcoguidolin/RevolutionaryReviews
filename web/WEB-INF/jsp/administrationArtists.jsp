@@ -1,6 +1,6 @@
 <%-- 
-    Document   : newsletter
-    Created on : 8-apr-2017, 19.43.21
+    Document   : administrationArtists
+    Created on : 9-apr-2017, 19.48.57
     Author     : matte
 --%>
 
@@ -16,7 +16,7 @@
         <meta name="description" content="Shopping List MVC">
         <meta name="author" content="Matteo Parlato">
 
-        <title>Newsletter | Amministrazione</title>
+        <title>Artisti | Amministrazione</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/WebCommunity/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -68,29 +68,15 @@
                         <li><a href="/WebCommunity/administration">Dashboard <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav nav-sidebar">
-                        <li><a href="">Utenti</a></li>
-                        <li class="active"><a href="#">Newsletter</a></li>
-                        <li><a href="">Categorie</a></li>
-                        <li><a href="">Artisti</a></li>
-                        <li><a href="">Eventi</a></li>
+                        <li><a href="/WebCommunity/administrationUsers">Utenti</a></li>
+                        <li><a href="/WebCommunity/administrationNewsletter">Newsletter</a></li>
+                        <li><a href="/WebCommunity/administrationCategories">Categorie</a></li>
+                        <li class="active"><a href="#">Artisti</a></li>
+                        <li><a href="/WebCommunity/administrationEvents">Eventi</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Newsletter</h1>
-
-                    <div class="col-md-8">
-                        <form action="/WebCommunity/sendNewsletters" method="POST" data-toggle="validator">
-                            <div class="form-group">
-                                <label>Oggetto</label>
-                                <input type="text" class="form-control" name="messageObject" placeholder="Oggetto" required></input>
-                            </div>
-                            <div class="form-group">
-                                <label>Messaggio</label>
-                                <textarea type="text" rows="10" class="form-control" name="messageBody" placeholder="Messaggio" required></textarea>
-                            </div>
-                            <center><button type="submit" class="btn">Invia</button></center>
-                        </form>
-                    </div>
+                    <h1 class="page-header">Artisti</h1>
                 </div>
             </div>
         </div>
