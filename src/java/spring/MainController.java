@@ -44,6 +44,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Front-end">
     // <editor-fold defaultstate="collapsed" desc="Registrazione">
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -87,6 +88,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Login e Logout">
     @RequestMapping(value = "/doLogin", params
             =
@@ -116,6 +118,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Profilo">
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap map)
@@ -211,6 +214,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String categories(ModelMap map, HttpServletRequest request)
@@ -221,6 +225,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
     public String artists(ModelMap map, HttpServletRequest request)
@@ -231,6 +236,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Eventi">
     @RequestMapping(value = "/events", params =
     {
