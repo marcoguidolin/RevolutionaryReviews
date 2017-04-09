@@ -5,9 +5,14 @@
  */
 package hibernate;
 
+import pojo.Artista;
+import pojo.Post;
+import pojo.PostPK;
+import pojo.Evento;
+import pojo.Categoria;
+import pojo.Membro;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
-import pojo.*;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory

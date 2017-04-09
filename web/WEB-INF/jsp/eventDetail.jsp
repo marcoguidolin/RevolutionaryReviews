@@ -146,7 +146,7 @@
                         <div class="panel-body">
                             Luogo: ${eventDetail.luogo}<br>
                             Data: ${eventDetail.data}<br>
-                            Descrizione;
+                            Descrizione: ${eventDetail.descrizione}
                         </div>
                     </div>
                 </div>

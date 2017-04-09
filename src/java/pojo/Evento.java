@@ -61,6 +61,9 @@ public class Evento implements Serializable
     @Column(name = "Data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    @Size(max = 1024)
+    @Column(name = "Descrizione")
+    private String descrizione;
     @Size(max = 100)
     @Column(name = "Immagine")
     private String immagine;
@@ -136,6 +139,14 @@ public class Evento implements Serializable
         this.data = data;
     }
 
+    public String getDescrizione(){
+        return descrizione;
+    }
+    
+    public void setDescrizione(String descrizione){
+        this.descrizione = descrizione;
+    }
+    
     public String getImmagine()
     {
         return immagine;

@@ -1,5 +1,10 @@
 package spring;
 
+import pojo.Artista;
+import pojo.Post;
+import pojo.Evento;
+import pojo.Categoria;
+import pojo.Membro;
 import utils.FTPUtils;
 import dao.*;
 import java.io.*;
@@ -15,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import pojo.*;
 import utils.MailUtils;
 
 /**
