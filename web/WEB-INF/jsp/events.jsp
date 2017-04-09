@@ -135,18 +135,7 @@
                         <c:forEach items="${eventList}" var="eventItem">
                             <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
                                 <center>
-                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;"
-                                        src="
-                                        <c:choose>
-                                            <c:when test="eventItem.immagine != null">
-                                                ${eventItem.immagine}
-                                            </c:when>
-                                            <c:otherwise>
-                                                /WebCommunity/resources/ticket.png
-                                            </c:otherwise>
-
-                                        </c:choose>
-                                    " alt="Event picture">
+                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="${eventItem.immagine}" alt="Event picture">
                                 </center>
                                 <div class="card-block">
                                     <h4 class="card-title">${eventItem.titolo}</h4>
