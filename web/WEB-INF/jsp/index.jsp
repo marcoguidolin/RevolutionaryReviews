@@ -170,12 +170,6 @@
                             <li data-flip-title="Razzmatazz" data-flip-category="Purples">
                                 <img src="/WebCommunity/resources/user.png">
                             </li>
-                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
                         </ul>
                     </div>
                 </div>

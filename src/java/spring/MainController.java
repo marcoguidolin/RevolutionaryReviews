@@ -182,6 +182,19 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
+    
+    @RequestMapping(value = "/deletePost",
+            params
+            =
+            {
+                "id"
+            }, method = RequestMethod.GET)
+    public String deletePost(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") Integer id)
+    {
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        MembriDao.removePost(id, user.getUsername());
+        return "redirect:profile";
+    }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     String uploadFileHandler(ModelMap map, HttpServletRequest request, @RequestParam("file") MultipartFile file)

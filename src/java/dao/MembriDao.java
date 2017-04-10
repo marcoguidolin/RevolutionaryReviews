@@ -139,6 +139,40 @@ public class MembriDao
         }
     }
     
+    public static void removePost(Integer eventID, String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+            
+//            List<Post> list = session.createCriteria(Post.class).list();
+//            for(Post p : list)
+//            {
+//                System.out.println(p.getMembro1().getUsername());
+//                System.out.println(username);
+//                System.out.println(p.getEvento1().getId());
+//                System.out.println(eventID);
+//                if(p.getMembro1().getUsername().equals(username) && p.getEvento1().getId().equals(eventID))
+//                {
+//                    session.delete(p);
+//                    break;
+//                }
+//            }
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+    }
+    
     public static Membro setAvatar(String username, String path)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();

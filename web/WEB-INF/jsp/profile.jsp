@@ -227,7 +227,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-xs-2">
-                                                        <a href="/WebCommunity/removePost?id=${postItem.evento1.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        <a href="/WebCommunity/deletePost?id=${postItem.evento1.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
                                                     </div>
                                                 </div>
                                             </c:forEach>

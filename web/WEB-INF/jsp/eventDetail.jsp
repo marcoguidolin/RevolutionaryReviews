@@ -184,18 +184,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <c:forEach items="${postList}" var="post">
-                        <div class="media" style="margin-bottom: 20px;">
-                            <div class="media-left">
-                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">${post.membro1.username}</h4>
-                                <p>${post.commento}</p>
-                                <input type="hidden" class="rating" data-readonly value="${post.voto}"/>
-                            </div>
-                        </div>
-                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${empty postList}">
+                            <center><h3>Nessun commento pubblicato. Sii tu il primo!</h3><center>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${postList}" var="post">
+                                <div class="media" style="margin-bottom: 20px;">
+                                    <div class="media-left">
+                                        <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">${post.membro1.username}</h4>
+                                        <p>${post.commento}</p>
+                                        <input type="hidden" class="rating" data-readonly value="${post.voto}"/>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
