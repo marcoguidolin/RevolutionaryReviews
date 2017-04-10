@@ -35,16 +35,18 @@ public class MembriDao
         return null;
     }
 
-    public static void setInterests(List<Integer> selectedCategories, String username)
+    public static Membro setInterests(List<Integer> selectedCategories, String username)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
+        
+        Membro membro = null;
         
         try
         {
             transaction = session.beginTransaction();
 
-            Membro membro = (Membro) session.get(Membro.class, username);
+            membro = (Membro) session.get(Membro.class, username);
 
             List<Categoria> categoriesList = session.createQuery("from Categoria").list();
             List<Categoria> newInterestsList = new ArrayList<>();
@@ -71,6 +73,8 @@ public class MembriDao
         {
             session.close();
         }
+        
+        return membro;
     }
 
     public static Membro register(String username, String password, String name, String surname, String mail)

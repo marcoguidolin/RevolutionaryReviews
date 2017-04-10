@@ -21,6 +21,8 @@ public class FTPUtils
 {
     public static void upload(String sourceFilePath, String sourceFileName)
     {
+        System.setProperty("java.net.useSystemProxies", "true");
+        
         String ftpUrl = "ftp://%s:%s@%s/%s;type=i";
         String host = "ftp.webcommunityproject.altervista.org";
         String user = "webcommunityproject";

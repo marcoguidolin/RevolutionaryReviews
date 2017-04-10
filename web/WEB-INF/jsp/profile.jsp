@@ -4,6 +4,7 @@
     Author     : matte
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,12 +35,16 @@
         <!-- Bootstrap Validator -->
         <script src="/WebCommunity/resources/js/validator.js"></script>
         
+        <!-- Rating Core -->
+        <script src="/WebCommunity/resources/js/bootstrap-rating.js" type="text/javascript"></script>
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        
     </head>
     
     <body class="background-container">
@@ -157,30 +162,84 @@
                     <%
                         } else {
                     %>
-                    <div class="col-xs-12 col-md-8">
+                    <div class="col-xs-12">
                         <div class="row">
                             <div class="col-md-3 col-xs-12 text-center" style="margin-bottom: 25px;">
                                 <a href="#" data-toggle="modal" data-target="#changeProfilePicture"><img src="/WebCommunity/resources/camera.png" alt="user-picture" class="img-circle user-img-circle-camera"></a>
                                 <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-large"/>
                             </div>
-                            <div class="col-md-8" style="margin-left: 15px;">
+                            <div class="col-md-8">
                                 <div class="row">
-                                    <h2>Le tue informazioni</h2>
-                                    <h4>${userinfo.username}</h4>
-                                    <h5>${userinfo.mail}</h5>
-                                    <h5>${userinfo.nome} ${userinfo.cognome}</h5>
+                                    <h2 class="popcolor">#Le tue informazioni</h2>
+                                    <h4><span class="glyphicon glyphicon-sunglasses" aria-hidden="true" style="margin-right: 10px;"></span>${userinfo.username}</h4>
+                                    <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="margin-right: 10px;"></span> ${userinfo.mail}</h5>
+                                    <h5><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 10px;"></span> ${userinfo.nome} ${userinfo.cognome}</h5>
                                     <h5></h5>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <br>
+                                    <br>
+                                    <h2 class="popcolor">#I tuoi interessi</h2>
+                                    
+                                    <c:choose>
+                                        <c:when test="${empty userinfo.categoriaList}">
+                                            <h4>Non stai seguendo interessi.</h4>
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#updateInterests">Aggiungi interessi</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <ul class="list-inline">
+                                                <c:forEach items="${userinfo.categoriaList}" var="categoriesItem">
+                                                    <li>
+                                                        <div class="btn-group" role="group" style="margin-bottom: 5px;">
+                                                            <a href="/WebCommunity/events?category=${categoriesItem.id}"  class="btn btn-default" style="color: black !important;">${categoriesItem.nome}</a>
+                                                            <a href="/WebCommunity/deleteInterest?id=${categoriesItem.id}" class="btn btn-default" style="height: 32px;"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        </div>
+                                                    </li>
+                                                </c:forEach>
+                                            </ul>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="row">
                                     <br>
                                     <br>
-                                    <h2>I tuoi interessi</h2>
-                                    <ul>
-                                        <c:forEach items="${categoriaList}" var="categoriesItem">
-                                            <li style="display:inline;">
-                                                ${categoriesItem.nome}
-                                            </li>
-                                        </c:forEach>
+                                    <h2 class="popcolor">#I tuoi commenti</h2>
+                                    <c:choose>
+                                        <c:when test="${empty userinfo.postList}">
+                                            <h4>Non stai seguendo interessi.</h4>
+                                            <button type="button" class="btn" >Aggiungi interessi</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${userinfo.postList}" var="postItem">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-xs-10">
+                                                        <div class="media" style="margin-bottom: 20px;">
+                                                            <div class="media-left">
+                                                                <img class="media-object img-circle user-img-circle-xsmall" src="${postItem.evento1.immagine}" alt="Event picture"/>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading">${postItem.evento1.titolo}</h4>
+                                                                <p>${postItem.commento}</p>
+                                                                <input type="hidden" class="rating" data-readonly value="${postItem.voto}"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <a href="/WebCommunity/removePost?id=${postItem.evento1.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div class="row">
+                                    <br>
+                                    <br>
+                                    <h2 class="popcolor">#I tuoi eventi</h2>
+                                    <ul class="list-inline">
+                                        Da implementare
                                     </ul>
                                 </div>
                             </div>
@@ -322,9 +381,52 @@
             </div>
         </div>
         
+        <!-- Modal -->
+        <div class="modal fade" id="updateInterests" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Aggiorna interessi</h4>
+                    </div>
+                    <form action="/WebCommunity/doInterests" method="POST">
+                        <div class="modal-body">
+                            <ul>
+                                <c:forEach items="${categoriesList}" var="categoriesItem">
+                                    <li style="display:inline;">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="categories" value="${categoriesItem.id}">
+                                                ${categoriesItem.nome}
+                                            </label>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Aggiorna</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
         <script>
             $(document).ready(function () {
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
+            });
+            
+            $('.dropdown').on('show.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+            });
+
+            $('.dropdown').on('hide.bs.dropdown', function() {
+              $(this).find('.dropdown-menu').first().stop(true, true).fadeOut(200);
             });
         </script>
     </body>

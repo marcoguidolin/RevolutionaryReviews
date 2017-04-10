@@ -19,6 +19,7 @@ html{
     background-repeat: no-repeat;
 }
 */
+
 body{
     /*****************/
     height: 100%;
@@ -236,8 +237,8 @@ body.modal-open .supreme-container{
 }
 
 .progress-bar.active, .progress.active .progress-bar {
-    -o-animation: progress-bar-stripes 2s linear infinite;
-    animation: progress-bar-stripes 0.2s linear infinite;
+    -o-animation: progress-bar-stripes 0.4s linear infinite;
+    animation: progress-bar-stripes 0.4s linear infinite;
 }
 
 .flipster__item__content{
@@ -256,5 +257,15 @@ body.modal-open .supreme-container{
     border-radius: 90px;
     padding: 5px;
     min-width: 50px;
-    background-color: rgba(94,89,93,1);
+    background-color: transparent;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
 }

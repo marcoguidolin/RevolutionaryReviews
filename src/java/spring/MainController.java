@@ -69,7 +69,7 @@ public class MainController
     @RequestMapping(value = "/selectInterests", method = RequestMethod.GET)
     public String selectInterests(ModelMap map, HttpServletRequest request)
     {
-        request.setAttribute("categoriesList", CategorieDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
         return "selectInterests";
     }
 
@@ -82,8 +82,8 @@ public class MainController
     public String doInterests(ModelMap map, HttpServletRequest request, @RequestParam(value = "categories") List<Integer> categories)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
-        MembriDao.setInterests(categories, user.getUsername());
-        request.setAttribute("categoriaList", CategorieDao.retrieveAll());
+        user = MembriDao.setInterests(categories, user.getUsername());
+        request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
 
@@ -100,6 +100,7 @@ public class MainController
         Membro user = MembriDao.checkLogin(username, password);
         if (user != null)
         {
+            System.out.println(user);
             request.getSession().setAttribute("userinfo", user);
             return "redirect:profile";
         } else
@@ -121,17 +122,18 @@ public class MainController
     
     // <editor-fold defaultstate="collapsed" desc="Profilo">
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profile(ModelMap map)
+    public String profile(ModelMap map, HttpServletRequest request)
     {
+        map.put("categoriesList", CategorieDao.retrieveAll());
         return "profile";
     }
 
     @RequestMapping(value = "/doRemove", method = RequestMethod.GET)
     public String doRemove(ModelMap map, HttpServletRequest request)
     {
-        HttpSession session = request.getSession();
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         MembriDao.remove(user.getUsername());
+        HttpSession session = request.getSession();
         session.setAttribute("username", null);
         session.invalidate();
         return "redirect:./";
@@ -147,7 +149,6 @@ public class MainController
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         user = MembriDao.changePassword(password, user.getUsername());
-        request.getSession().removeAttribute("userinfo");
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
@@ -164,7 +165,20 @@ public class MainController
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         user = MembriDao.updateProfileInformations(name, surname, mail, user.getUsername());
-        request.getSession().removeAttribute("userinfo");
+        request.getSession().setAttribute("userinfo", user);
+        return "redirect:profile";
+    }
+    
+    @RequestMapping(value = "/deleteInterest",
+            params
+            =
+            {
+                "id"
+            }, method = RequestMethod.GET)
+    public String deleteInterest(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") Integer id)
+    {
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        user = MembriDao.deleteInterest(id, user.getUsername());
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
@@ -200,7 +214,6 @@ public class MainController
 
                 user = MembriDao.setAvatar(user.getUsername(), "http://webcommunityproject.altervista.org/" + tempFile.getName());
 
-                request.getSession().removeAttribute("userinfo");
                 request.getSession().setAttribute("userinfo", user);
             } catch (IOException ex)
             {
@@ -316,10 +329,35 @@ public class MainController
         return "administration";
     }
 
-    @RequestMapping(value = "/newsletter", method = RequestMethod.GET)
-    public String newsletter(ModelMap map)
+    @RequestMapping(value = "/administrationNewsletter", method = RequestMethod.GET)
+    public String administrationNewsletter(ModelMap map, HttpServletRequest request)
     {
-        return "newsletter";
+        map.put("usersList", MembriDao.retrieveAll());
+        return "administrationNewsletter";
+    }
+    
+    @RequestMapping(value = "/administrationUsers", method = RequestMethod.GET)
+    public String administrationUsers(ModelMap map)
+    {
+        return "administrationUsers";
+    }
+    
+    @RequestMapping(value = "/administrationCategories", method = RequestMethod.GET)
+    public String administrationCategories(ModelMap map)
+    {
+        return "administrationCategories";
+    }
+    
+    @RequestMapping(value = "/administrationEvents", method = RequestMethod.GET)
+    public String administrationEvents(ModelMap map)
+    {
+        return "administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationArtists", method = RequestMethod.GET)
+    public String administrationArtists(ModelMap map)
+    {
+        return "administrationArtists";
     }
 
     @RequestMapping(value = "/sendNewsletters",
@@ -330,15 +368,19 @@ public class MainController
             }, method = RequestMethod.POST)
     public String sendNewsletters(ModelMap map, @RequestParam("messageObject") String messageObject, @RequestParam("messageBody") String messageBody)
     {
+        List<Membro> list = MembriDao.retrieveAll();
         try
         {
-            MailUtils.Send(messageObject, messageBody);
+            for(Membro m : list)
+            {
+                MailUtils.Send(m.getMail(), messageObject, messageBody);
+            }
         } catch (MessagingException ex)
         {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "redirect:newsletter";
+        return "redirect:administrationNewsletter";
     }
     // </editor-fold>
 
