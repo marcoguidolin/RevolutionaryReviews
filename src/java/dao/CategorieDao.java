@@ -7,6 +7,9 @@ package dao;
 
 import hibernate.HibernateUtil;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojo.Categoria;
 
 /**
@@ -19,4 +22,30 @@ public class CategorieDao {
     {
         return HibernateUtil.getSessionFactory().openSession().createCriteria(Categoria.class).list();
     }
+    
+    
+    public static void addCategorie (String nome, String immagine){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        if(immagine==null) 
+            immagine="/WebCommunity/resources/ticket.png";
+        
+        Categoria categoria = new Categoria(nome, immagine);
+        
+        try{
+            transaction = session.beginTransaction();
+            
+            session.save(categoria);
+            
+            transaction.commit();
+        }catch(HibernateException e){
+            transaction.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+    }
+    
+    
 }
