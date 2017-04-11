@@ -144,30 +144,34 @@
                         %>
                         <div class="col-xs-12 col-md-7">
                             <div class="row">
-                                <form class="form" method="POST" action="/WebCommunity/doRegistration" id="login-nav">
+                                <form class="form" method="POST" action="/WebCommunity/createEvent" id="login-nav">
                                     <div class="form-group">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control" name="name" placeholder="Nome" required>
+                                        <label>Titolo</label>
+                                        <input type="text" class="form-control" name="titolo" placeholder="Titolo" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Cognome</label>
-                                        <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+                                        <label>Luogo</label>
+                                        <input type="text" class="form-control" name="luogo" placeholder="Luogo" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                        <label>Data</label>
+                                        <input type="date" class="form-control" name="data" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                        <label>Categoria</label>
+                                        <select>
+                                            <c:forEach items="${categoriesList}" var="categoriesItem">
+                                                <option value="${categoriesItem.id}">${categoriesItem.nome}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Ripetere password</label>
-                                        <input type="password" class="form-control" name="passwordCheck" placeholder="Password" required>
+                                        <label>Descrizione</label>
+                                        <input type="text" class="form-control" name="descrizione" placeholder="Descrizione" required>
                                     </div>
                                     <div class="form-group">
-                                        <label>Mail</label>
-                                        <input type="mail" class="form-control" name="mail" placeholder="Mail" required>
+                                        <label>Immagine</label>
+                                        <input type="text" class="form-control" name="immagine" placeholder="Url immagine" required>
                                     </div>
                                     <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px; float: right;">Registrati</button>
                                 </form>
