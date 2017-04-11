@@ -354,43 +354,60 @@ public class MainController
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Back-end">
+    
+    // <editor-fold defaultstate="collapsed" desc="Amministrazione">
+
     @RequestMapping(value = "/administration", method = RequestMethod.GET)
     public String administration(ModelMap map)
     {
         return "administration";
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Newsletter">
     @RequestMapping(value = "/administrationNewsletter", method = RequestMethod.GET)
     public String administrationNewsletter(ModelMap map, HttpServletRequest request)
     {
         map.put("usersList", MembriDao.retrieveAll());
         return "administrationNewsletter";
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Membri">
     @RequestMapping(value = "/administrationUsers", method = RequestMethod.GET)
     public String administrationUsers(ModelMap map)
     {
         return "administrationUsers";
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/administrationCategories", method = RequestMethod.GET)
     public String administrationCategories(ModelMap map)
     {
         return "administrationCategories";
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Eventi">
     @RequestMapping(value = "/administrationEvents", method = RequestMethod.GET)
     public String administrationEvents(ModelMap map)
     {
         return "administrationEvents";
     }
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/administrationArtists", method = RequestMethod.GET)
-    public String administrationArtists(ModelMap map)
+    public String administrationArtists(ModelMap map,HttpServletRequest request)
     {
-        
+        List<Artista> artistiList = ArtistiDao.retrieveAll();
+        request.setAttribute("artistsList", artistiList);
         return "administrationArtists";
     }
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Newsletter">
 
     @RequestMapping(value = "/sendNewsletters",
             params =
@@ -414,6 +431,8 @@ public class MainController
         
         return "redirect:administrationNewsletter";
     }
+    // </editor-fold>
+
     // </editor-fold>
 
 }

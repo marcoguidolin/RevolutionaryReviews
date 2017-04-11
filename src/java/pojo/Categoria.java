@@ -62,6 +62,11 @@ public class Categoria implements Serializable
         this.id = id;
     }
 
+    public Categoria(String nome, String immagine) {
+        this.nome = nome;
+        this.immagine = immagine;
+    }
+
     public Categoria(Integer id, String nome)
     {
         this.id = id;
