@@ -388,6 +388,7 @@ public class MainController
     @RequestMapping(value = "/administrationArtists", method = RequestMethod.GET)
     public String administrationArtists(ModelMap map)
     {
+        
         return "administrationArtists";
     }
 
