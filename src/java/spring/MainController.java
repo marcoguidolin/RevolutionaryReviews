@@ -310,6 +310,24 @@ public class MainController
         request.setAttribute("postList", postList);
         return "eventDetail";
     }
+    
+    @RequestMapping(value = "/createEvent",
+            params
+            =
+            {
+                "id"
+            },
+            method = RequestMethod.GET)
+    public String createEvent(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+    {
+        System.out.println("Provaasdf");
+        Evento evento = EventiDao.retrieveSingle(id);
+        request.setAttribute("eventDetail", evento);
+        Integer idInt = Integer.parseInt(id);
+        List<Post> postList = PostDao.retrieveByEvent(idInt);
+        request.setAttribute("postList", postList);
+        return "events";
+    }
 
     @RequestMapping(value = "/commento", params =
     {
