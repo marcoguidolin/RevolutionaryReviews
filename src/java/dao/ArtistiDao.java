@@ -63,17 +63,17 @@ public class ArtistiDao
         {
             transaction = session.beginTransaction();
 
-            Artista artista = (Artista) session.get(Artista.class, id);
-            session.delete(artista);
-            
-            List<Post> list = session.createCriteria(Post.class).list();
-            for(Post p : list)
-            {
-                if(p.getArtista().equals(id))
-                {
-                    session.delete(p);
-                }
-            }
+//            Artista artista = (Artista) session.get(Artista.class, id);
+//            session.delete(artista);
+//            
+//            List<Post> list = session.createCriteria(Post.class).list();
+//            for(Post p : list)
+//            {
+//                if(p.getArtista().equals(id))
+//                {
+//                    session.delete(p);
+//                }
+//            }
 
             transaction.commit();
         } catch (HibernateException e)
