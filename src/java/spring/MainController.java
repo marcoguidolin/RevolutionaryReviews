@@ -312,6 +312,15 @@ public class MainController
     }
     
     @RequestMapping(value = "/createEvent",
+            method = RequestMethod.GET)
+    public String createEvent(ModelMap map, HttpServletRequest request)
+    {
+        List<Categoria> catList = CategorieDao.retrieveAll();
+        request.setAttribute("catList", catList);
+        return "createEvent";
+    }
+    
+    @RequestMapping(value = "/createEvent",
             params
             =
             {
