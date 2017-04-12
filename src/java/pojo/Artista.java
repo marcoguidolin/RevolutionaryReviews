@@ -67,6 +67,12 @@ public class Artista implements Serializable
         this.nome = nome;
     }
 
+    public Artista(String nome, String cognome, String immagine) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.immagine = immagine;
+    }
+
     public Integer getId()
     {
         return id;

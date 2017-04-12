@@ -78,10 +78,18 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header">Artisti</h1>
-                    
+                    <table class="table">
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
                     <c:forEach items="${artistsList}" var="artistItemz">
-                        <h4>${artistItemz.nome} ${artistItemz.cognome}</h4>
+                        <tr>
+                            <td>${artistItemz.id}</td>
+                            <td>${artistItemz.nome}</td>
+                            <td>${artistItemz.cognome}</td>
+                        </tr>
                     </c:forEach>
+                    </table>
                 </div>
             </div>
         </div>
