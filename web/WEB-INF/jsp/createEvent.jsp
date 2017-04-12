@@ -159,9 +159,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Categoria</label>
-                                        <select>
-                                            <c:forEach items="${categoriesList}" var="categoriesItem">
-                                                <option value="${categoriesItem.id}">${categoriesItem.nome}</option>
+                                        <select class="form-control">
+                                            <c:forEach items="${catList}" var="catItem">
+                                                <option value="${catItem.id}">${catItem.nome}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -175,15 +175,6 @@
                                     </div>
                                     <button type="submit" class="btn " style="padding-left: 50px; padding-right: 50px; float: right;">Registrati</button>
                                 </form>
-                            </div>
-                        </div>
-                        <!-- Non modificare col-md-4 -->
-                        <div class="col-xs-6 col-md-4 error">
-                            <div class="row">
-                                <c:if test="${error}">
-                                    <h4>Attenzione</h4>
-                                    <p>${messageError}</p>
-                                </c:if>
                             </div>
                         </div>
                         <%
