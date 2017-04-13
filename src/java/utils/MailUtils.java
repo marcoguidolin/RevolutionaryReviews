@@ -15,6 +15,8 @@ public class MailUtils
 
     public static void Send(String address, String title, String message) throws AddressException, MessagingException
     {
+        System.setProperty("java.net.useSystemProxies", "true");
+        
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 

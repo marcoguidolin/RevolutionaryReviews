@@ -380,6 +380,29 @@ public class MainController
         map.put("usersList", MembriDao.retrieveAll());
         return "administrationNewsletter";
     }
+    
+    @RequestMapping(value = "/sendNewsletters",
+            params =
+            {
+                "messageObject",
+                "messageBody"
+            }, method = RequestMethod.POST)
+    public String sendNewsletters(ModelMap map, @RequestParam("messageObject") String messageObject, @RequestParam("messageBody") String messageBody)
+    {
+        List<Membro> list = MembriDao.retrieveAll();
+        try
+        {
+            for(Membro m : list)
+            {
+                MailUtils.Send(m.getMail(), messageObject, messageBody);
+            }
+        } catch (MessagingException ex)
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "redirect:administrationNewsletter";
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Membri">
@@ -415,32 +438,6 @@ public class MainController
         return "administrationArtists";
     }
 // </editor-fold>
-    
-    // <editor-fold defaultstate="collapsed" desc="Newsletter">
-
-    @RequestMapping(value = "/sendNewsletters",
-            params =
-            {
-                "messageObject",
-                "messageBody"
-            }, method = RequestMethod.POST)
-    public String sendNewsletters(ModelMap map, @RequestParam("messageObject") String messageObject, @RequestParam("messageBody") String messageBody)
-    {
-        List<Membro> list = MembriDao.retrieveAll();
-        try
-        {
-            for(Membro m : list)
-            {
-                MailUtils.Send(m.getMail(), messageObject, messageBody);
-            }
-        } catch (MessagingException ex)
-        {
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return "redirect:administrationNewsletter";
-    }
-    // </editor-fold>
 
     // </editor-fold>
 
