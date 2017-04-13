@@ -269,3 +269,27 @@ body.modal-open .supreme-container{
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
+.card-title{
+    height: 40px;
+}
+
+.rating{
+    border-radius: 90px;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    float: right;
+    z-index: 1;
+    margin-top: -78px;
+    margin-left: 132px;
+    box-shadow: 0px 0px 120px 0px rgba(0,0,0,0.75);
+    text-align: center;
+    vertical-align: middle;
+    background-image: linear-gradient(to bottom,rgb(239, 99, 60) 0%,rgb(241, 26, 147) 100%);
+}
+
+.rating > h3{
+    color: white;
+    margin-top: 18px;
+}

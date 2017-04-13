@@ -138,7 +138,7 @@
                         </tr>
                     <c:forEach items="${catList}" var="catItem">
                         <tr>
-                        <a href="">
+                        <a href="events?category=${catItem.id}&name=${catItem.nome}">
                             <td>
                                 <a href="events?category=${catItem.id}">${catItem.nome}</a>
                             </td>
