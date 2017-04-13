@@ -91,6 +91,7 @@ public class MembriDao
             transaction = session.beginTransaction();
 
             m = new Membro(username, password, name, surname, mail);
+            m.setAvatar("http://webcommunityproject.altervista.org/-1661776617");
             
             session.save(m);
 

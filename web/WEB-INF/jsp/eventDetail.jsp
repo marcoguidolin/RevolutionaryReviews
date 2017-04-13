@@ -192,7 +192,15 @@
                             <c:forEach items="${postList}" var="post">
                                 <div class="media" style="margin-bottom: 20px;">
                                     <div class="media-left">
-                                        <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
+                                        <c:choose>
+                                            <c:when test="${empty post.membro1.avatar}">
+                                                <img class="media-object img-circle user-img-circle-xsmall" src="http://webcommunityproject.altervista.org/-1661776617" alt="Event picture">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
+                                            
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">${post.membro1.username}</h4>
