@@ -136,8 +136,8 @@
                             <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
                                 <center><img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="/WebCommunity/resources/artist.png" alt="Artist picture"></center>
                                 <div class="card-block">
-                                    <h4 class="card-title">${artistItem.nome} ${artistItem.cognome}</h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h4 class="card-title text-center">${artistItem.nome} ${artistItem.cognome}</h4>
+                                    <p class="card-text text-justify">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                 </div>
                                 <div class="card-footer">
                                     <center><a href="#" class="btn">Guarda</a></center>
