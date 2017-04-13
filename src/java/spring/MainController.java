@@ -44,7 +44,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Front-end">
     // <editor-fold defaultstate="collapsed" desc="Registrazione">
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -88,7 +87,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Login e Logout">
     @RequestMapping(value = "/doLogin", params
             =
@@ -119,7 +117,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Profilo">
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap map, HttpServletRequest request)
@@ -168,7 +165,7 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
-    
+
     @RequestMapping(value = "/deleteInterest",
             params
             =
@@ -182,7 +179,7 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
-    
+
     @RequestMapping(value = "/deletePost",
             params
             =
@@ -240,7 +237,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String categories(ModelMap map, HttpServletRequest request)
@@ -251,7 +247,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
     public String artists(ModelMap map, HttpServletRequest request)
@@ -262,7 +257,6 @@ public class MainController
     }
 
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc="Eventi">
     @RequestMapping(value = "/events", params =
     {
@@ -310,7 +304,7 @@ public class MainController
         request.setAttribute("postList", postList);
         return "eventDetail";
     }
-    
+
     @RequestMapping(value = "/createEvent",
             method = RequestMethod.GET)
     public String createEvent(ModelMap map, HttpServletRequest request)
@@ -319,7 +313,7 @@ public class MainController
         request.setAttribute("catList", catList);
         return "createEvent";
     }
-    
+
     @RequestMapping(value = "/createEvent",
             params
             =
@@ -363,16 +357,14 @@ public class MainController
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Back-end">
-    
     // <editor-fold defaultstate="collapsed" desc="Amministrazione">
-
     @RequestMapping(value = "/administration", method = RequestMethod.GET)
     public String administration(ModelMap map)
     {
         return "administration";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Newsletter">
     @RequestMapping(value = "/administrationNewsletter", method = RequestMethod.GET)
     public String administrationNewsletter(ModelMap map, HttpServletRequest request)
@@ -380,7 +372,7 @@ public class MainController
         map.put("usersList", MembriDao.retrieveAll());
         return "administrationNewsletter";
     }
-    
+
     @RequestMapping(value = "/sendNewsletters",
             params =
             {
@@ -392,7 +384,7 @@ public class MainController
         List<Membro> list = MembriDao.retrieveAll();
         try
         {
-            for(Membro m : list)
+            for (Membro m : list)
             {
                 MailUtils.Send(m.getMail(), messageObject, messageBody);
             }
@@ -400,11 +392,11 @@ public class MainController
         {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return "redirect:administrationNewsletter";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Membri">
     @RequestMapping(value = "/administrationUsers", method = RequestMethod.GET)
     public String administrationUsers(ModelMap map)
@@ -412,7 +404,7 @@ public class MainController
         return "administrationUsers";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/administrationCategories", method = RequestMethod.GET)
     public String administrationCategories(ModelMap map)
@@ -420,7 +412,7 @@ public class MainController
         return "administrationCategories";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Eventi">
     @RequestMapping(value = "/administrationEvents", method = RequestMethod.GET)
     public String administrationEvents(ModelMap map)
@@ -428,10 +420,10 @@ public class MainController
         return "administrationEvents";
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/administrationArtists", method = RequestMethod.GET)
-    public String administrationArtists(ModelMap map,HttpServletRequest request)
+    public String administrationArtists(ModelMap map, HttpServletRequest request)
     {
         List<Artista> artistiList = ArtistiDao.retrieveAll();
         request.setAttribute("artistsList", artistiList);
@@ -440,5 +432,4 @@ public class MainController
 // </editor-fold>
 
     // </editor-fold>
-
 }
