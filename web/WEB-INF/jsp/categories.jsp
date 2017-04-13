@@ -131,14 +131,28 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="list-group">
+                    <table class="table">
+                        <tr>
+                            <td><span style="font-weight: bold;">Categoria</span></td>
+                            <td><span style="font-weight: bold; float:right;">Eventi</span></td>
+                        </tr>
                     <c:forEach items="${catList}" var="catItem">
-                        <a href="events?category=${catItem.id}" class="list-group-item">
-                            <span class="badge">${catItem.getEventoList().size()}</span>
-                            ${catItem.nome}
+                        <tr>
+                        <a href="">
+                            <td>
+                                <a href="events?category=${catItem.id}">${catItem.nome}</a>
+                            </td>
+                            <td>
+                                <span class="badge" style="float:right;">${catItem.getEventoList().size()}</span>
+                            </td>
                         </a>
+                        </tr>
                     </c:forEach>
-                    </div>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
