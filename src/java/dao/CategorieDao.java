@@ -10,10 +10,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import pojo.Artista;
 import pojo.Categoria;
-import pojo.Membro;
-import pojo.Post;
 
 /**
  *

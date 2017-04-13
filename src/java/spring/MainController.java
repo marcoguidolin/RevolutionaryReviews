@@ -87,6 +87,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Login e Logout">
     @RequestMapping(value = "/doLogin", params
             =
@@ -117,6 +118,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Profilo">
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String profile(ModelMap map, HttpServletRequest request)
@@ -136,12 +138,7 @@ public class MainController
         return "redirect:./";
     }
 
-    @RequestMapping(value = "/doChangePassword",
-            params
-            =
-            {
-                "password"
-            }, method = RequestMethod.POST)
+    @RequestMapping(value = "/doChangePassword", method = RequestMethod.POST)
     public String doChangePassword(ModelMap map, HttpServletRequest request, @RequestParam(value = "password") String password)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
@@ -150,14 +147,7 @@ public class MainController
         return "redirect:profile";
     }
 
-    @RequestMapping(value = "/doChangePersonalInformations",
-            params
-            =
-            {
-                "name",
-                "surname",
-                "mail"
-            }, method = RequestMethod.POST)
+    @RequestMapping(value = "/doChangePersonalInformations", method = RequestMethod.POST)
     public String doChangePersonalInformations(ModelMap map, HttpServletRequest request, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
@@ -166,12 +156,7 @@ public class MainController
         return "redirect:profile";
     }
 
-    @RequestMapping(value = "/deleteInterest",
-            params
-            =
-            {
-                "id"
-            }, method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteInterest", method = RequestMethod.GET)
     public String deleteInterest(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") Integer id)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
@@ -180,12 +165,7 @@ public class MainController
         return "redirect:profile";
     }
 
-    @RequestMapping(value = "/deletePost",
-            params
-            =
-            {
-                "id"
-            }, method = RequestMethod.GET)
+    @RequestMapping(value = "/deletePost", method = RequestMethod.GET)
     public String deletePost(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") Integer id)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
@@ -237,6 +217,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Categorie">
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public String categories(ModelMap map, HttpServletRequest request)
@@ -247,6 +228,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Artisti">
     @RequestMapping(value = "/artists", method = RequestMethod.GET)
     public String artists(ModelMap map, HttpServletRequest request)
@@ -257,46 +239,40 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Eventi">
-    @RequestMapping(value = "/events", params =
+    @RequestMapping(value = "/events",
+            params
+            =
+            {
+                "category",
+                "name"
+            }, method = RequestMethod.GET)
+    public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String categoryID, @RequestParam(value = "name") String categoryName)
     {
-        "category"
-    },
-            method = RequestMethod.GET)
-    public String events(ModelMap map, HttpServletRequest request, @RequestParam(value = "category") String category)
-    {
-        if (!category.equals("0"))
+        if (!categoryID.equals("0"))
         {
-            List<Evento> eventoList = EventiDao.retrieveByCat(category);
-            request.setAttribute("eventList", eventoList);
+            map.put("eventList", EventiDao.retrieveByCat(categoryID));
+            map.put("categoryName", categoryName);
         } else
         {
-            List<Evento> eventoList = EventiDao.retrieveAll();
-            request.setAttribute("eventList", eventoList);
+            map.put("eventList", EventiDao.retrieveAll());
+            map.put("categoryName", "Eventi");
         }
         return "events";
     }
 
-    @RequestMapping(value = "/events",
-            method = RequestMethod.GET)
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String events(ModelMap map, HttpServletRequest request)
     {
-        List<Evento> eventoList = EventiDao.retrieveAll();
-        request.setAttribute("eventList", eventoList);
-
+        map.put("eventList", EventiDao.retrieveAll());
+        map.put("categoryName", "Eventi");
         return "events";
     }
 
-    @RequestMapping(value = "/eventDetail",
-            params
-            =
-            {
-                "id"
-            },
-            method = RequestMethod.GET)
+    @RequestMapping(value = "/eventDetail", method = RequestMethod.GET)
     public String eventDetail(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
     {
-        System.out.println("Provaasdf");
         Evento evento = EventiDao.retrieveSingle(id);
         request.setAttribute("eventDetail", evento);
         Integer idInt = Integer.parseInt(id);
@@ -323,7 +299,6 @@ public class MainController
             method = RequestMethod.GET)
     public String createEvent(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
     {
-        System.out.println("Provaasdf");
         Evento evento = EventiDao.retrieveSingle(id);
         request.setAttribute("eventDetail", evento);
         Integer idInt = Integer.parseInt(id);
@@ -341,9 +316,6 @@ public class MainController
             method = RequestMethod.GET)
     public String commento(ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
     {
-
-        System.out.println("Prova");
-
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
 
         Integer eventoI = Integer.parseInt(evento);

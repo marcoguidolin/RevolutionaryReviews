@@ -193,7 +193,7 @@
                                                 <c:forEach items="${userinfo.categoriaList}" var="categoriesItem">
                                                     <li>
                                                         <div class="btn-group" role="group" style="margin-bottom: 5px;">
-                                                            <a href="/WebCommunity/events?category=${categoriesItem.id}"  class="btn btn-default" style="color: black !important;">${categoriesItem.nome}</a>
+                                                            <a href="/WebCommunity/events?category=${categoriesItem.id}&name=${categoriesItem.nome}"  class="btn btn-default" style="color: black !important;">${categoriesItem.nome}</a>
                                                             <a href="/WebCommunity/deleteInterest?id=${categoriesItem.id}" class="btn btn-default" style="height: 32px;"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height: 18px;"></span></a>
                                                         </div>
                                                     </li>

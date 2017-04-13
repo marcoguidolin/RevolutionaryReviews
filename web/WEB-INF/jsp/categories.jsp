@@ -133,7 +133,7 @@
                 <div class="row">
                     <div class="list-group">
                     <c:forEach items="${catList}" var="catItem">
-                        <a href="events?category=${catItem.id}" class="list-group-item">
+                        <a href="events?category=${catItem.id}&name=${catItem.nome}" class="list-group-item">
                             <span class="badge">${catItem.getEventoList().size()}</span>
                             ${catItem.nome}
                         </a>

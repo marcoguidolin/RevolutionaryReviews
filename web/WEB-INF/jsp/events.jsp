@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -127,7 +128,7 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Eventi</span> <small><!----></small></h1>
+                        <h1><span class="popcolor">#${categoryName}</span> <small><!----></small></h1>
                     </div>
                 </div>
                 <div class="row">
@@ -137,9 +138,12 @@
                                 <center>
                                     <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="${eventItem.immagine}" alt="Event picture">
                                 </center>
+                                <div class="rating"><h3>5★</h3></div>
                                 <div class="card-block">
-                                    <h4 class="card-title">${eventItem.titolo}</h4>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <h4 class="card-title text-center">${eventItem.titolo}</h4>
+                                    <p class="card-text text-justify">
+                                        ${fn:substring(eventItem.descrizione, 0, 85)}...
+                                    </p>
                                 </div>
                                 <div class="card-footer">
                                     <center><a href="eventDetail?id=${eventItem.id}" class="btn">Guarda</a></center>
@@ -150,7 +154,7 @@
                 </div>
             </div>
         </div>
-                                
+                    
         <script>
             $(document).ready(function () {
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
