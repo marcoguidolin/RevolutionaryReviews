@@ -140,7 +140,7 @@
                         <tr>
                         <a href="events?category=${catItem.id}&name=${catItem.nome}">
                             <td>
-                                <a href="events?category=${catItem.id}">${catItem.nome}</a>
+                                <a href="events?category=${catItem.id}&name=${catItem.nome}">${catItem.nome}</a>
                             </td>
                             <td>
                                 <span class="badge" style="float:right;">${catItem.getEventoList().size()}</span>
