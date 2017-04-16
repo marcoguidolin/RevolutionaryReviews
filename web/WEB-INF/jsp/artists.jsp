@@ -101,7 +101,16 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="
+                                                <c:choose>
+                                                   <c:when test="${userinfo.avatar != null}">
+                                                       data:image/png;base64,${userinfo.getAvatarString()}
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                       /WebCommunity/resources/user.png
+                                                   </c:otherwise>
+                                               </c:choose>
+                                            " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             Ciao ${userinfo.username}

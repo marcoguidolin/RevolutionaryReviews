@@ -108,7 +108,16 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="
+                                                <c:choose>
+                                                   <c:when test="${userinfo.avatar != null}">
+                                                       data:image/png;base64,${userinfo.getAvatarString()}
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                       /WebCommunity/resources/user.png
+                                                   </c:otherwise>
+                                               </c:choose>
+                                            " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             <h4>Ciao ${userinfo.username}</h4>
@@ -166,7 +175,16 @@
                         <div class="row">
                             <div class="col-md-3 col-xs-12 text-center" style="margin-bottom: 25px;">
                                 <a href="#" data-toggle="modal" data-target="#changeProfilePicture"><img src="/WebCommunity/resources/camera.png" alt="user-picture" class="img-circle user-img-circle-camera"></a>
-                                <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-large"/>
+                                <img src="
+                                    <c:choose>
+                                        <c:when test="${userinfo.avatar != null}">
+                                            data:image/png;base64,${userinfo.getAvatarString()}
+                                        </c:when>
+                                        <c:otherwise>
+                                            /WebCommunity/resources/user.png
+                                        </c:otherwise>
+                                    </c:choose>
+                                " alt="user-picture" class="img-circle user-img-circle-large"/>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
@@ -208,8 +226,7 @@
                                     <h2 class="popcolor">#I tuoi commenti</h2>
                                     <c:choose>
                                         <c:when test="${empty userinfo.postList}">
-                                            <h4>Non stai seguendo interessi.</h4>
-                                            <button type="button" class="btn" >Aggiungi interessi</button>
+                                            <h4>Non hai pubblicato commenti.</h4>
                                         </c:when>
                                         <c:otherwise>
                                             <c:forEach items="${userinfo.postList}" var="postItem">

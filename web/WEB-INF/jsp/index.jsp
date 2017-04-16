@@ -4,6 +4,7 @@
     Author     : matte
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -106,7 +107,16 @@
                                     %>
                                     <div class="row text-center">
                                         <div class="row">
-                                            <img src="${userinfo.avatar}" alt="user-picture" class="img-circle user-img-circle-small">
+                                            <img src="
+                                                <c:choose>
+                                                   <c:when test="${userinfo.avatar != null}">
+                                                       data:image/png;base64,${userinfo.getAvatarString()}
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                       /WebCommunity/resources/user.png
+                                                   </c:otherwise>
+                                               </c:choose>
+                                            " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
                                             <h4>Ciao ${userinfo.username}</h4>
@@ -174,6 +184,11 @@
                     </div>
                 </div>
                 <a href="/WebCommunity/createEvent">prova</a>
+                <div class="alert alert-warning" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Attenzione:</span>
+                    Assicurati che sul database sia stato importato l'ultimo schema disponibile su Google Drive altrimenti potrebbero verificarsi degli errori inaspettati causa le immagini vengono ora memorizzate nel database. Se Glassfish restituisce l'errore HTTP 500 cerca nella pagina che stati tentando di visualizzare l'invocazione al metodo userinfo.getAvatarString() e rimuovila oppure inserisci un'immagine per l'utente tramite phpMyAdmin. Gli utenti "predefiniti" al 99% genereranno tale errore, possibilmente genera un nuovo profilo.
+                </div>
             </div>
         </div>
         <script>
