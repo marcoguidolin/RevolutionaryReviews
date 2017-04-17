@@ -219,3 +219,59 @@ public class Membro implements Serializable {
     }
     
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+public static Membro removePost(Integer eventID, String username)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        Membro membro = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+            
+            Post post = (Post) session.get(Post.class, new PostPK(username, eventID));
+            
+            List<Post> eventoPostList = post.getEvento1().getPostList();
+            for(int i = 0; i < eventoPostList.size(); i++)
+            {
+                Post temp = eventoPostList.get(i);
+                if(temp.getPostPK().getMembro().equals(username) && temp.getPostPK().getEvento() == eventID)
+                {
+                    eventoPostList.remove(i);
+                    System.out.println("okkk");
+                }
+            }
+            post.getEvento1().setPostList(eventoPostList);
+            
+            List<Post> membroPostList = post.getMembro1().getPostList();
+            for(int i = 0; i < membroPostList.size(); i++)
+            {
+                Post temp = membroPostList.get(i);
+                if(temp.getPostPK().getMembro().equals(username) && temp.getPostPK().getEvento() == eventID)
+                {
+                    membroPostList.remove(i);
+                    System.out.println("OOOOOOokkk");
+                }
+            }
+            post.getMembro1().setPostList(membroPostList);
+
+            session.delete(post);
+            session.save(post);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            membro = (Membro) session.get(Membro.class, username);
+            session.close();
+        }
+        
+        return membro;
+    }

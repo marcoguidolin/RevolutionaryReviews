@@ -5,7 +5,6 @@ import pojo.Post;
 import pojo.Evento;
 import pojo.Categoria;
 import pojo.Membro;
-import utils.FTPUtils;
 import dao.*;
 import java.io.*;
 import java.util.List;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import utils.BlobUtils;
 import utils.MailUtils;
 
 /**
@@ -169,50 +169,21 @@ public class MainController
     public String deletePost(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") Integer id)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
-        MembriDao.removePost(id, user.getUsername());
+        user = MembriDao.removePost(id, user.getUsername());
+        request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
 
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     String uploadFileHandler(ModelMap map, HttpServletRequest request, @RequestParam("file") MultipartFile file)
     {
-        if (!file.isEmpty())
-        {
-            try
-            {
-                byte[] bytes = file.getBytes();
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+                
+        user = MembriDao.setAvatar(user.getUsername(), BlobUtils.createTempFile(file));
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("user.home");
-                File dir = new File(rootPath + File.separator + "temp");
-                if (!dir.exists())
-                {
-                    dir.mkdirs();
-                }
-
-                // Create the file on server
-                File tempFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename().hashCode());
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(tempFile));
-                stream.write(bytes);
-                stream.close();
-
-                System.out.print(tempFile.getAbsolutePath());
-
-                FTPUtils.upload(tempFile.getAbsolutePath(), tempFile.getName());
-
-                Membro user = (Membro) request.getSession().getAttribute("userinfo");
-
-                user = MembriDao.setAvatar(user.getUsername(), "http://webcommunityproject.altervista.org/" + tempFile.getName());
-
-                request.getSession().setAttribute("userinfo", user);
-            } catch (IOException ex)
-            {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else
-        {
-            //
-        }
+        request.getSession().setAttribute("userinfo", user);
+        
+        
         return "redirect:profile";
     }
 

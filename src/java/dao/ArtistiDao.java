@@ -6,14 +6,11 @@
 package dao;
 
 import hibernate.HibernateUtil;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
-import pojo.Evento;
-import pojo.Post;
 
 /**
  *
@@ -30,10 +27,7 @@ public class ArtistiDao
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
-        Artista artista = new Artista(nome, cognome, immagine);
-        
-        if(immagine==null)
-            immagine="/WebCommunity/resources/event.png";
+        Artista artista = new Artista(nome, cognome);
         
         try
         {

@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,6 +35,7 @@ import javax.validation.constraints.Size;
 })
 public class Categoria implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +47,9 @@ public class Categoria implements Serializable
     @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
-    @Size(max = 100)
+    @Lob
     @Column(name = "Immagine")
-    private String immagine;
+    private byte[] immagine;
     @ManyToMany(mappedBy = "categoriaList")
     private List<Membro> membroList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
@@ -62,9 +64,8 @@ public class Categoria implements Serializable
         this.id = id;
     }
 
-    public Categoria(String nome, String immagine) {
+    public Categoria(String nome) {
         this.nome = nome;
-        this.immagine = immagine;
     }
 
     public Categoria(Integer id, String nome)
@@ -93,15 +94,6 @@ public class Categoria implements Serializable
         this.nome = nome;
     }
 
-    public String getImmagine()
-    {
-        return immagine;
-    }
-
-    public void setImmagine(String immagine)
-    {
-        this.immagine = immagine;
-    }
 
     public List<Membro> getMembroList()
     {
@@ -151,6 +143,22 @@ public class Categoria implements Serializable
     public String toString()
     {
         return "pojo.Categoria[ id=" + id + " ]";
+    }
+
+    public byte[] getImmagine()
+    {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine)
+    {
+        this.immagine = immagine;
+    }
+    
+    public String getImmagineString()
+    {
+        sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+        return encoder.encode(immagine);
     }
     
 }

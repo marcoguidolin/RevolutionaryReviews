@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,6 +35,10 @@ import org.hibernate.annotations.FetchMode;
 @NamedQueries({
     @NamedQuery(name = "Membro.findAll", query = "SELECT m FROM Membro m")})
 public class Membro implements Serializable {
+
+    @Lob
+    @Column(name = "Avatar")
+    private byte[] avatar;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,9 +66,6 @@ public class Membro implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "Mail")
     private String mail;
-    @Size(max = 100)
-    @Column(name = "Avatar")
-    private String avatar;
     @JoinTable(name = "MEMBRO_CATEGORIA", joinColumns = {
         @JoinColumn(name = "Membro", referencedColumnName = "Username")}, inverseJoinColumns = {
         @JoinColumn(name = "Categoria", referencedColumnName = "Id")})
@@ -71,7 +73,7 @@ public class Membro implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Categoria> categoriaList;
     @Fetch(FetchMode.SELECT)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "membro1", fetch = FetchType.EAGER, orphanRemoval=true)
     private List<Post> postList;
 
     public Membro() {
@@ -129,13 +131,13 @@ public class Membro implements Serializable {
         this.mail = mail;
     }
 
-    public String getAvatar() {
-        return avatar;
+    
+    public String getAvatarString()
+    {
+        sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+        return encoder.encode(avatar);
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 
     public List<Categoria> getCategoriaList() {
         return categoriaList;
@@ -177,6 +179,16 @@ public class Membro implements Serializable {
     public String toString()
     {
         return "Membro{" + "username=" + username + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", avatar=" + avatar + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
+    }
+
+    public byte[] getAvatar()
+    {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar)
+    {
+        this.avatar = avatar;
     }
     
 }

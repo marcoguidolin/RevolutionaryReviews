@@ -1,6 +1,13 @@
 package dao;
 
 import hibernate.HibernateUtil;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,8 +16,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
+import pojo.Evento;
 import pojo.Membro;
 import pojo.Post;
+import pojo.PostPK;
 import utils.SecurityUtils;
 
 /**
@@ -77,6 +86,7 @@ public class MembriDao
         return membro;
     }
 
+    
     public static Membro register(String username, String password, String name, String surname, String mail)
     {   
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -91,7 +101,6 @@ public class MembriDao
             transaction = session.beginTransaction();
 
             m = new Membro(username, password, name, surname, mail);
-            m.setAvatar("http://webcommunityproject.altervista.org/-1661776617");
             
             session.save(m);
 
@@ -140,53 +149,22 @@ public class MembriDao
         }
     }
     
-    public static void removePost(Integer eventID, String username)
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        
-        try
-        {
-            transaction = session.beginTransaction();
-            
-//            List<Post> list = session.createCriteria(Post.class).list();
-//            for(Post p : list)
-//            {
-//                System.out.println(p.getMembro1().getUsername());
-//                System.out.println(username);
-//                System.out.println(p.getEvento1().getId());
-//                System.out.println(eventID);
-//                if(p.getMembro1().getUsername().equals(username) && p.getEvento1().getId().equals(eventID))
-//                {
-//                    session.delete(p);
-//                    break;
-//                }
-//            }
-
-            transaction.commit();
-        } catch (HibernateException e)
-        {
-            transaction.rollback();
-            e.printStackTrace();
-        } finally
-        {
-            session.close();
-        }
-    }
-    
-    public static Membro setAvatar(String username, String path)
+    public static Membro removePost(Integer eventID, String username)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
         Membro membro = null;
+        
         try
         {
             transaction = session.beginTransaction();
-
-            membro = (Membro) session.get(Membro.class, username);
-            membro.setAvatar(path);
-            session.update(membro);
+            
+            String hql = "DELETE FROM Post WHERE evento = :eventID AND membro = :userID";
+            Query query = session.createQuery(hql);
+            query.setParameter("eventID", eventID);
+            query.setParameter("userID", username);
+            int result = query.executeUpdate();
 
             transaction.commit();
         } catch (HibernateException e)
@@ -195,9 +173,36 @@ public class MembriDao
             e.printStackTrace();
         } finally
         {
+            membro = (Membro) session.get(Membro.class, username);
             session.close();
         }
+        
         return membro;
+    }
+    
+    public static Membro setAvatar(String username, String path)
+    {
+        try
+        {
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/5ib10", "root", "");
+            conn.setAutoCommit(false);
+            
+            File file = new File(path);
+            
+            PreparedStatement statement = conn.prepareStatement("UPDATE Membri SET Avatar = ? WHERE Username = ?");
+            statement.setBinaryStream(1, new FileInputStream(file), (int) file.length());
+            statement.setString(2, username);
+            statement.executeUpdate();
+            
+            conn.commit();
+        }
+        catch(FileNotFoundException | SQLException ex)
+        {
+           // 
+        }
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        return (Membro) session.get(Membro.class, username);
     }
 
     public static Membro changePassword(String password, String username)

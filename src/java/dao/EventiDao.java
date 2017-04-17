@@ -53,10 +53,7 @@ public class EventiDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
-        Evento evento = new Evento(titolo, luogo, data, descrizione, immagine, categoria);
-        
-        if(immagine==null)
-            immagine="/WebCommunity/resources/event.png";
+        Evento evento = new Evento(titolo, luogo, data, descrizione, categoria);
         
         try
         {

@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -40,6 +41,7 @@ import javax.validation.constraints.Size;
 })
 public class Evento implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,9 +66,9 @@ public class Evento implements Serializable
     @Size(max = 1024)
     @Column(name = "Descrizione")
     private String descrizione;
-    @Size(max = 100)
+    @Lob
     @Column(name = "Immagine")
-    private String immagine;
+    private byte[] immagine;
     @JoinTable(name = "EVENTO_ARTISTA", joinColumns =
     {
         @JoinColumn(name = "Evento", referencedColumnName = "Id")
@@ -79,7 +81,7 @@ public class Evento implements Serializable
     @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Categoria categoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento1", orphanRemoval=true)
     private List<Post> postList;
 
     public Evento()
@@ -99,12 +101,11 @@ public class Evento implements Serializable
         this.data = data;
     }
 
-    public Evento(String titolo, String luogo, Date data, String descrizione, String immagine, Integer categoria) {
+    public Evento(String titolo, String luogo, Date data, String descrizione, Integer categoria) {
         this.titolo = titolo;
         this.luogo = luogo;
         this.data = data;
         this.descrizione = descrizione;
-        this.immagine = immagine;
         this.categoria = new Categoria(categoria);
     }
 
@@ -156,15 +157,6 @@ public class Evento implements Serializable
         this.descrizione = descrizione;
     }
     
-    public String getImmagine()
-    {
-        return immagine;
-    }
-
-    public void setImmagine(String immagine)
-    {
-        this.immagine = immagine;
-    }
 
     public List<Artista> getArtistaList()
     {
@@ -224,6 +216,22 @@ public class Evento implements Serializable
     public String toString()
     {
         return "pojo.Evento[ id=" + id + " ]";
+    }
+
+    public byte[] getImmagine()
+    {
+        return immagine;
+    }
+    
+    public String getImmagineString()
+    {
+        sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+        return encoder.encode(immagine);
+    }
+
+    public void setImmagine(byte[] immagine)
+    {
+        this.immagine = immagine;
     }
     
 }

@@ -28,10 +28,7 @@ public class CategorieDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
-        if(immagine==null) 
-            immagine="/WebCommunity/resources/ticket.png";
-        
-        Categoria categoria = new Categoria(nome, immagine);
+        Categoria categoria = new Categoria(nome);
         
         try{
             transaction = session.beginTransaction();

@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,6 +33,7 @@ import javax.validation.constraints.Size;
 })
 public class Artista implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,9 +48,9 @@ public class Artista implements Serializable
     @Size(max = 30)
     @Column(name = "Cognome")
     private String cognome;
-    @Size(max = 100)
+    @Lob
     @Column(name = "Immagine")
-    private String immagine;
+    private byte[] immagine;
     @ManyToMany(mappedBy = "artistaList")
     private List<Evento> eventoList;
 
@@ -67,10 +69,9 @@ public class Artista implements Serializable
         this.nome = nome;
     }
 
-    public Artista(String nome, String cognome, String immagine) {
+    public Artista(String nome, String cognome) {
         this.nome = nome;
         this.cognome = cognome;
-        this.immagine = immagine;
     }
 
     public Integer getId()
@@ -103,15 +104,6 @@ public class Artista implements Serializable
         this.cognome = cognome;
     }
 
-    public String getImmagine()
-    {
-        return immagine;
-    }
-
-    public void setImmagine(String immagine)
-    {
-        this.immagine = immagine;
-    }
 
     public List<Evento> getEventoList()
     {
@@ -152,5 +144,20 @@ public class Artista implements Serializable
     {
         return "pojo.Artista[ id=" + id + " ]";
     }
+
+    public byte[] getImmagine()
+    {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine)
+    {
+        this.immagine = immagine;
+    }
     
+    public String getImmagineString()
+    {
+        sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+        return encoder.encode(immagine);
+    }
 }
