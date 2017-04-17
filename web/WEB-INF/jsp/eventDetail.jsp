@@ -206,8 +206,7 @@
                                                 <img class="media-object img-circle user-img-circle-xsmall" src="http://webcommunityproject.altervista.org/-1661776617" alt="Event picture">
                                             </c:when>
                                             <c:otherwise>
-                                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="Event picture">
-                                            
+                                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
                                             </c:otherwise>
                                         </c:choose>
                                     </div>

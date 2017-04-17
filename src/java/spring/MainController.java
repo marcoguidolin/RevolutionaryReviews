@@ -44,6 +44,7 @@ public class MainController
     }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="Front-end">
     // <editor-fold defaultstate="collapsed" desc="Registrazione">
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -292,7 +293,8 @@ public class MainController
         Integer eventoI = Integer.parseInt(evento);
         Integer votoI = Integer.parseInt(voto);
 
-        PostDao.addPost(comm, votoI, eventoI, user.getUsername());
+        user = PostDao.addPost(comm, votoI, eventoI, user.getUsername());
+        request.getSession().setAttribute("userinfo", user);
 
         return "redirect:events";
     }

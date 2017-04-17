@@ -35,18 +35,17 @@ public class PostDao {
         return newList;
     }
     
-    public static void addPost(String commento, Integer voto, Integer evento, String membro){
+    public static Membro addPost(String commento, Integer voto, Integer evento, String membro){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
-        PostPK postPK = new PostPK(membro, evento);
-        Post post = new Post(postPK, commento, voto);
+        Membro m = null;
         
         try
         {
             transaction = session.beginTransaction();
             
-            session.save(post);
+            session.save(new Post(new PostPK(membro, evento), commento, voto));
 
             transaction.commit();
         } catch (HibernateException e)
@@ -55,7 +54,10 @@ public class PostDao {
             e.printStackTrace();
         } finally
         {
+            m = (Membro) session.get(Membro.class, membro);
             session.close();
         }
+        
+        return m;
     }
 }
