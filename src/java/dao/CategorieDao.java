@@ -23,6 +23,13 @@ public class CategorieDao {
         return HibernateUtil.getSessionFactory().openSession().createCriteria(Categoria.class).list();
     }
     
+    public static Categoria retrieveSingle(Integer id)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        return (Categoria) session.get(Categoria.class, id);
+    }
+    
     
     public static void addCategorie (String nome, String immagine){
         Session session = HibernateUtil.getSessionFactory().openSession();

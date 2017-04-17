@@ -187,7 +187,7 @@
                 <div class="alert alert-warning" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span class="sr-only">Attenzione:</span>
-                    Assicurati che sul database sia stato importato l'ultimo schema disponibile su Google Drive altrimenti potrebbero verificarsi degli errori inaspettati causa le immagini vengono ora memorizzate nel database. Se Glassfish restituisce l'errore HTTP 500 cerca nella pagina che stati tentando di visualizzare l'invocazione al metodo userinfo.getAvatarString() e rimuovila oppure inserisci un'immagine per l'utente tramite phpMyAdmin. Gli utenti "predefiniti" al 99% genereranno tale errore, possibilmente genera un nuovo profilo.
+                    Assicurati che sul database sia stato importato l'ultimo schema disponibile su Google Drive altrimenti potrebbero verificarsi degli errori inaspettati causa le immagini vengono ora memorizzate nel database. Se Glassfish restituisce l'errore HTTP 500 cerca nella pagina che stati tentando di visualizzare l'invocazione al metodo userinfo.getAvatarString() e rimuovila oppure inserisci un'immagine per l'utente tramite phpMyAdmin.
                 </div>
             </div>
         </div>

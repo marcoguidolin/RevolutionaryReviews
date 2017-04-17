@@ -212,12 +212,6 @@ public class Evento implements Serializable
         return true;
     }
 
-    @Override
-    public String toString()
-    {
-        return "pojo.Evento[ id=" + id + " ]";
-    }
-
     public byte[] getImmagine()
     {
         return immagine;
@@ -232,6 +226,12 @@ public class Evento implements Serializable
     public void setImmagine(byte[] immagine)
     {
         this.immagine = immagine;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Evento{" + "id=" + id + ", titolo=" + titolo + ", luogo=" + luogo + ", data=" + data + ", descrizione=" + descrizione + ", immagine=" + immagine + ", artistaList=" + artistaList + ", categoria=" + categoria + ", postList=" + postList + '}';
     }
     
 }

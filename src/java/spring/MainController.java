@@ -1,17 +1,14 @@
 package spring;
 
-import pojo.Artista;
-import pojo.Post;
-import pojo.Evento;
-import pojo.Categoria;
-import pojo.Membro;
+import pojo.*;
 import dao.*;
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import utils.BlobUtils;
-import utils.MailUtils;
+import utils.*;
 
 /**
  * Classe MainController
@@ -100,7 +96,6 @@ public class MainController
         Membro user = MembriDao.checkLogin(username, password);
         if (user != null)
         {
-            System.out.println(user);
             request.getSession().setAttribute("userinfo", user);
             return "redirect:profile";
         } else
@@ -269,7 +264,7 @@ public class MainController
                 "id"
             },
             method = RequestMethod.GET)
-    public String createEvent(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+    public String createEvent(ModelMap map, HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "id") String id)
     {
         Evento evento = EventiDao.retrieveSingle(id);
         request.setAttribute("eventDetail", evento);
@@ -286,7 +281,7 @@ public class MainController
         "voto"
     },
             method = RequestMethod.GET)
-    public String commento(ModelMap map, HttpServletRequest request, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
+    public void commento(ModelMap map, HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "comm") String comm, @RequestParam(value = "evento") String evento, @RequestParam(value = "voto") String voto)
     {
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
 
@@ -295,8 +290,16 @@ public class MainController
 
         user = PostDao.addPost(comm, votoI, eventoI, user.getUsername());
         request.getSession().setAttribute("userinfo", user);
+        
+        String referer = request.getHeader("Referer");
 
-        return "redirect:events";
+        try
+        {
+            response.sendRedirect(referer);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     // </editor-fold>
     // </editor-fold>
@@ -362,7 +365,101 @@ public class MainController
     @RequestMapping(value = "/administrationEvents", method = RequestMethod.GET)
     public String administrationEvents(ModelMap map)
     {
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
         return "administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationRemoveEvent", method = RequestMethod.GET)
+    public String administrationRemoveEvent(ModelMap map, @RequestParam("id") String id)
+    {
+        if (ParseUtils.tryParseInt(id))
+        {
+            EventiDao.removeEvento(Integer.parseInt(id));
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationAddEvent", method = RequestMethod.POST)
+    public String administrationAddEvent(ModelMap map, @RequestParam("titolo") String titolo, @RequestParam("luogo") String luogo, @RequestParam("data") String data, @RequestParam("categoria") String categoria, @RequestParam("descrizione") String descrizione)
+    {
+        if (ParseUtils.tryParseInt(categoria))
+        {
+            EventiDao.addEvento(titolo, luogo, data, Integer.parseInt(categoria), descrizione);
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationUploadEventImage", method = RequestMethod.POST)
+    public String administrationUploadEventImage(ModelMap map, @RequestParam("eventID") String id, @RequestParam("file") MultipartFile file)
+    {
+        if (file != null && ParseUtils.tryParseInt(id))
+        {
+            EventiDao.setImmagine(Integer.parseInt(id), BlobUtils.createTempFile(file));
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationRemoveUserPostEvent", method = RequestMethod.GET)
+    public String administrationRemoveUserPostEvent(ModelMap map, @RequestParam("eventID") String eventID, @RequestParam("userID") String userID)
+    {
+        if(ParseUtils.tryParseInt(eventID))
+        {
+            MembriDao.removePost(Integer.parseInt(eventID), userID);
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationUpdateEvent", method = RequestMethod.POST)
+    public String administrationUpdateEvent(ModelMap map, @RequestParam("eventoID") String id, @RequestParam("titolo") String titolo, @RequestParam("luogo") String luogo, @RequestParam("data") String data, @RequestParam("categoria") String categoria, @RequestParam("descrizione") String descrizione)
+    {
+        if (ParseUtils.tryParseInt(categoria) && ParseUtils.tryParseInt(id))
+        {
+            EventiDao.updateEvento(Integer.parseInt(id), titolo, luogo, data, Integer.parseInt(categoria), descrizione);
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationRemoveArtistEvent", method = RequestMethod.GET)
+    public String administrationRemoveArtistEvent(ModelMap map, @RequestParam("eventID") String eventoID, @RequestParam("artistID") String artistID)
+    {
+        if (ParseUtils.tryParseInt(eventoID) && ParseUtils.tryParseInt(artistID))
+        {
+            EventiDao.removeArtistaEvento(Integer.parseInt(eventoID), Integer.parseInt(artistID));
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
+    }
+    
+    @RequestMapping(value = "/administrationUpdateArtists", method = RequestMethod.POST)
+    public String administrationUpdateArtists(ModelMap map, @RequestParam("eventoID") String eventoID, @RequestParam(value = "artists") List<Integer> artists)
+    {
+        if (ParseUtils.tryParseInt(eventoID))
+        {
+            EventiDao.addArtistaEvento(Integer.parseInt(eventoID), artists);
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        map.put("artistsList", ArtistiDao.retrieveAll());
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationEvents";
     }
     // </editor-fold>
 

@@ -16,10 +16,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Categoria;
-import pojo.Evento;
 import pojo.Membro;
 import pojo.Post;
-import pojo.PostPK;
 import utils.SecurityUtils;
 
 /**
@@ -164,7 +162,7 @@ public class MembriDao
             Query query = session.createQuery(hql);
             query.setParameter("eventID", eventID);
             query.setParameter("userID", username);
-            int result = query.executeUpdate();
+            query.executeUpdate();
 
             transaction.commit();
         } catch (HibernateException e)
@@ -184,7 +182,7 @@ public class MembriDao
     {
         try
         {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/5ib10", "root", "");
+            Connection conn = DriverManager.getConnection(HibernateUtil.HOST, HibernateUtil.USERNAME, HibernateUtil.PASSWORD);
             conn.setAutoCommit(false);
             
             File file = new File(path);

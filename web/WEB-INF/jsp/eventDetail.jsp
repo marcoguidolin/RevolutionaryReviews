@@ -145,19 +145,67 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Evento</span> <small><!----></small></h1>
+                        <h1><span class="popcolor">#${eventDetail.titolo}</span> <small><!----></small></h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">${eventDetail.titolo}</h3>
+                    <div class="col-md-2">
+                        <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="
+                        <c:choose>
+                            <c:when test="${eventDetail.immagine != null}">
+                                data:image/png;base64,${eventDetail.getImmagineString()}
+                            </c:when>
+                            <c:otherwise>
+                                /WebCommunity/resources/event.png
+                            </c:otherwise>
+                        </c:choose>
+                    " alt="Event picture">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">${eventDetail.titolo}</h3>
+                            </div>
+                            <div class="panel-body">
+                                Luogo: ${eventDetail.luogo}<br>
+                                Data: ${eventDetail.data}<br>
+                                Descrizione: ${eventDetail.descrizione}
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            Luogo: ${eventDetail.luogo}<br>
-                            Data: ${eventDetail.data}<br>
-                            Descrizione: ${eventDetail.descrizione}
-                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="page-header">
+                        <h3><span class="popcolor">#Artisti partecipanti</span> <small><!----></small></h3>
+                    </div>
+                    <c:choose>
+                        <c:when test="${empty eventDetail.artistaList}">
+                            <center><h3>Nessun artista partecipa a questo evento.</h3><center>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="row">
+                                <c:forEach items="${eventDetail.artistaList}" var="artistaItem">
+                                    <div class="col-md-4" style="margin-bottom: 25px;">
+                                        <img src="
+                                            <c:choose>
+                                               <c:when test="${artistaItem.immagine != null}">
+                                                   data:image/png;base64,${artistaItem.getImmagineString()}
+                                               </c:when>
+                                               <c:otherwise>
+                                                   /WebCommunity/resources/artist.png
+                                               </c:otherwise>
+                                           </c:choose>
+                                        " alt="user-picture" class="img-circle user-img-circle-xsmall" style="float: left;">
+                                        <h3 style="float: left; margin-left: 15px;">${artistaItem.nome} ${artistaItem.cognome}</h3>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="row">
+                    <div class="page-header">
+                        <h3><span class="popcolor">#Commenti</span> <small><!----></small></h3>
                     </div>
                 </div>
                 <div class="row">
@@ -186,11 +234,7 @@
                     <%
                         }
                     %>
-                </div>
-                <div class="row">
-                    <div class="page-header">
-                        <h3><span class="popcolor">#Commenti</span> <small><!----></small></h3>
-                    </div>
+                    <hr>
                 </div>
                 <div class="row">
                     <c:choose>
@@ -201,14 +245,16 @@
                             <c:forEach items="${postList}" var="post">
                                 <div class="media" style="margin-bottom: 20px;">
                                     <div class="media-left">
-                                        <c:choose>
-                                            <c:when test="${empty post.membro1.avatar}">
-                                                <img class="media-object img-circle user-img-circle-xsmall" src="http://webcommunityproject.altervista.org/-1661776617" alt="Event picture">
-                                            </c:when>
-                                            <c:otherwise>
-                                                <img class="media-object img-circle user-img-circle-xsmall" src="${post.membro1.avatar}" alt="User picture">
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <img src="
+                                            <c:choose>
+                                               <c:when test="${post.membro1.avatar != null}">
+                                                   data:image/png;base64,${post.membro1.getAvatarString()}
+                                               </c:when>
+                                               <c:otherwise>
+                                                   /WebCommunity/resources/user.png
+                                               </c:otherwise>
+                                           </c:choose>
+                                        " alt="user-picture" class="img-circle user-img-circle-xsmall">
                                     </div>
                                     <div class="media-body">
                                         <h4 class="media-heading">${post.membro1.username}</h4>

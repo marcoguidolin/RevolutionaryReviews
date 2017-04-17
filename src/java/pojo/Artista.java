@@ -139,12 +139,6 @@ public class Artista implements Serializable
         return true;
     }
 
-    @Override
-    public String toString()
-    {
-        return "pojo.Artista[ id=" + id + " ]";
-    }
-
     public byte[] getImmagine()
     {
         return immagine;
@@ -160,4 +154,11 @@ public class Artista implements Serializable
         sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
         return encoder.encode(immagine);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Artista{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", immagine=" + immagine + ", eventoList=" + eventoList + '}';
+    }
+    
 }

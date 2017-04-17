@@ -234,7 +234,16 @@
                                                     <div class="col-md-10 col-xs-10">
                                                         <div class="media" style="margin-bottom: 20px;">
                                                             <div class="media-left">
-                                                                <img class="media-object img-circle user-img-circle-xsmall" src="${postItem.evento1.immagine}" alt="Event picture"/>
+                                                                <img class="media-object img-circle user-img-circle-xsmall" src="
+                                                                    <c:choose>
+                                                                       <c:when test="${postItem.evento1.immagine != null}">
+                                                                           data:image/png;base64,${postItem.evento1.getImmagineString()}
+                                                                       </c:when>
+                                                                       <c:otherwise>
+                                                                           /WebCommunity/resources/event.png
+                                                                       </c:otherwise>
+                                                                   </c:choose>
+                                                                " alt="Event picture"/>
                                                             </div>
                                                             <div class="media-body">
                                                                 <h4 class="media-heading">${postItem.evento1.titolo}</h4>

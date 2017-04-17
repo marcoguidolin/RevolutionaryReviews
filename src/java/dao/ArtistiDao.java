@@ -23,6 +23,13 @@ public class ArtistiDao
         return HibernateUtil.getSessionFactory().openSession().createCriteria(Artista.class).list();
     }
     
+    public static Artista retrieveSingle(Integer id)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        return (Artista) session.get(Artista.class, id);
+    }
+    
     public static void addArtista(String nome, String cognome, String immagine){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;

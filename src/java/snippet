@@ -242,7 +242,6 @@ public static Membro removePost(Integer eventID, String username)
                 if(temp.getPostPK().getMembro().equals(username) && temp.getPostPK().getEvento() == eventID)
                 {
                     eventoPostList.remove(i);
-                    System.out.println("okkk");
                 }
             }
             post.getEvento1().setPostList(eventoPostList);
@@ -254,7 +253,6 @@ public static Membro removePost(Integer eventID, String username)
                 if(temp.getPostPK().getMembro().equals(username) && temp.getPostPK().getEvento() == eventID)
                 {
                     membroPostList.remove(i);
-                    System.out.println("OOOOOOokkk");
                 }
             }
             post.getMembro1().setPostList(membroPostList);

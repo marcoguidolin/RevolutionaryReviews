@@ -145,7 +145,16 @@
                         <c:forEach items="${eventList}" var="eventItem">
                             <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
                                 <center>
-                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="${eventItem.immagine}" alt="Event picture">
+                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="
+                                    <c:choose>
+                                        <c:when test="${eventItem.immagine != null}">
+                                            data:image/png;base64,${eventItem.getImmagineString()}
+                                        </c:when>
+                                        <c:otherwise>
+                                            /WebCommunity/resources/event.png
+                                        </c:otherwise>
+                                    </c:choose>
+                                " alt="Event picture">
                                 </center>
                                 <div class="rating"><h3>5★</h3></div>
                                 <div class="card-block">
