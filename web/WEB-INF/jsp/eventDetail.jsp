@@ -212,8 +212,10 @@
                     <%
                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
                     %>
-                    <h2>Per rilasciare un commento devi essere un utente registrato.</h2>
-                    <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                    <center>
+                        <h3>Per rilasciare un commento devi essere un utente registrato.</h3>
+                        <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
+                    </center>
                     <br/>
                     <%
                         } else {

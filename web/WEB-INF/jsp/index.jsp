@@ -32,9 +32,6 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="/WebCommunity/resources/js/bootstrap.min.js"></script>
         
-        <!-- Carousel Script -->
-        <script src="/WebCommunity/resources/js/jquery.flipster.min.js"></script>
-        
         <!-- Carousel CSS -->
         <link rel="stylesheet" href="/WebCommunity/resources/css/flipster.min.css">
     
@@ -47,7 +44,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation">
+        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation" style="background-color: rgba(65,61,61,0.8);">
             <div class="container-fluid centered-content">
                 
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -72,7 +69,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown"><b>Account</b> <span class="caret"></span></a>
-                            <ul id="login-dp" class="dropdown-menu">
+                            <ul id="login-dp" class="dropdown-menu" style="background-color: rgba(65,61,61,0.8);">
                                 <li>
                                     <%
                                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
@@ -137,6 +134,50 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        <div class="carousel slide" id="myCarousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" style="width:100%" src="/assets/example/bg_suburb.jpg">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Bootstrap 3 Carousel Layout</h1>
+                            <p></p>
+                            <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Learn More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <c:forEach items="${eventsList}" var="eventItem">
+                    <div class="item">
+                        <img class="img-responsive" style="margin-bottom: 25px;" src="
+                             <c:choose>
+                                 <c:when test="${eventItem.immagine != null}">
+                                     data:image/png;base64,${eventItem.getImmagineString()}
+                                 </c:when>
+                                 <c:otherwise>
+                                     /WebCommunity/resources/event.png
+                                 </c:otherwise>
+                             </c:choose>
+                             " alt="Event picture">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${eventItem.titolo}</h1>
+                                <p>${eventItem.descrizione}</p>
+                                <p><a class="btn btn-large btn-primary" href="/WebCommunity/eventDetail?id=${eventItem.id}">Guarda</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="icon-next"></span>
+            </a>  
+        </div>
+        <!-- /.carousel -->
         <div class="body-container">
             <div class="container bs-docs-container transition-page">
                 <div class="row">
@@ -145,55 +186,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div id="coverflow">
-                        <ul class="flip-items" style="margin-top: 20px;">
-                            <li data-flip-title="Red">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Red">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Red">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Red">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
-                                <img src="/WebCommunity/resources/user.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="/WebCommunity/createEvent">prova</a>
-                <div class="alert alert-warning" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Attenzione:</span>
-                    Assicurati che sul database sia stato importato l'ultimo schema disponibile su Google Drive altrimenti potrebbero verificarsi degli errori inaspettati causa le immagini vengono ora memorizzate nel database. Se Glassfish restituisce l'errore HTTP 500 cerca nella pagina che stati tentando di visualizzare l'invocazione al metodo userinfo.getAvatarString() e rimuovila oppure inserisci un'immagine per l'utente tramite phpMyAdmin.
+                    Da completare
                 </div>
             </div>
         </div>
         <script>
             $(document).ready(function () {
-                $("#coverflow").flipster();
                 $('div.transition-page').fadeIn(250).removeClass('transition-page');
             });
             

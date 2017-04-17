@@ -36,6 +36,7 @@ public class MainController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {
+        map.put("eventsList", EventiDao.retrieveAll());
         return "index";
     }
 
