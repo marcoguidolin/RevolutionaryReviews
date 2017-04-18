@@ -77,12 +77,14 @@
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Eventi</h1>
-                    <a href="#" data-toggle="modal" data-target="#addEvent" class="btn btn-default" style="float: right;">Inserisci evento</a>
-                    <table class="table table-striped">
+                    <h1 class="page-header">
+                        Eventi
+                        <a href="#" data-toggle="modal" data-target="#addEvent" class="btn btn-default" style="float: right;">Inserisci evento</a>
+                    </h1>
+                    <table class="table table-striped" style="width: 2000px !important; max-width: 2000px !important;">
                         <thead>
                             <tr>
-                                <!--<th>ID</th>-->
+                                <th>ID</th>
                                 <th>Titolo</th>
                                 <th>Luogo</th>
                                 <th>Data</th>
@@ -91,54 +93,69 @@
                                 <th>Commenti</th>
                                 <th>Artisti</th>
                                 <th>Immagine</th>
-                                <th></th>
+                                <th>Azioni</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${eventsList}" var="eventItem">
                                 <tr>
-                                    <!--<td><%--${eventItem.id}--%></td>-->
-                                    <td>${eventItem.titolo}</td>
+                                    <td>${eventItem.id}</td>
+                                    <td><a href="/WebCommunity/eventDetail?id=${eventItem.id}">${eventItem.titolo}</a></td>
                                     <td>${eventItem.luogo}</td>
                                     <td>${eventItem.data}</td>
                                     <td><a href="/WebCommunity/administrationCategories/">${eventItem.categoria.nome}</a></td>
-                                    <td>${eventItem.descrizione}</td>
+                                    <td width="500px">${eventItem.descrizione}</td>
                                     <td>
                                         <ul class="list-unstyled">
-                                            <c:forEach items="${eventItem.postList}" var="postItem">
-                                                <li><a href="/WebCommunity/administrationUsers/">${postItem.postPK.membro}</a></li>
-                                                <li>${postItem.commento}</li>
-                                                <li>Voto: ${postItem.voto}</li>
-                                                <li>
-                                                    <center>
-                                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveUserPostEvent?eventID=${eventItem.id}&userID=${postItem.postPK.membro}'" class="btn btn-danger btn-xs">
-                                                            Elimina
-                                                        </a>
-                                                    </center>
-                                                </li>
-                                                <hr>
-                                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${empty eventItem.postList}">
+                                                    Nessun commento pubblicato
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach items="${eventItem.postList}" var="postItem">
+                                                        <li>
+                                                            <a href="/WebCommunity/administrationUsers/">${postItem.postPK.membro}</a>
+                                                            <br>
+                                                            ${postItem.commento}
+                                                            <br>
+                                                            Voto: ${postItem.voto}
+                                                            <a onclick="window.location.href='/WebCommunity/administrationRemoveUserPostEvent?eventID=${eventItem.id}&userID=${postItem.postPK.membro}'" class="btn btn-default btn-xs" style="float: right; margin-top: -21px;">
+                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                            </a>
+                                                        </li>
+                                                        <hr>
+                                                    </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </ul>
                                     </td>
                                     <td>
                                         <ul class="list-unstyled">
-                                            <c:forEach items="${eventItem.artistaList}" var="artistItem">
-                                                <li><a href="/WebCommunity/administrationArtists/">${artistItem.nome} ${artistItem.cognome}</a></li>
-                                                <li>
-                                                    <center>
-                                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveArtistEvent?eventID=${eventItem.id}&artistID=${artistItem.id}'" class="btn btn-danger btn-xs">
-                                                            Elimina
-                                                        </a>
-                                                    </center>
-                                                </li>
-                                                <hr>
-                                            </c:forEach>
-                                            <a href="#" data-toggle="modal" data-target="#updateArtists" class="btn btn-default" onclick="document.getElementById('eventoID').value = '${eventItem.id}'" >
-                                                <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
-                                            </a>
+                                            <c:choose>
+                                                <c:when test="${empty eventItem.artistaList}">
+                                                    Nessun artista partecipante
+                                                    <br><br>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach items="${eventItem.artistaList}" var="artistItem">
+                                                        <li>
+                                                            <a href="/WebCommunity/administrationArtists/">${artistItem.nome} ${artistItem.cognome}</a>
+                                                            <a onclick="window.location.href='/WebCommunity/administrationRemoveArtistEvent?eventID=${eventItem.id}&artistID=${artistItem.id}'" class="btn btn-default btn-xs" style="float: right;">
+                                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                            </a>
+                                                        </li>
+                                                        <hr>
+                                                    </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
+                                            <center>
+                                                <a href="#" data-toggle="modal" data-target="#updateArtists" class="btn btn-default btn-xs" onclick="document.getElementById('eventoID').value = '${eventItem.id}'" >
+                                                    Aggiungi
+                                                </a>
+                                            </center>
                                         </ul>
                                     </td>
-                                    <td>
+                                    <td width="64px">
                                         <img src="
                                             <c:choose>
                                                 <c:when test="${eventItem.immagine != null}">
