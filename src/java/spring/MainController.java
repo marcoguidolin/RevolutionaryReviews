@@ -472,6 +472,20 @@ public class MainController
         request.setAttribute("artistsList", artistiList);
         return "administrationArtists";
     }
+    
+    @RequestMapping(value = "/doRemoveArtistAdmin", 
+            params
+            =
+            {
+                "id"
+            },
+        method = RequestMethod.GET)
+    public String doRemoveArtistAdmin(ModelMap map,HttpServletRequest request, @RequestParam("id") String id)
+    {
+        Integer i = Integer.parseInt(id);
+        ArtistiDao.remove(i);
+        return "redirect:administrationArtists";
+    }
 // </editor-fold>
 
     // </editor-fold>

@@ -8,6 +8,7 @@ package dao;
 import hibernate.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
@@ -64,18 +65,11 @@ public class ArtistiDao
         {
             transaction = session.beginTransaction();
 
-//            Artista artista = (Artista) session.get(Artista.class, id);
-//            session.delete(artista);
-//            
-//            List<Post> list = session.createCriteria(Post.class).list();
-//            for(Post p : list)
-//            {
-//                if(p.getArtista().equals(id))
-//                {
-//                    session.delete(p);
-//                }
-//            }
-
+            String hql = "DELETE FROM Artista WHERE id = :artistID";
+            Query query = session.createQuery(hql);
+            query.setParameter("artistID", id);
+            query.executeUpdate();
+            
             transaction.commit();
         } catch (HibernateException e)
         {
