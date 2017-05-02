@@ -16,13 +16,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
-import pojo.Categoria;
 import pojo.Evento;
 
 /**
@@ -130,7 +128,7 @@ public class EventiDao {
         }
         catch(FileNotFoundException | SQLException ex)
         {
-           // 
+           ex.printStackTrace();
         }
     }
 

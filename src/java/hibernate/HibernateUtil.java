@@ -25,9 +25,9 @@ public class HibernateUtil
 
     private static final SessionFactory sessionFactory;
     
-    public static final String HOST = "jdbc:mysql://10.0.1.252:3306/5ib10";
-    public static final String USERNAME = "5ib10";
-    public static final String PASSWORD = "5ib10";
+    public static final String HOST = "jdbc:mysql://localhost:3306/5ib10";
+    public static final String USERNAME = "root";
+    public static final String PASSWORD = "";
     
     static
     {

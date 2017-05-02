@@ -358,7 +358,50 @@ public class MainController
     @RequestMapping(value = "/administrationCategories", method = RequestMethod.GET)
     public String administrationCategories(ModelMap map)
     {
+        map.put("categoriesList", CategorieDao.retrieveAll());
         return "administrationCategories";
+    }
+    
+    @RequestMapping(value = "/administrationUploadCategoryImage", method = RequestMethod.POST)
+    public String administrationUploadCategoryImage(ModelMap map, @RequestParam("categoryID") String id, @RequestParam("file") MultipartFile file)
+    {
+        if (file != null && ParseUtils.tryParseInt(id))
+        {
+            CategorieDao.setImmagine(Integer.parseInt(id), BlobUtils.createTempFile(file));
+        }
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationCategories";
+    }
+    
+    @RequestMapping(value = "/administrationUpdateCategory", method = RequestMethod.POST)
+    public String administrationUpdateCategory(ModelMap map, @RequestParam("categoriaID") String id, @RequestParam("nome") String nome)
+    {
+        if (ParseUtils.tryParseInt(id))
+        {
+            CategorieDao.updateEvento(Integer.parseInt(id), nome);
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        return "redirect:administrationCategories";
+    }
+    
+    @RequestMapping(value = "/administrationRemoveCategory", method = RequestMethod.GET)
+    public String administrationRemoveCategory(ModelMap map, @RequestParam("id") String id)
+    {
+        if (ParseUtils.tryParseInt(id))
+        {
+            CategorieDao.removeCategoria(Integer.parseInt(id));
+        }
+        map.put("eventsList", EventiDao.retrieveAll());
+        return "redirect:administrationCategories";
+    }
+    
+    @RequestMapping(value = "/administrationAddCategory", method = RequestMethod.POST)
+    public String administrationAddCategory(ModelMap map, @RequestParam("nome") String nome)
+    {
+        CategorieDao.addCategoria(nome);
+        
+        map.put("categoriesList", CategorieDao.retrieveAll());
+        return "redirect:administrationCategories";
     }
     // </editor-fold>
 
