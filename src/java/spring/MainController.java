@@ -350,7 +350,18 @@ public class MainController
     @RequestMapping(value = "/administrationUsers", method = RequestMethod.GET)
     public String administrationUsers(ModelMap map)
     {
+        List<Membro> membri = MembriDao.retrieveAll();
+        map.put("usersList", membri);
         return "administrationUsers";
+    }
+    
+    
+    @RequestMapping(value = "/administrationRemoveUser", method = RequestMethod.GET)
+    public String administrationRemoveUser(ModelMap map, @RequestParam("username") String username)
+    {
+        MembriDao.remove(username);
+        map.put("eventsList", EventiDao.retrieveAll());
+        return "redirect:administrationUsers";
     }
     // </editor-fold>
 

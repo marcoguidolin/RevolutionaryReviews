@@ -4,6 +4,7 @@
     Author     : matte
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -77,6 +78,32 @@
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1 class="page-header">Utenti</h1>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${usersList}" var="userItem">
+                                <tr>
+                                    <td>${userItem.username}</td>
+                                    <td>${userItem.nome}</td>
+                                    <td>${userItem.cognome}</td>
+                                    <td>${userItem.mail}</td>
+                                    <td>
+                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveUser?username=${userItem.username}'" class="btn btn-default" style="float: right;">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach> 
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
