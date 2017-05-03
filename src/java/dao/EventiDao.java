@@ -37,6 +37,30 @@ public class EventiDao {
         
         return eventoList;
     }
+    
+    public static List<Evento> orderEventsByDate() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        String hql = "FROM Evento E ORDER BY E.data DESC";
+        Query query = session.createQuery(hql);
+        return (List<Evento>) query.list();
+    }
+    
+    public static List<Evento> orderEventsByTitle() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        String hql = "FROM Evento E ORDER BY E.titolo ASC";
+        Query query = session.createQuery(hql);
+        return (List<Evento>) query.list();
+    }
+    
+    public static List<Evento> orderEventsByCategory() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        String hql = "FROM Evento E ORDER BY E.categoria ASC";
+        Query query = session.createQuery(hql);
+        return (List<Evento>) query.list();
+    }
 
     public static Evento retrieveSingle(String id) {
         Session session = HibernateUtil.getSessionFactory().openSession();

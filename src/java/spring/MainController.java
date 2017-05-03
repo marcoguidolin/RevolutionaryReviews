@@ -27,6 +27,8 @@ import utils.*;
 public class MainController
 {
 
+    boolean ready = true;
+    
     public MainController()
     {
         //
@@ -233,9 +235,38 @@ public class MainController
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String events(ModelMap map, HttpServletRequest request)
     {
-        map.put("eventList", EventiDao.retrieveAll());
+        if(ready)
+        {
+            map.put("eventList", EventiDao.retrieveAll());
+            map.put("categoryName", "Eventi");
+        }
+        ready = true;
+        return "events";
+    }
+    
+    @RequestMapping(value = "/orderEventsByDate", method = RequestMethod.GET)
+    public String orderEventsByDate(ModelMap map, HttpServletRequest request)
+    {
+        ready = false;
+        map.put("eventList", EventiDao.orderEventsByDate());
         map.put("categoryName", "Eventi");
         return "events";
+    }
+    
+    @RequestMapping(value = "/orderEventsByTitle", method = RequestMethod.GET)
+    public String orderEventsByTitle(ModelMap map, HttpServletRequest request)
+    {
+        map.put("eventList", EventiDao.orderEventsByTitle());
+        map.put("categoryName", "Eventi");
+        return "redirect:events";
+    }
+    
+    @RequestMapping(value = "/orderEventsByCategory", method = RequestMethod.GET)
+    public String orderEventsByCategory(ModelMap map, HttpServletRequest request)
+    {
+        map.put("eventList", EventiDao.orderEventsByCategory());
+        map.put("categoryName", "Eventi");
+        return "redirect:events";
     }
 
     @RequestMapping(value = "/eventDetail", method = RequestMethod.GET)

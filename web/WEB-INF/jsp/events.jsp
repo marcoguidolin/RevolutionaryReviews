@@ -138,6 +138,17 @@
                 <div class="row">
                     <div class="page-header">
                         <h1><span class="popcolor">#${categoryName}</span> <small><!----></small></h1>
+                        <div class="dropdown" style="float: right; z-index: 2; top: -6px;">
+                            <button class="btn btn-default dropdown-toggle action-dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Ordina eventi
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li><a href="/WebCommunity/orderEventsByDate">Ordina per data</a></li>
+                                <li><a href="/WebCommunity/orderEventsByTitle">Ordina per titolo</a></li>
+                                <li><a href="/WebCommunity/orderEventsByCategory">Ordina per categoria</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
