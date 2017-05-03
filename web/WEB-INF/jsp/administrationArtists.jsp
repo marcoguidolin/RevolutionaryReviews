@@ -87,7 +87,7 @@
                             <td>${artistItemz.id}</td>
                             <td>${artistItemz.nome}</td>
                             <td>${artistItemz.cognome}</td>
-                            <td><a href="/WebCommunity/doRemoveArtistAdmin?id=${artistItemz.id}" class="btn btn-block">Elimina</a></td>
+                            <td><a href="/WebCommunity/doRemoveArtistAdmin?id=${artistItemz.id}" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                         </tr>
                     </c:forEach>
                     </table>
