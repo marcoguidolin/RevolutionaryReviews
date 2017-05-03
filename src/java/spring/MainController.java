@@ -256,17 +256,19 @@ public class MainController
     @RequestMapping(value = "/orderEventsByTitle", method = RequestMethod.GET)
     public String orderEventsByTitle(ModelMap map, HttpServletRequest request)
     {
+        ready = false;
         map.put("eventList", EventiDao.orderEventsByTitle());
         map.put("categoryName", "Eventi");
-        return "redirect:events";
+        return "events";
     }
     
     @RequestMapping(value = "/orderEventsByCategory", method = RequestMethod.GET)
     public String orderEventsByCategory(ModelMap map, HttpServletRequest request)
     {
+        ready = false;
         map.put("eventList", EventiDao.orderEventsByCategory());
         map.put("categoryName", "Eventi");
-        return "redirect:events";
+        return "events";
     }
 
     @RequestMapping(value = "/eventDetail", method = RequestMethod.GET)
