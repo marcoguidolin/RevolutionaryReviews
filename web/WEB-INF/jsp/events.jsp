@@ -156,7 +156,9 @@
                                     </c:choose>
                                 " alt="Event picture">
                                 </center>
-                                <div class="rating"><h3>5★</h3></div>
+                                <c:if test="${eventItem.getAverage() != 'NaN'}">
+                                    <div class="rating"><h3>${eventItem.getAverage()}★</h3></div>
+                                </c:if>
                                 <div class="card-block">
                                     <h4 class="card-title text-center">${eventItem.titolo}</h4>
                                     <p class="card-text text-justify">

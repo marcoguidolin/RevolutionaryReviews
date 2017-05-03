@@ -234,4 +234,14 @@ public class Evento implements Serializable
         return "Evento{" + "id=" + id + ", titolo=" + titolo + ", luogo=" + luogo + ", data=" + data + ", descrizione=" + descrizione + ", immagine=" + immagine + ", artistaList=" + artistaList + ", categoria=" + categoria + ", postList=" + postList + '}';
     }
     
+    public float getAverage()
+    {
+        float media = 0;
+        for(Post p : postList)
+        {
+            media += p.getVoto();
+        }
+        return media / postList.size();
+    }
+    
 }
