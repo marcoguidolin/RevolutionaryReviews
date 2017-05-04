@@ -29,10 +29,7 @@
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
-                
-            <c:forEach items="${ListRecensioniUtente}" var="recensione">
-                <p> ?id=${recensione.id}> ${recensione.commento}</p>
-            </c:forEach>
+
             
         </div>
     </body>

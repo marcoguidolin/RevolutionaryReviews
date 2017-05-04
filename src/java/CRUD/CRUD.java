@@ -87,6 +87,7 @@ public class CRUD {
             
             transazione.commit();
             return f;
+
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
@@ -110,6 +111,7 @@ public class CRUD {
                         
             transazione.commit();
             return r;
+
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
@@ -139,9 +141,5 @@ public class CRUD {
         }
         return null;
     }
-   
-    
-   
-    
     
 }
