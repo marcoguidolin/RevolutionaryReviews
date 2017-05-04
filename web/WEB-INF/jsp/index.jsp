@@ -30,9 +30,11 @@
                 </c:forEach>
             </ul>
                 
-            <c:forEach items="${ListRecensioniUtente}" var="recensione">
-                <p> ?id=${recensione.id}> ${recensione.commento}</p>
-            </c:forEach>
+           <ul>
+                <c:forEach items="${listEventiPiuVotati}" var="listaEventi">
+                    <li>${listaEventi.titolo}</li>
+                </c:forEach>
+            </ul>
             ciao
         </div>
     </body>
