@@ -33,7 +33,7 @@
             <c:forEach items="${ListRecensioniUtente}" var="recensione">
                 <p> ?id=${recensione.id}> ${recensione.commento}</p>
             </c:forEach>
-            
+            ciao
         </div>
     </body>
 </html>
