@@ -73,7 +73,11 @@ public class CRUD {
         }
         return null;
     }
-    
+
+    /**
+    * Ritorna una lista contenente tutti gli utenti
+    * @return lista contenente tutti gli utenti
+    */
     public List ListaUtenti() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
@@ -91,6 +95,28 @@ public class CRUD {
         }
         return null;
     }
+    
+    /**
+    * Ritorna una lista contenente tutti gli utenti
+    * @return lista contenente tutti gli utenti
+    */
+   /* public List ListaUtenti() {
+        Session sessione=factory.openSession();
+        Transaction transazione=null;
+        try{
+            transazione=sessione.beginTransaction();
+            
+            List f=sessione.createQuery("FROM Followers").list();
+            
+            transazione.commit();
+            return f;
+        }catch(HibernateException e){
+            if(transazione!=null) transazione.rollback();
+        }finally{
+            sessione.close();
+        }
+        return null;
+    }*/
     
     
 }
