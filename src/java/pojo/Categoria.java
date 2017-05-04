@@ -35,6 +35,9 @@ import javax.validation.constraints.Size;
 })
 public class Categoria implements Serializable
 {
+    @Lob
+    @Column(name = "Immagine")
+    private byte[] immagine;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,9 +50,6 @@ public class Categoria implements Serializable
     @Size(min = 1, max = 30)
     @Column(name = "Nome")
     private String nome;
-    @Lob
-    @Column(name = "Immagine")
-    private byte[] immagine;
     @ManyToMany(mappedBy = "categoriaList")
     private List<Membro> membroList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
@@ -145,20 +145,19 @@ public class Categoria implements Serializable
         return "pojo.Categoria[ id=" + id + " ]";
     }
 
-    public byte[] getImmagine()
-    {
-        return immagine;
-    }
-
-    public void setImmagine(byte[] immagine)
-    {
-        this.immagine = immagine;
-    }
     
     public String getImmagineString()
     {
         sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
         return encoder.encode(immagine);
+    }
+
+    public byte[] getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
     }
     
 }

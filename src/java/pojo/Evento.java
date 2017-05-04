@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,6 +42,12 @@ import javax.validation.constraints.Size;
 })
 public class Evento implements Serializable
 {
+    @Lob()
+    @Column(name = "Immagine")
+    private byte[] immagine;
+    @JoinColumn(name = "Promotore", referencedColumnName = "Username")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Membro promotore;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,9 +73,6 @@ public class Evento implements Serializable
     @Size(max = 1024)
     @Column(name = "Descrizione")
     private String descrizione;
-    @Lob
-    @Column(name = "Immagine")
-    private byte[] immagine;
     @JoinTable(name = "EVENTO_ARTISTA", joinColumns =
     {
         @JoinColumn(name = "Evento", referencedColumnName = "Id")
@@ -212,10 +216,6 @@ public class Evento implements Serializable
         return true;
     }
 
-    public byte[] getImmagine()
-    {
-        return immagine;
-    }
     
     public String getImmagineString()
     {
@@ -223,10 +223,6 @@ public class Evento implements Serializable
         return encoder.encode(immagine);
     }
 
-    public void setImmagine(byte[] immagine)
-    {
-        this.immagine = immagine;
-    }
 
     @Override
     public String toString()
@@ -242,6 +238,23 @@ public class Evento implements Serializable
             media += p.getVoto();
         }
         return media / postList.size();
+    }
+
+
+    public Membro getPromotore() {
+        return promotore;
+    }
+
+    public void setPromotore(Membro promotore) {
+        this.promotore = promotore;
+    }
+
+    public byte[] getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
     }
     
 }

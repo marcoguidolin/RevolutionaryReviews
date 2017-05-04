@@ -33,6 +33,9 @@ import javax.validation.constraints.Size;
 })
 public class Artista implements Serializable
 {
+    @Lob
+    @Column(name = "Immagine")
+    private byte[] immagine;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,9 +51,6 @@ public class Artista implements Serializable
     @Size(max = 30)
     @Column(name = "Cognome")
     private String cognome;
-    @Lob
-    @Column(name = "Immagine")
-    private byte[] immagine;
     @ManyToMany(mappedBy = "artistaList")
     private List<Evento> eventoList;
 
@@ -139,15 +139,6 @@ public class Artista implements Serializable
         return true;
     }
 
-    public byte[] getImmagine()
-    {
-        return immagine;
-    }
-
-    public void setImmagine(byte[] immagine)
-    {
-        this.immagine = immagine;
-    }
     
     public String getImmagineString()
     {
@@ -159,6 +150,14 @@ public class Artista implements Serializable
     public String toString()
     {
         return "Artista{" + "id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", immagine=" + immagine + ", eventoList=" + eventoList + '}';
+    }
+
+    public byte[] getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
     }
     
 }

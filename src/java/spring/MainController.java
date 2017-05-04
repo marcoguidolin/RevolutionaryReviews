@@ -36,9 +36,15 @@ public class MainController
 
     // <editor-fold defaultstate="collapsed" desc="/">
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap map)
+    public String index(ModelMap map, HttpServletRequest request)
     {
-        map.put("eventsList", EventiDao.retrieveAll());
+        Membro membro = (Membro) request.getSession().getAttribute("userinfo");
+        
+        if(membro != null){
+            map.put("eventsList", EventiDao.retrieveByZone(membro.getZona()));
+        }else{
+            map.put("eventsList", EventiDao.retrieveAll());
+        }
         return "index";
     }
 

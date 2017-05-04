@@ -134,49 +134,6 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <div class="carousel slide" id="myCarousel">
-            <div class="carousel-inner">
-                    <c:set var="isSet" value="${0}"></c:set>
-                <c:forEach items="${eventsList}" var="eventItem">
-                    <div
-                        <c:choose>
-                            <c:when test="${isSet == 0}">
-                             class="item active"
-                             <c:set var="isSet" value="${1}"></c:set>
-                            </c:when>
-                            <c:otherwise>
-                                class="item"
-                            </c:otherwise>
-                        </c:choose>
-                          >
-                        <img class="img-responsive" style="margin-bottom: 25px;" src="
-                             <c:choose>
-                                 <c:when test="${eventItem.immagine != null}">
-                                     data:image/png;base64,${eventItem.getImmagineString()}
-                                 </c:when>
-                                 <c:otherwise>
-                                     /WebCommunity/resources/event.png
-                                 </c:otherwise>
-                             </c:choose>
-                             " alt="Event picture">
-                        <div class="container">
-                            <div class="carousel-caption">
-                                <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${eventItem.titolo}</h1>
-                                <p>${eventItem.descrizione}</p>
-                                <p><a class="btn btn-large btn-primary" href="/WebCommunity/eventDetail?id=${eventItem.id}">Guarda</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="icon-prev"></span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="icon-next"></span>
-            </a>  
-        </div>
         <!-- /.carousel -->
         <div class="body-container">
             <div class="container bs-docs-container transition-page">
@@ -186,7 +143,49 @@
                     </div>
                 </div>
                 <div class="row">
-                    Da completare
+                    <div class="carousel slide" id="myCarousel">
+                        <div class="carousel-inner">
+                        <c:set var="isSet" value="${0}"></c:set>
+                            <c:forEach items="${eventsList}" var="eventItem">
+                                <div
+                                    <c:choose>
+                                        <c:when test="${isSet == 0}">
+                                         class="item active"
+                                         <c:set var="isSet" value="${1}"></c:set>
+                                        </c:when>
+                                        <c:otherwise>
+                                            class="item"
+                                        </c:otherwise>
+                                    </c:choose>
+                                      >
+                                    <img class="img-responsive" style="margin-bottom: 25px;" src="
+                                         <c:choose>
+                                             <c:when test="${eventItem.immagine != null}">
+                                                 data:image/png;base64,${eventItem.getImmagineString()}
+                                             </c:when>
+                                             <c:otherwise>
+                                                 /WebCommunity/resources/event.png
+                                             </c:otherwise>
+                                         </c:choose>
+                                         " alt="Event picture">
+                                    <div class="container">
+                                        <div class="carousel-caption">
+                                            <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${eventItem.titolo}</h1>
+                                            <p>${eventItem.descrizione}</p>
+                                            <p><a class="btn btn-large btn-primary" href="/WebCommunity/eventDetail?id=${eventItem.id}">Guarda</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="icon-prev"></span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="icon-next"></span>
+                        </a>  
+                    </div>
                 </div>
             </div>
         </div>

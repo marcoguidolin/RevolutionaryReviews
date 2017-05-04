@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -35,10 +36,17 @@ import org.hibernate.annotations.FetchMode;
 @NamedQueries({
     @NamedQuery(name = "Membro.findAll", query = "SELECT m FROM Membro m")})
 public class Membro implements Serializable {
-
     @Lob
     @Column(name = "Avatar")
     private byte[] avatar;
+
+    @Basic(optional = false)
+    @NotNull()
+    @Size(min = 1, max = 50)
+    @Column(name = "Zona")
+    private String zona;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotore", fetch = FetchType.EAGER)
+    private List<Evento> eventoList;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -181,13 +189,31 @@ public class Membro implements Serializable {
         return "Membro{" + "username=" + username + ", password=" + password + ", nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", avatar=" + avatar + ", categoriaList=" + categoriaList + ", postList=" + postList + '}';
     }
 
-    public byte[] getAvatar()
+    public String getZona()
     {
+        return zona;
+    }
+
+    public void setZona(String zona)
+    {
+        this.zona = zona;
+    }
+
+
+    @XmlTransient
+    public List<Evento> getEventoList() {
+        return eventoList;
+    }
+
+    public void setEventoList(List<Evento> eventoList) {
+        this.eventoList = eventoList;
+    }
+
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar)
-    {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
     

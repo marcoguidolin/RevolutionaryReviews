@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
@@ -35,6 +36,14 @@ public class EventiDao {
         
         List<Evento> eventoList = session.createQuery("from Evento e where e.categoria = " + cat).list();
         
+        return eventoList;
+    }
+    
+    public static List<Evento> retrieveByZone(String zona){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Evento> eventoList = session.createSQLQuery("SELECT * FROM EVENTI WHERE Luogo = 'Padova'").list();
+        
+        //List<Evento> eventoList = session.createQuery("from Evento e where e.luogo = 'Padova'").list();//'" + zona + "'").list();
         return eventoList;
     }
     
