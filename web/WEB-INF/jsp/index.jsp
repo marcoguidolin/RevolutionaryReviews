@@ -136,19 +136,19 @@
         </nav>
         <div class="carousel slide" id="myCarousel">
             <div class="carousel-inner">
-                <div class="item active">
-                    <img class="img-responsive" style="width:100%" src="/assets/example/bg_suburb.jpg">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Bootstrap 3 Carousel Layout</h1>
-                            <p></p>
-                            <p><a class="btn btn-lg btn-primary" href="http://getbootstrap.com">Learn More</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    <c:set var="isSet" value="${0}"></c:set>
                 <c:forEach items="${eventsList}" var="eventItem">
-                    <div class="item">
+                    <div
+                        <c:choose>
+                            <c:when test="${isSet == 0}">
+                             class="item active"
+                             <c:set var="isSet" value="${1}"></c:set>
+                            </c:when>
+                            <c:otherwise>
+                                class="item"
+                            </c:otherwise>
+                        </c:choose>
+                          >
                         <img class="img-responsive" style="margin-bottom: 25px;" src="
                              <c:choose>
                                  <c:when test="${eventItem.immagine != null}">
