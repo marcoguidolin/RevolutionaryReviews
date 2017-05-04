@@ -29,6 +29,7 @@
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
+
             
         </div>
     </body>
