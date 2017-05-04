@@ -6,6 +6,7 @@
 package CRUD;
 
 import POJO.Eventi;
+import POJO.Followers;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -73,14 +74,16 @@ public class CRUD {
         return null;
     }
     
-    public double votoMedioEvento(Integer id){
+    public List ListaUtenti() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            List eventiPassati=sessione.createQuery("FROM Eventi WHERE data < CURRENT_DATE").list();
+            
+            List f=sessione.createQuery("FROM Followers").list();
+            
             transazione.commit();
-            return eventiPassati;
+            return f;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
@@ -88,5 +91,6 @@ public class CRUD {
         }
         return null;
     }
-            
+    
+    
 }

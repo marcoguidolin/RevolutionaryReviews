@@ -4,6 +4,8 @@ package spring;
 
 import CRUD.CRUD;
 import POJO.Eventi;
+import POJO.Followers;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +31,7 @@ public class MainController
     public String index(ModelMap map)
     {        
         map.put("listEventiPassati", crud.leggiEventiPassati());
-        
+        map.put("listFollowers", crud.ListaUtenti());
         return "index";
     }
     
@@ -41,4 +43,13 @@ public class MainController
         
         return "dettagliEvento";
     }
+    
+    @RequestMapping(value="/listaFollower", method=RequestMethod.GET)
+    public String ListaFollower(ModelMap map){
+        List<Followers> lista=crud.ListaUtenti();
+        map.put("lista",lista);
+        
+        return "listaFollower";
+    }
+    
 }
