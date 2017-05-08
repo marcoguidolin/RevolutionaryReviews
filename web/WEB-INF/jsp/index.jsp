@@ -18,18 +18,18 @@
     </head>
 
     <body>
+        <h1>Revolutionary Reviews</h1>
+        
         <div>
-            
-            <c:forEach items="${listEventiPassati}" var="evento">
-                <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-            </c:forEach>
-           
-            <ul>
-                <c:forEach items="${listFollowers}" var="follower">
-                    <li>${follower.nickname}</li>
-                </c:forEach>
-            </ul>
+            <img src="/RevolutionaryReviews/resources/LogoUtente.jpg" />
             
         </div>
+        
+        <h3>Eventi principali</h3>
+        <h3>Eventi in scadenza</h3>
+        <h3>Eventi passati</h3>
+        <c:forEach items="${listEventiPassati}" var="evento">
+            <p>${evento.titolo}</p>
+        </c:forEach>
     </body>
 </html>
