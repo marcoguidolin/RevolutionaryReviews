@@ -51,6 +51,26 @@ public class CRUD {
     }   
 
     /**
+     * Metodo per leggere gli eventi in scadenza
+     * @return gli eventi in scadenza
+     */
+    public List leggiEventiScadenza(){
+        Session sessione=factory.openSession();
+        Transaction transazione=null;
+        try{
+            transazione=sessione.beginTransaction();
+            List eventiScadenza=sessione.createQuery("FROM Eventi WHERE data = CURRENT_DATE").list();
+            transazione.commit();
+            return eventiScadenza;
+        }catch(HibernateException e){
+            if(transazione!=null) transazione.rollback();
+        }finally{
+            sessione.close();
+        }
+        return null;
+    }   
+    
+    /**
      * Metodo per visualizzare i dettagli di un evento
      * @param id id dell'evento
      * @return le informozioni dell'evento
@@ -118,17 +138,20 @@ public class CRUD {
         return null;
     }
     
+    
+     
     /**
      * Metodo che cerca e stampa gli eventi più votati
+     * @param id
      * @return 
-     */
-    public List ListaEventiPiuVotati() {
+    
+    public List ListaEventiPiuVotati(Integer id) {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
             
-            List e=sessione.createQuery("SELECT EVENTI.Id, VISTAVOTI.Media FROM EVENTI, VISTAVOTI WHERE EVENTI.Id=VISTAVOTI.Id AND VISTAVOTI.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
+            List e=sessione.createQuery("SELECT Eventi.Id, VistaVoti.Media FROM Eventi, VistaVoti WHERE Eventi.Id=VistaVoti.Id AND VistaVoti.Media > (SELECT AVG(Media) FROM VistaVoti)").list();
             
             transazione.commit();
             return e;
@@ -139,7 +162,7 @@ public class CRUD {
         }
         return null;
     }
-   
+    */
     
    
     
