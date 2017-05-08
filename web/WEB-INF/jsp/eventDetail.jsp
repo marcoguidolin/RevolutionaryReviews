@@ -50,7 +50,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation">
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid centered-content">
                 
                 <!-- Brand and toggle get grouped for better mobile display -->

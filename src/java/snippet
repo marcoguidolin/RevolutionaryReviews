@@ -273,3 +273,7 @@ public static Membro removePost(Integer eventID, String username)
         
         return membro;
     }
+
+////////////////////////////////////////////////////////////////////////////////
+
+navbar-fixed-top

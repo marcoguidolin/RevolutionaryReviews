@@ -85,7 +85,7 @@ public class MembriDao
     }
 
     
-    public static Membro register(String username, String password, String name, String surname, String mail)
+    public static Membro register(String username, String password, String name, String surname, String mail, String zone)
     {   
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
@@ -98,7 +98,7 @@ public class MembriDao
         {
             transaction = session.beginTransaction();
 
-            m = new Membro(username, password, name, surname, mail);
+            m = new Membro(username, password, name, surname, mail, zone);
             
             session.save(m);
 

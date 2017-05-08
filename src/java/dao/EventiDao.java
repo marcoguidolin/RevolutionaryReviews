@@ -18,11 +18,11 @@ import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
 import pojo.Evento;
+import pojo.Membro;
 
 /**
  *
@@ -90,11 +90,11 @@ public class EventiDao {
         return eventoList;
     }
     
-    public static void addEvento(String titolo, String luogo, String data, Integer categoria, String descrizione){
+    public static void addEvento(String titolo, String luogo, String data, Integer categoria, String descrizione, String promotore){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         
-        Evento evento = new Evento(titolo, luogo, new Date(), descrizione, categoria);
+        Evento evento = new Evento(titolo, luogo, new Date(), descrizione, categoria, (Membro)session.get(Membro.class, promotore));
         
         try
         {

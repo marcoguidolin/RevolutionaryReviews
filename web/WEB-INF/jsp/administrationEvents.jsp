@@ -87,6 +87,7 @@
                                 <th>ID</th>
                                 <th>Titolo</th>
                                 <th>Luogo</th>
+                                <th>Promotore</th>
                                 <th>Data</th>
                                 <th>Categoria</th>
                                 <th>Descrizione</th>
@@ -102,6 +103,7 @@
                                     <td>${eventItem.id}</td>
                                     <td><a href="/WebCommunity/eventDetail?id=${eventItem.id}">${eventItem.titolo}</a></td>
                                     <td>${eventItem.luogo}</td>
+                                    <td>${eventItem.promotore.username}</td>
                                     <td>${eventItem.data}</td>
                                     <td><a href="/WebCommunity/administrationCategories/">${eventItem.categoria.nome}</a></td>
                                     <td width="500px">${eventItem.descrizione}</td>
@@ -205,6 +207,10 @@
                             <div class="form-group">
                                 <label>Luogo</label>
                                 <input type="text" class="form-control" name="luogo" placeholder="Luogo" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Promotore</label>
+                                <input type="text" class="form-control" name="promotore" placeholder="Promotore" required>
                             </div>
                             <div class="form-group">
                                 <label>Data</label>

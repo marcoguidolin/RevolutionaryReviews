@@ -44,7 +44,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation">
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid centered-content">
 
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -159,6 +159,10 @@
                                 <div class="form-group">
                                     <label>Cognome</label>
                                     <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Zona</label>
+                                    <input type="text" class="form-control" name="zone" placeholder="Zona" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>

@@ -105,12 +105,13 @@ public class Evento implements Serializable
         this.data = data;
     }
 
-    public Evento(String titolo, String luogo, Date data, String descrizione, Integer categoria) {
+    public Evento(String titolo, String luogo, Date data, String descrizione, Integer categoria, Membro promotore) {
         this.titolo = titolo;
         this.luogo = luogo;
         this.data = data;
         this.descrizione = descrizione;
         this.categoria = new Categoria(categoria);
+        this.promotore = promotore;
     }
 
     public Integer getId()

@@ -91,12 +91,13 @@ public class Membro implements Serializable {
         this.username = username;
     }
 
-    public Membro(String username, String password, String nome, String cognome, String mail) {
+    public Membro(String username, String password, String nome, String cognome, String mail, String zona) {
         this.username = username;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
         this.mail = mail;
+        this.zona = zona;
     }
 
     public String getUsername() {

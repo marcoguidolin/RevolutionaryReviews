@@ -44,7 +44,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-fixed-top navbar-default navbar-inverse" role="navigation" style="background-color: rgba(65,61,61,0.8);">
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid centered-content">
                 
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -69,7 +69,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown"><b>Account</b> <span class="caret"></span></a>
-                            <ul id="login-dp" class="dropdown-menu" style="background-color: rgba(65,61,61,0.8);">
+                            <ul id="login-dp" class="dropdown-menu">
                                 <li>
                                     <%
                                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
