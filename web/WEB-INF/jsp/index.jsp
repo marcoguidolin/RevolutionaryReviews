@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
+        <title>RevolutionaryReviews</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -29,6 +29,13 @@
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
+            <%--<c:forEach items="${recUt}" var="recUt">
+                <a>${recUt.votoEvento}</a>
+                <a>${recUt.commento}</a>
+             </c:forEach>--%>
+            
+            
+            
             
         </div>
     </body>
