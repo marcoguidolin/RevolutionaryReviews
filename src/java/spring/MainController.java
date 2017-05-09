@@ -31,7 +31,9 @@ public class MainController
     public String index(ModelMap map)
     {        
         map.put("listEventiPassati", crud.leggiEventiPassati());
+        map.put("listEventiScadenza", crud.leggiEventiScadenza());
         map.put("listFollowers", crud.ListaUtenti());
+        
         return "index";
     }
     
@@ -52,4 +54,11 @@ public class MainController
         return "listaFollower";
     }
     
+    @RequestMapping(value="/listEventiScadenza", method=RequestMethod.GET)
+    public String ListaEventiScadenza(ModelMap map){
+        List<Eventi> lista=crud.leggiEventiScadenza();
+        map.put("lista",lista);
+        
+        return "listEventiScadenza";
+    }
 }

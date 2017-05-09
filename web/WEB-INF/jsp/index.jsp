@@ -24,18 +24,24 @@
                 <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
             </c:forEach>
            
+            <c:forEach items="${listEventiScandeza}" var="eventoSca">
+                <p> ${eventoSca.titolo} </p>
+            </c:forEach>
+                
             <ul>
                 <c:forEach items="${listFollowers}" var="follower">
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
                 
+            <%--   
            <ul>
-                <c:forEach items="${listEventiPiuVotati}" var="listaEventi">
+                <c:forEach items="${ListaEventiPiuVotati}" var="listaEventi">
                     <li>${listaEventi.titolo}</li>
                 </c:forEach>
             </ul>
-            ciao
+           --%>
+           
         </div>
     </body>
 </html>
