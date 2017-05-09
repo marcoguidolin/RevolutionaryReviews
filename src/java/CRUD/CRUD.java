@@ -11,7 +11,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import spring.HibernateUtil;
 
 /**
  *
@@ -32,7 +31,7 @@ public class CRUD {
     
     /**
      * Metodo per leggere gli eventi passati
-     * @return gli eventi passati
+     * @return la lista degli eventi passati
      */
     public List leggiEventiPassati(){
         Session sessione=factory.openSession();
@@ -41,6 +40,7 @@ public class CRUD {
             transazione=sessione.beginTransaction();
             List eventiPassati=sessione.createQuery("FROM Eventi WHERE data < CURRENT_DATE").list();
             transazione.commit();
+            
             return eventiPassati;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -52,7 +52,7 @@ public class CRUD {
 
     /**
      * Metodo per leggere gli eventi in scadenza
-     * @return gli eventi in scadenza
+     * @return la lista degli eventi in scadenza
      */
     public List leggiEventiScadenza(){
         Session sessione=factory.openSession();
@@ -61,6 +61,7 @@ public class CRUD {
             transazione=sessione.beginTransaction();
             List eventiScadenza=sessione.createQuery("FROM Eventi WHERE data = CURRENT_DATE").list();
             transazione.commit();
+            
             return eventiScadenza;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -80,10 +81,9 @@ public class CRUD {
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            
             Eventi e = (Eventi) sessione.get(Eventi.class, id);
-            
             transazione.commit();
+            
             return e;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -102,10 +102,9 @@ public class CRUD {
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            
             List f=sessione.createQuery("FROM Followers").list();
-            
             transazione.commit();
+            
             return f;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -116,44 +115,18 @@ public class CRUD {
     }
     
     /**
-     * Metodo per visualizzare tutte le recensioni fatte da un utente
-     * @param id identificativo del follower
-     * @return tutte le recensioni fatte dall'utente
-     */
-    public Recensioni ListRecensioniUtente(Integer id) {
-        Session sessione=factory.openSession();
-        Transaction transazione=null;
-        try{
-            transazione=sessione.beginTransaction();
-            
-            Recensioni r = (Recensioni) sessione.get(Recensioni.class, id);
-                        
-            transazione.commit();
-            return r;
-        }catch(HibernateException e){
-            if(transazione!=null) transazione.rollback();
-        }finally{
-            sessione.close();
-        }
-        return null;
-    }
-    
-    
-     
-    /**
      * Metodo che cerca e stampa gli eventi più votati
-     * @param id
-     * @return 
-    
+     * @param id Identificativo dell'evento
+     * @return la lista degli eventi più votati
+     */
     public List ListaEventiPiuVotati(Integer id) {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            
-            List e=sessione.createQuery("SELECT Eventi.Id, VistaVoti.Media FROM Eventi, VistaVoti WHERE Eventi.Id=VistaVoti.Id AND VistaVoti.Media > (SELECT AVG(Media) FROM VistaVoti)").list();
-            
+            List e=sessione.createQuery("SELECT Eventi.Id, Vistavoti.Media FROM Eventi, Vistavoti WHERE Eventi.Id=Vistavoti.Id AND Vistavoti.Media > (SELECT AVG(Media) FROM Vistavoti)").list();
             transazione.commit();
+            
             return e;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -161,10 +134,5 @@ public class CRUD {
             sessione.close();
         }
         return null;
-    }
-    */
-    
-   
-    
-    
+    }    
 }
