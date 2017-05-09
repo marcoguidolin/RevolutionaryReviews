@@ -97,16 +97,17 @@ public class CRUD {
     }
     
     /**
-    * Ritorna una lista contenente tutti gli utenti
-    * @return lista contenente tutti gli utenti
+    * Ritorna una lista contenente le recensioni scritte da un dato Follower
+    * @param id id dell'utente di cui si vigliono selezionare le recensioni
+    * @return una lista contenente le recensioni scritte da un dato Follower
     */
-   /* public List ListaUtenti() {
+   public List recensioniUtente(int id) {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
             
-            List f=sessione.createQuery("FROM Followers").list();
+            List f=sessione.createQuery("FROM Recensioni WHERE Utente ="+id).list();
             
             transazione.commit();
             return f;
@@ -116,7 +117,7 @@ public class CRUD {
             sessione.close();
         }
         return null;
-    }*/
+    }
     
     
 }
