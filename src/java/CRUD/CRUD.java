@@ -6,6 +6,9 @@
 package CRUD;
 
 import POJO.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -54,15 +57,30 @@ public class CRUD {
      * Metodo per leggere gli eventi in scadenza
      * @return la lista degli eventi in scadenza
      */
-    public List leggiEventiScadenza(){
+    public List<Eventi> leggiEventiScadenza(){
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            List eventiScadenza=sessione.createQuery("FROM Eventi WHERE data = CURRENT_DATE").list();
+            
+            List<Eventi> eventiScadenza=sessione.createCriteria(Eventi.class).list();
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.now();
+            
+            
+            List<Eventi> eventi = new ArrayList<>();
+            for(Eventi e : eventiScadenza)
+            {
+                if(e.getData().toString().equals(dtf.format(localDate)))
+                {
+                    eventi.add(e);
+                }
+            }
+            
             transazione.commit();
             
-            return eventiScadenza;
+            return eventi;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
