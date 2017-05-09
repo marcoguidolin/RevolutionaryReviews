@@ -5,8 +5,7 @@
  */
 package CRUD;
 
-import POJO.Eventi;
-import POJO.Followers;
+import POJO.*;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -101,14 +100,14 @@ public class CRUD {
     * @param id id dell'utente di cui si vigliono selezionare le recensioni
     * @return una lista contenente le recensioni scritte da un dato Follower
     */
-   public List recensioniUtente(int id) {
+   public List<Recensioni> recensioniUtente(int id) {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
             
-            List f=sessione.createQuery("FROM Recensioni WHERE Utente ="+id).list();
-            
+            List<Recensioni> f=sessione.createQuery("FROM Recensioni where utente ="+id).list();
+        
             transazione.commit();
             return f;
         }catch(HibernateException e){
@@ -118,6 +117,8 @@ public class CRUD {
         }
         return null;
     }
-    
-    
+   
 }
+    
+    
+
