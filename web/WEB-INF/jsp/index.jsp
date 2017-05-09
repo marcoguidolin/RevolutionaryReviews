@@ -19,29 +19,44 @@
 
     <body>
         <div>
-            
+            <h2> Eventi Passati </h2>
+            <div>
             <c:forEach items="${listEventiPassati}" var="evento">
                 <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
             </c:forEach>
-           
-            <c:forEach items="${listEventiScandeza}" var="eventoSca">
+            </div>
+            
+            </br> 
+            </br>
+            
+            <h2> Eventi in Scadenza </h2>
+            <div>
+            <c:forEach items="${listEventiScadenza}" var="eventoSca">
                 <p> ${eventoSca.titolo} </p>
             </c:forEach>
-                
+            </div>
+            
+            <h2> Lista Utenti </h2>
+            <div>
             <ul>
                 <c:forEach items="${listFollowers}" var="follower">
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
-                
-            <%--   
-           <ul>
-                <c:forEach items="${ListaEventiPiuVotati}" var="listaEventi">
-                    <li>${listaEventi.titolo}</li>
+            </div>
+            
+            </br>
+            </br>
+            
+            <h2> Eventi più votati </h2>
+            <div>
+            <ol>
+                <c:forEach items="${listEVotati}" var="eventoVotato">
+                    <li>${eventoVotato.titolo} </li>
                 </c:forEach>
-            </ul>
-           --%>
-           
+            </ol>
+            </div>
+            
         </div>
     </body>
 </html>

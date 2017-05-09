@@ -137,12 +137,12 @@ public class CRUD {
      * @param id Identificativo dell'evento
      * @return la lista degli eventi più votati
      */
-    public List ListaEventiPiuVotati(Integer id) {
+    public List ListaEventiPiuVotati() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            List e=sessione.createQuery("SELECT Eventi.Id, Vistavoti.Media FROM Eventi, Vistavoti WHERE Eventi.Id=Vistavoti.Id AND Vistavoti.Media > (SELECT AVG(Media) FROM Vistavoti)").list();
+            List e=sessione.createSQLQuery("SELECT E.Id, V.Media FROM EVENTI E, VISTAVOTI V WHERE E.Id=V.Id AND V.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
             transazione.commit();
             
             return e;
