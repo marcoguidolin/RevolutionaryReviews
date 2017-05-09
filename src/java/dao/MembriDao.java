@@ -41,6 +41,13 @@ public class MembriDao
         }
         return null;
     }
+    
+    public static Membro getUserInfo(String username)
+    {        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        return (Membro) session.get(Membro.class, username);
+    }
 
     public static Membro setInterests(List<Integer> selectedCategories, String username)
     {

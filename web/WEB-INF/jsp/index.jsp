@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -146,6 +147,18 @@
                     <div class="carousel slide" id="myCarousel">
                         <div class="carousel-inner">
                         <c:set var="isSet" value="${0}"></c:set>
+                            <c:if test="${fn:length(eventsList) eq 0}">
+                                <div class="item active">
+                                    <img class="img-responsive" style="margin-bottom: 25px;" src="/WebCommunity/resources/event.png" alt="Event picture"/>
+                                    <div class="container">
+                                        <div class="carousel-caption">
+                                            <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">Nessun evento disponibile</h1>
+                                            <p>Cambia zona nelle impostazioni del tuo account oppure guarda tutti gli eventi.</p>
+                                            <p><a class="btn btn-large btn-primary" href="/WebCommunity/events">Guarda tutti gli eventi</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
                             <c:forEach items="${eventsList}" var="eventItem">
                                 <div
                                     <c:choose>
@@ -167,7 +180,7 @@
                                                  /WebCommunity/resources/event.png
                                              </c:otherwise>
                                          </c:choose>
-                                         " alt="Event picture">
+                                         " alt="Event picture"/>
                                     <div class="container">
                                         <div class="carousel-caption">
                                             <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${eventItem.titolo}</h1>

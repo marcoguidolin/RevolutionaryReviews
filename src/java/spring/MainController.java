@@ -156,7 +156,16 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
-
+    
+    @RequestMapping(value = "/removeUserEvent", method = RequestMethod.GET)
+    public String removeUserEvent(ModelMap map, HttpServletRequest request, @RequestParam(value = "id") String id)
+    {
+        EventiDao.removeEvento(Integer.parseInt(id));
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        request.getSession().setAttribute("userinfo", MembriDao.getUserInfo(user.getUsername()));
+        return "redirect:profile";
+    }
+    
     @RequestMapping(value = "/doChangePersonalInformations", method = RequestMethod.POST)
     public String doChangePersonalInformations(ModelMap map, HttpServletRequest request, @RequestParam(value = "name") String name, @RequestParam(value = "surname") String surname, @RequestParam(value = "mail") String mail)
     {
@@ -181,6 +190,18 @@ public class MainController
         Membro user = (Membro) request.getSession().getAttribute("userinfo");
         user = MembriDao.removePost(id, user.getUsername());
         request.getSession().setAttribute("userinfo", user);
+        return "redirect:profile";
+    }
+    
+    @RequestMapping(value = "/updateUserEvent", method = RequestMethod.POST)
+    public String updateUserEvent(ModelMap map, HttpServletRequest request, @RequestParam("eventoID") String id, @RequestParam("titolo") String titolo, @RequestParam("luogo") String luogo, @RequestParam("data") String data, @RequestParam("categoria") String categoria, @RequestParam("descrizione") String descrizione)
+    {
+        if (ParseUtils.tryParseInt(categoria) && ParseUtils.tryParseInt(id))
+        {
+            EventiDao.updateEvento(Integer.parseInt(id), titolo, luogo, data, Integer.parseInt(categoria), descrizione);
+        }
+        Membro user = (Membro) request.getSession().getAttribute("userinfo");
+        request.getSession().setAttribute("userinfo", MembriDao.getUserInfo(user.getUsername()));
         return "redirect:profile";
     }
 

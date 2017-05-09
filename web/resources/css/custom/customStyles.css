@@ -305,7 +305,7 @@ hr{
 
 .carousel .item {
   height: 500px;
-  background-color:#555;
+  /*background-color:#555;*/
 }
 
 .carousel img {
@@ -313,4 +313,12 @@ hr{
   top: 0;
   left: 0;
   min-height: 400px;
+}
+
+.carousel-control.left{
+    background-image: none;
+}
+
+.carousel-control.right{
+    background-image: none;
 }

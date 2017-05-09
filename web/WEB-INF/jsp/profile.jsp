@@ -216,6 +216,12 @@
                                                         </div>
                                                     </li>
                                                 </c:forEach>
+                                                <li>
+                                                    <div class="btn-group" role="group" style="margin-bottom: 5px;">
+                                                        <button type="button" class="btn" data-toggle="modal" data-target="#updateInterests"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height: 18px; transform: rotate(45deg);"></span></button>
+                                                    </div>
+                                                    
+                                                </li>
                                             </ul>
                                         </c:otherwise>
                                     </c:choose>
@@ -264,9 +270,41 @@
                                     <br>
                                     <br>
                                     <h2 class="popcolor">#I tuoi eventi</h2>
-                                    <ul class="list-inline">
-                                        Da implementare
-                                    </ul>
+                                    <c:choose>
+                                        <c:when test="${empty userinfo.eventoList}">
+                                            <h4>Non hai pubblicato eventi.</h4>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${userinfo.eventoList}" var="eventItem">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-xs-10">
+                                                        <div class="media" style="margin-bottom: 20px;">
+                                                            <div class="media-left">
+                                                                <img class="media-object img-circle user-img-circle-xsmall" src="
+                                                                    <c:choose>
+                                                                       <c:when test="${eventItem.immagine != null}">
+                                                                           data:image/png;base64,${eventItem.getImmagineString()}
+                                                                       </c:when>
+                                                                       <c:otherwise>
+                                                                           /WebCommunity/resources/event.png
+                                                                       </c:otherwise>
+                                                                   </c:choose>
+                                                                " alt="Event picture"/>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading">${eventItem.titolo}</h4>
+                                                                <p>${eventItem.luogo}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <a href="/WebCommunity/removeUserEvent?id=${eventItem.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#updateEvent" onclick="document.getElementById('eventoID').value = '${eventItem.id}';document.getElementById('titolo').value = '${eventItem.titolo}';document.getElementById('luogo').value = '${eventItem.luogo}';document.getElementById('descrizione').value = '${eventItem.descrizione}'" class="btn btn-circle" style="margin-top: 25px;  margin-right: 10px; float: right;"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
@@ -335,6 +373,56 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
+                            <button type="submit" class="btn">Aggiorna</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="updateEvent" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modifica evento</h4>
+                    </div>
+                    <form action="/WebCommunity/updateUserEvent" method="POST" data-toggle="validator">
+                        <input type="hidden" id="eventoID" name="eventoID" value="">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Titolo</label>
+                                <input type="text" class="form-control" id="titolo" name="titolo" placeholder="Titolo" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Luogo</label>
+                                <input type="text" class="form-control" id="luogo" name="luogo" placeholder="Luogo" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Data</label>
+                                <input type="date" class="form-control" id="data" name="data" required>
+                                <div class="help-block">Questo campo deve essere riportato manualmente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select class="form-control" id="categoria" name="categoria">
+                                    <c:forEach items="${categoriesList}" var="categoryItem">
+                                        <option value="${categoryItem.id}">${categoryItem.nome}</option>
+                                    </c:forEach>
+                                </select>
+                                <div class="help-block">Questo campo deve essere riportato manualmente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrizione</label>
+                                <input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Descrizione" required>
                             </div>
                         </div>
                         <div class="modal-footer">

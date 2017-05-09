@@ -179,7 +179,7 @@ public class EventiDao {
             evento.setTitolo(titolo);
             evento.setLuogo(luogo);
             evento.setData(new Date());
-            evento.setCategoria(CategorieDao.retrieveSingle(id));
+            evento.setCategoria(CategorieDao.retrieveSingle(categoria));
             evento.setDescrizione(descrizione);
             
             session.update(evento);
