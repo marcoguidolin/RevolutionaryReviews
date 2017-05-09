@@ -1,7 +1,6 @@
 package spring;
 
 
-
 import CRUD.CRUD;
 import POJO.Eventi;
 import POJO.Followers;
@@ -33,6 +32,7 @@ public class MainController
         map.put("listEventiPassati", crud.leggiEventiPassati());
         map.put("listEventiScadenza", crud.leggiEventiScadenza());
         map.put("listFollowers", crud.ListaUtenti());
+        map.put("listEVotati", crud.ListaEventiPiuVotati());
         
         return "index";
     }
@@ -54,11 +54,15 @@ public class MainController
         return "listaFollower";
     }
     
-    @RequestMapping(value="/listEventiScadenza", method=RequestMethod.GET)
-    public String ListaEventiScadenza(ModelMap map){
-        List<Eventi> lista=crud.leggiEventiScadenza();
-        map.put("lista",lista);
+    @RequestMapping(value="/listEventiScandenza", method=RequestMethod.GET)
+    public String ListEventiScadenza(ModelMap map){
+        List<Eventi> listaEScadenza=crud.leggiEventiScadenza();
         
-        return "listEventiScadenza";
+        map.put("listEventiScandeza",listaEScadenza);
+        
+        return "lista";
     }
+    
+
+    
 }
