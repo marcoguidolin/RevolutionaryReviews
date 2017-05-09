@@ -31,5 +31,6 @@
         <c:forEach items="${listEventiPassati}" var="evento">
             <p>${evento.titolo}</p>
         </c:forEach>
+            
     </body>
 </html>
