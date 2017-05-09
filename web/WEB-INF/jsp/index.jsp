@@ -21,7 +21,7 @@
         <h1>Revolutionary Reviews</h1>
         
         <div>
-            <img src="/RevolutionaryReviews/resources/LogoUtente.jpg" />
+            <img src="/RevolutionaryReviews/resources/LogoUtente.png" />
             
         </div>
         
