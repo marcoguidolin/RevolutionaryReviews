@@ -18,7 +18,9 @@
     </head>
 
     <body>
-    <nav>
+        
+        
+    <nav class="navbar navbar-inverse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
             <li><a href="#">Eventi</a></li>
@@ -27,13 +29,16 @@
             <li style="float: right;"><a href="#" style="padding: 0;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px"/></a></li>
         </ul>
     </nav>
-    <div align="center">
-        <img src="/RevolutionaryReviews/resources/logo.png" width="600px"/>
+    
+    
+    <div class="sfondo" align="center">
+        <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>  
 
     <h3>Eventi principali</h3>
     
     <h3>Eventi in scadenza</h3>
+    
     
         <div>
             <c:forEach items="${listEventiScadenza}" var="eventoSca">
@@ -41,38 +46,32 @@
             </c:forEach>
         </div>
     
+    
     <h3>Eventi passati</h3>
-    <c:forEach items="${listEventiPassati}" var="evento">
-        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-    </c:forEach>
-
-    <h3> Recensioni dell'utente 3</h3>
-    <c:forEach items="${recUt}" var="recUtItem">
-        <p>${recUtItem.getVotoEvento()}</p>
-        <p>${recUtItem.getCommento()}</p>
-    </c:forEach>
-
-
-    <h2> Lista Utenti </h2>
     <div>
-        <ul>
-            <c:forEach items="${listFollowers}" var="follower">
-                <li>${follower.nickname}</li>
-                </c:forEach>
-        </ul>
-
-    </div>
-
-    <h2> Eventi più votati </h2>
-    <%--
-    <div>
-    <ol>
-        <c:forEach items="${listEVotati}" var="eventoVotato">
-            <li>${eventoVotato.titolo} </li>
+        <c:forEach items="${listEventiPassati}" var="evento">
+            <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
         </c:forEach>
-    </ol>
     </div>
-    --%>
+
+    
+    <h3> Eventi più votati </h3>
     
 </body>
 </html>
+
+
+
+<style>
+    
+    .navbar {
+        margin-bottom: 0;
+    }
+    
+    .sfondo {
+        height: 400px;
+        background-image: url('http://mclarenwalltowall.com/static/images/map/header_bg.jpg');
+        background-size: cover;
+    }
+    
+</style>
