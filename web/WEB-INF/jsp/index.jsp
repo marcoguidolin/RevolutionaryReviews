@@ -32,64 +32,47 @@
     </div>  
 
     <h3>Eventi principali</h3>
+    
     <h3>Eventi in scadenza</h3>
+    
+        <div>
+            <c:forEach items="${listEventiScadenza}" var="eventoSca">
+                <p> ${eventoSca.getTitolo()} </p>
+            </c:forEach>
+        </div>
+    
     <h3>Eventi passati</h3>
     <c:forEach items="${listEventiPassati}" var="evento">
-        <p>${evento.titolo}</p>
+        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
     </c:forEach>
 
-        <div>
+    <h3> Recensioni dell'utente 3</h3>
+    <c:forEach items="${recUt}" var="recUtItem">
+        <p>${recUtItem.getVotoEvento()}</p>
+        <p>${recUtItem.getCommento()}</p>
+    </c:forEach>
 
-            <h2> Eventi Passati </h2>
-            <div>
 
-            <c:forEach items="${recUt}" var="recUtItem">
-                <p>${recUtItem.getVotoEvento()}</p>
-                <p>${recUtItem.getCommento()}</p>
-             </c:forEach>
-            
-
-            <c:forEach items="${listEventiPassati}" var="evento">
-                <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-            </c:forEach>
-            </div>
-            
-            </br> 
-            </br>
-            
-            <h2> Eventi in Scadenza </h2>
-            <%--
-            <div>
-            <c:forEach items="${listEventiScadenza}" var="eventoSca">
-                <p> ${eventoSca.titolo} </p>
-            </c:forEach>
-            </div>
-            --%>
-            
-            <h2> Lista Utenti </h2>
-            <div>
-            <ul>
-                <c:forEach items="${listFollowers}" var="follower">
-                    <li>${follower.nickname}</li>
+    <h2> Lista Utenti </h2>
+    <div>
+        <ul>
+            <c:forEach items="${listFollowers}" var="follower">
+                <li>${follower.nickname}</li>
                 </c:forEach>
-            </ul>
+        </ul>
 
-            </div>
-            
-            </br>
-            </br>
-            
-            <h2> Eventi più votati </h2>
-            <%--
-            <div>
-            <ol>
-                <c:forEach items="${listEVotati}" var="eventoVotato">
-                    <li>${eventoVotato.titolo} </li>
-                </c:forEach>
-            </ol>
-            </div>
-            --%>
-            
-        </div>
-    </body>
+    </div>
+
+    <h2> Eventi più votati </h2>
+    <%--
+    <div>
+    <ol>
+        <c:forEach items="${listEVotati}" var="eventoVotato">
+            <li>${eventoVotato.titolo} </li>
+        </c:forEach>
+    </ol>
+    </div>
+    --%>
+    
+</body>
 </html>
