@@ -18,7 +18,7 @@
     </head>
 
     <body>
-
+    <nav>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
             <li><a href="#">Eventi</a></li>
@@ -38,15 +38,11 @@
         <p>${evento.titolo}</p>
     </c:forEach>
 
-</body>
         <div>
 
             <h2> Eventi Passati </h2>
             <div>
 
-            
-<!--
-            
             <c:forEach items="${recUt}" var="recUtItem">
                 <p>${recUtItem.getVotoEvento()}</p>
                 <p>${recUtItem.getCommento()}</p>
@@ -62,11 +58,13 @@
             </br>
             
             <h2> Eventi in Scadenza </h2>
+            <%--
             <div>
             <c:forEach items="${listEventiScadenza}" var="eventoSca">
                 <p> ${eventoSca.titolo} </p>
             </c:forEach>
             </div>
+            --%>
             
             <h2> Lista Utenti </h2>
             <div>
@@ -82,6 +80,7 @@
             </br>
             
             <h2> Eventi più votati </h2>
+            <%--
             <div>
             <ol>
                 <c:forEach items="${listEVotati}" var="eventoVotato">
@@ -89,7 +88,7 @@
                 </c:forEach>
             </ol>
             </div>
--->
+            --%>
             
         </div>
     </body>
