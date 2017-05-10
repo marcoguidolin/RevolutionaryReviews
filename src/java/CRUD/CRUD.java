@@ -103,6 +103,9 @@ public class CRUD {
             transazione.commit();
             
             return e;
+
+            return f;
+
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
@@ -112,18 +115,45 @@ public class CRUD {
     }
     
     /**
+
      * Metodo per visualizzare tutti i followers
      * @return la lista dei followers
+
+
+    * Ritorna una lista contenente le recensioni scritte da un dato Follower
+    * @param id id dell'utente di cui si vigliono selezionare le recensioni
+    * @return una lista contenente le recensioni scritte da un dato Follower
+    */
+   public List<Recensioni> recensioniUtente(int id) {
+     * Metodo per visualizzare tutte le recensioni fatte da un utente
+     * @param id identificativo del follower
+     * @return tutte le recensioni fatte dall'utente
+
      */
     public List ListaUtenti() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
+
             List f=sessione.createQuery("FROM Followers").list();
             transazione.commit();
             
             return f;
+
+            
+
+            List<Recensioni> f=sessione.createQuery("FROM Recensioni where utente ="+id).list();
+        
+            transazione.commit();
+            return f;
+
+            Recensioni r = (Recensioni) sessione.get(Recensioni.class, id);
+                        
+            transazione.commit();
+            return r;
+
+
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
         }finally{
@@ -152,5 +182,14 @@ public class CRUD {
             sessione.close();
         }
         return null;
+
     }    
 }
+
+    }
+    
+
+}
+    
+    
+

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,6 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Recensioni.findByVotoPos", query = "SELECT r FROM Recensioni r WHERE r.votoPos = :votoPos"),
     @NamedQuery(name = "Recensioni.findByVotoNeg", query = "SELECT r FROM Recensioni r WHERE r.votoNeg = :votoNeg")})
 public class Recensioni implements Serializable {
+    @JoinColumn(name = "Evento", referencedColumnName = "Id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Eventi evento;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,12 +57,9 @@ public class Recensioni implements Serializable {
     private Integer votoPos;
     @Column(name = "VotoNeg")
     private Integer votoNeg;
-    @JoinColumn(name = "Utenti", referencedColumnName = "Id")
+    @JoinColumn(name = "Utente", referencedColumnName = "Id")
     @ManyToOne(optional = false)
-    private Followers utenti;
-    @JoinColumn(name = "Eventi", referencedColumnName = "Id")
-    @ManyToOne(optional = false)
-    private Eventi eventi;
+    private Followers utente;
 
     public Recensioni() {
     }
@@ -112,21 +113,14 @@ public class Recensioni implements Serializable {
         this.votoNeg = votoNeg;
     }
 
-    public Followers getUtenti() {
-        return utenti;
+    public Followers getUtente() {
+        return utente;
     }
 
-    public void setUtenti(Followers utenti) {
-        this.utenti = utenti;
+    public void setUtente(Followers utente) {
+        this.utente = utente;
     }
 
-    public Eventi getEventi() {
-        return eventi;
-    }
-
-    public void setEventi(Eventi eventi) {
-        this.eventi = eventi;
-    }
 
     @Override
     public int hashCode() {
@@ -151,6 +145,14 @@ public class Recensioni implements Serializable {
     @Override
     public String toString() {
         return "POJO.Recensioni[ id=" + id + " ]";
+    }
+
+    public Eventi getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Eventi evento) {
+        this.evento = evento;
     }
     
 }

@@ -29,11 +29,15 @@ public class MainController
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map)
     {        
+
         map.put("listEventiPassati", crud.leggiEventiPassati());
         map.put("listEventiScadenza", crud.leggiEventiScadenza());
         map.put("listFollowers", crud.ListaUtenti());
         map.put("listEVotati", crud.ListaEventiPiuVotati());
         
+
+       map.put("recUt",crud.recensioniUtente(3));
+
         return "index";
     }
     
