@@ -57,16 +57,5 @@ public class MainController
         
         return "listaFollower";
     }
-    
-    @RequestMapping(value="/listEventiScandenza", method=RequestMethod.GET)
-    public String ListEventiScadenza(ModelMap map){
-        List<Eventi> listaEScadenza=crud.leggiEventiScadenza();
-        
-        map.put("listEventiScandeza",listaEScadenza);
-        
-        return "lista";
-    }
-    
-
-    
+     
 }
