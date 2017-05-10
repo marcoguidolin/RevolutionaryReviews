@@ -20,19 +20,11 @@
     <body>
         <div>
             
-            <c:forEach items="${listEventiPassati}" var="evento">
-                <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-            </c:forEach>
-           
-            <ul>
-                <c:forEach items="${listFollowers}" var="follower">
-                    <li>${follower.nickname}</li>
-                </c:forEach>
-            </ul>
-            <%--<c:forEach items="${recUt}" var="recUt">
-                <a>${recUt.votoEvento}</a>
-                <a>${recUt.commento}</a>
-             </c:forEach>--%>
+            
+            <c:forEach items="${recUt}" var="recUtItem">
+                <p>${recUtItem.getVotoEvento()}</p>
+                <p>${recUtItem.getCommento()}</p>
+             </c:forEach>
             
             
             

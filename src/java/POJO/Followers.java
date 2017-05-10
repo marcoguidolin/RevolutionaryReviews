@@ -88,7 +88,7 @@ public class Followers implements Serializable {
     private List<Categorie> categorieList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utenteCreatore")
     private List<Eventi> eventiList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utenti")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utente")
     private List<Recensioni> recensioniList;
 
     public Followers() {
