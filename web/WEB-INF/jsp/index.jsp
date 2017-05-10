@@ -18,7 +18,7 @@
     </head>
 
     <body>
-    <nav class="navbar navbar-inverse">
+
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
             <li><a href="#">Eventi</a></li>
@@ -39,4 +39,19 @@
     </c:forEach>
 
 </body>
+        <div>
+            
+            <c:forEach items="${listEventiPassati}" var="evento">
+                <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
+            </c:forEach>
+           
+            <ul>
+                <c:forEach items="${listFollowers}" var="follower">
+                    <li>${follower.nickname}</li>
+                </c:forEach>
+            </ul>
+
+            
+        </div>
+    </body>
 </html>
