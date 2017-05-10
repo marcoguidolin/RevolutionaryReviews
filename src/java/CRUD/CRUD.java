@@ -6,12 +6,14 @@
 package CRUD;
 
 import POJO.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import spring.HibernateUtil;
 
 /**
  *
@@ -32,7 +34,7 @@ public class CRUD {
     
     /**
      * Metodo per leggere gli eventi passati
-     * @return gli eventi passati
+     * @return la lista degli eventi passati
      */
     public List leggiEventiPassati(){
         Session sessione=factory.openSession();
@@ -41,6 +43,7 @@ public class CRUD {
             transazione=sessione.beginTransaction();
             List eventiPassati=sessione.createQuery("FROM Eventi WHERE data < CURRENT_DATE").list();
             transazione.commit();
+            
             return eventiPassati;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -51,6 +54,42 @@ public class CRUD {
     }   
 
     /**
+     * Metodo per leggere gli eventi in scadenza
+     * @return la lista degli eventi in scadenza
+     */
+    public List<Eventi> leggiEventiScadenza(){
+        Session sessione=factory.openSession();
+        Transaction transazione=null;
+        try{
+            transazione=sessione.beginTransaction();
+            
+            List<Eventi> eventiScadenza=sessione.createCriteria(Eventi.class).list();
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.now();
+            
+            
+            List<Eventi> eventi = new ArrayList<>();
+            for(Eventi e : eventiScadenza)
+            {
+                if(e.getData().toString().equals(dtf.format(localDate)))
+                {
+                    eventi.add(e);
+                }
+            }
+            
+            transazione.commit();
+            
+            return eventi;
+        }catch(HibernateException e){
+            if(transazione!=null) transazione.rollback();
+        }finally{
+            sessione.close();
+        }
+        return null;
+    }   
+    
+    /**
      * Metodo per visualizzare i dettagli di un evento
      * @param id id dell'evento
      * @return le informozioni dell'evento
@@ -60,32 +99,11 @@ public class CRUD {
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            
             Eventi e = (Eventi) sessione.get(Eventi.class, id);
-            
             transazione.commit();
+            
             return e;
-        }catch(HibernateException e){
-            if(transazione!=null) transazione.rollback();
-        }finally{
-            sessione.close();
-        }
-        return null;
-    }
-    
-    /**
-     * Metodo per visualizzare tutti i followers
-     * @return la lista dei followers
-     */
-    public List ListaUtenti() {
-        Session sessione=factory.openSession();
-        Transaction transazione=null;
-        try{
-            transazione=sessione.beginTransaction();
-            
-            List f=sessione.createQuery("FROM Followers").list();
-            
-            transazione.commit();
+
             return f;
 
         }catch(HibernateException e){
@@ -98,6 +116,10 @@ public class CRUD {
     
     /**
 
+     * Metodo per visualizzare tutti i followers
+     * @return la lista dei followers
+
+
     * Ritorna una lista contenente le recensioni scritte da un dato Follower
     * @param id id dell'utente di cui si vigliono selezionare le recensioni
     * @return una lista contenente le recensioni scritte da un dato Follower
@@ -106,12 +128,19 @@ public class CRUD {
      * Metodo per visualizzare tutte le recensioni fatte da un utente
      * @param id identificativo del follower
      * @return tutte le recensioni fatte dall'utente
+
      */
-    public Recensioni ListRecensioniUtente(Integer id) {
+    public List ListaUtenti() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
+
+            List f=sessione.createQuery("FROM Followers").list();
+            transazione.commit();
+            
+            return f;
+
             
 
             List<Recensioni> f=sessione.createQuery("FROM Recensioni where utente ="+id).list();
@@ -135,17 +164,17 @@ public class CRUD {
     
     /**
      * Metodo che cerca e stampa gli eventi più votati
-     * @return 
+     * @param id Identificativo dell'evento
+     * @return la lista degli eventi più votati
      */
     public List ListaEventiPiuVotati() {
         Session sessione=factory.openSession();
         Transaction transazione=null;
         try{
             transazione=sessione.beginTransaction();
-            
-            List e=sessione.createQuery("SELECT EVENTI.Id, VISTAVOTI.Media FROM EVENTI, VISTAVOTI WHERE EVENTI.Id=VISTAVOTI.Id AND VISTAVOTI.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
-            
+            List e=sessione.createSQLQuery("SELECT E.Id, V.Media FROM EVENTI E, VISTAVOTI V WHERE E.Id=V.Id AND V.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
             transazione.commit();
+            
             return e;
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -153,6 +182,10 @@ public class CRUD {
             sessione.close();
         }
         return null;
+
+    }    
+}
+
     }
     
 

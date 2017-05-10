@@ -55,54 +55,71 @@ public class Eventi implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Titolo")
     private String titolo;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Programma")
     private String programma;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
     @Column(name = "Descrizione")
     private String descrizione;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Durata")
     private int durata;
+    
     @Size(max = 50)
     @Column(name = "Sponsor")
     private String sponsor;
+   
     @Size(max = 100)
     @Column(name = "Social1")
     private String social1;
+    
     @Size(max = 100)
     @Column(name = "Social2")
     private String social2;
+    
     @Size(max = 200)
     @Column(name = "Biglietti")
     private String biglietti;
+    
     @ManyToMany(mappedBy = "eventiList")
     private List<Artisti> artistiList;
+    
     @JoinColumn(name = "UtenteCreatore", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Followers utenteCreatore;
+    
     @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Categorie categoria;
+    
     @JoinColumn(name = "Location", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Locations location;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventi")
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
+
     private List<Recensioni> recensioniList;
 
     public Eventi() {
