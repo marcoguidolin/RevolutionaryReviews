@@ -34,12 +34,8 @@
     <div class="sfondo" align="center">
         <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>  
-
-    <h3>Eventi principali</h3>
     
     <h3>Eventi in scadenza</h3>
-    
-    
         <div>
             <c:forEach items="${listEventiScadenza}" var="eventoSca">
                 <p> ${eventoSca.getTitolo()} </p>
@@ -48,15 +44,20 @@
     
     
     <h3>Eventi passati</h3>
-    <div>
-        <c:forEach items="${listEventiPassati}" var="evento">
-            <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-        </c:forEach>
-    </div>
 
-    
+    <c:forEach items="${listEventiPassati}" var="evento">
+        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
+    </c:forEach>
+        
     <h3> Eventi più votati </h3>
-    
+    <div>
+    <ol>
+        <c:forEach items="${listEVotati}" var="eventoVotato">
+            <li>${eventoVotato} </li>
+        </c:forEach>
+    </ol>
+    </div>
+      
 </body>
 </html>
 

@@ -176,12 +176,12 @@ public class CRUD {
      *
      * @return la lista degli eventi più votati
      */
-    public List ListaEventiPiuVotati() {
+    public List<String> ListaEventiPiuVotati() {
         Session sessione = factory.openSession();
         Transaction transazione = null;
         try {
             transazione = sessione.beginTransaction();
-            List e = sessione.createSQLQuery("SELECT E.Id, V.Media FROM EVENTI E, VISTAVOTI V WHERE E.Id=V.Id AND V.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
+            List<String> e = sessione.createSQLQuery("SELECT E.Titolo FROM EVENTI E, VISTAVOTI V WHERE E.Id=V.Id AND V.Media > (SELECT AVG(Media) FROM VISTAVOTI)").list();
             transazione.commit();
 
             return e;
@@ -193,8 +193,9 @@ public class CRUD {
             sessione.close();
         }
         return null;
-
     }
+    
+    
 }
 
 
