@@ -18,6 +18,27 @@
     </head>
 
     <body>
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Eventi</a></li>
+            <li><a href="#">Utenti</a></li>
+            <li><a href="#">Chi siamo</a></li>   
+            <li style="float: right;"><a href="#" style="padding: 0;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px"/></a></li>
+        </ul>
+    </nav>
+    <div align="center">
+        <img src="/RevolutionaryReviews/resources/logo.png" width="600px"/>
+    </div>  
+
+    <h3>Eventi principali</h3>
+    <h3>Eventi in scadenza</h3>
+    <h3>Eventi passati</h3>
+    <c:forEach items="${listEventiPassati}" var="evento">
+        <p>${evento.titolo}</p>
+    </c:forEach>
+
+</body>
         <div>
             
 /*
