@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
+        <title>RevolutionaryReviews</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -20,6 +20,16 @@
     <body>
         <div>
             
+/*
+            
+            <c:forEach items="${recUt}" var="recUtItem">
+                <p>${recUtItem.getVotoEvento()}</p>
+                <p>${recUtItem.getCommento()}</p>
+             </c:forEach>
+            
+            
+            
+
             <c:forEach items="${listEventiPassati}" var="evento">
                 <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
             </c:forEach>
@@ -29,7 +39,8 @@
                     <li>${follower.nickname}</li>
                 </c:forEach>
             </ul>
-
+*/
+          
             
         </div>
     </body>

@@ -97,6 +97,12 @@ public class CRUD {
     }
     
     /**
+
+    * Ritorna una lista contenente le recensioni scritte da un dato Follower
+    * @param id id dell'utente di cui si vigliono selezionare le recensioni
+    * @return una lista contenente le recensioni scritte da un dato Follower
+    */
+   public List<Recensioni> recensioniUtente(int id) {
      * Metodo per visualizzare tutte le recensioni fatte da un utente
      * @param id identificativo del follower
      * @return tutte le recensioni fatte dall'utente
@@ -107,10 +113,17 @@ public class CRUD {
         try{
             transazione=sessione.beginTransaction();
             
+
+            List<Recensioni> f=sessione.createQuery("FROM Recensioni where utente ="+id).list();
+        
+            transazione.commit();
+            return f;
+
             Recensioni r = (Recensioni) sessione.get(Recensioni.class, id);
                         
             transazione.commit();
             return r;
+
 
         }catch(HibernateException e){
             if(transazione!=null) transazione.rollback();
@@ -142,4 +155,8 @@ public class CRUD {
         return null;
     }
     
+
 }
+    
+    
+

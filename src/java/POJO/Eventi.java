@@ -102,7 +102,7 @@ public class Eventi implements Serializable {
     @JoinColumn(name = "Location", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Locations location;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventi")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento")
     private List<Recensioni> recensioniList;
 
     public Eventi() {
