@@ -37,30 +37,37 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Recensioni.findByVotoPos", query = "SELECT r FROM Recensioni r WHERE r.votoPos = :votoPos"),
     @NamedQuery(name = "Recensioni.findByVotoNeg", query = "SELECT r FROM Recensioni r WHERE r.votoNeg = :votoNeg")})
 public class Recensioni implements Serializable {
-    @JoinColumn(name = "Evento", referencedColumnName = "Id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Eventi evento;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "VotoEvento")
     private int votoEvento;
+    
     @Size(max = 1000)
     @Column(name = "Commento")
     private String commento;
+    
     @Column(name = "VotoPos")
     private Integer votoPos;
+    
     @Column(name = "VotoNeg")
     private Integer votoNeg;
+    
     @JoinColumn(name = "Utente", referencedColumnName = "Id")
     @ManyToOne(optional = false)
     private Followers utente;
-
+    
+    @JoinColumn(name = "Evento", referencedColumnName = "Id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Eventi evento;
+    
     public Recensioni() {
     }
 
