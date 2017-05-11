@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author FSEVERI\guidolin3172
+ * @author FSEVERI\scolaro3313
  */
 @Entity
 @Table(name = "RECENSIONI")
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Recensioni.findByVotoPos", query = "SELECT r FROM Recensioni r WHERE r.votoPos = :votoPos"),
     @NamedQuery(name = "Recensioni.findByVotoNeg", query = "SELECT r FROM Recensioni r WHERE r.votoNeg = :votoNeg")})
 public class Recensioni implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,9 +59,15 @@ public class Recensioni implements Serializable {
     
     @Column(name = "VotoNeg")
     private Integer votoNeg;
+
     
+
+    @JoinColumn(name = "Evento", referencedColumnName = "Id")
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Eventi evento;
+
     @JoinColumn(name = "Utente", referencedColumnName = "Id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Followers utente;
     
     @JoinColumn(name = "Evento", referencedColumnName = "Id")
@@ -120,6 +126,14 @@ public class Recensioni implements Serializable {
         this.votoNeg = votoNeg;
     }
 
+    public Eventi getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Eventi evento) {
+        this.evento = evento;
+    }
+
     public Followers getUtente() {
         return utente;
     }
@@ -127,7 +141,6 @@ public class Recensioni implements Serializable {
     public void setUtente(Followers utente) {
         this.utente = utente;
     }
-
 
     @Override
     public int hashCode() {
@@ -151,15 +164,7 @@ public class Recensioni implements Serializable {
 
     @Override
     public String toString() {
-        return "POJO.Recensioni[ id=" + id + " ]";
-    }
-
-    public Eventi getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Eventi evento) {
-        this.evento = evento;
+        return "pojo.Recensioni[ id=" + id + " ]";
     }
     
 }

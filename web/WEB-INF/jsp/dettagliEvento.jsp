@@ -23,6 +23,9 @@
             ${dettagli.id}
             ${dettagli.titolo}
             ${dettagli.data}
+            <c:forEach items="${recensioni}" var="rec">
+                <p>${rec.commento}</p>
+            </c:forEach>
             
             
             
