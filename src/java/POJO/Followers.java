@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\guidolin3172
+ * @author FSEVERI\scolaro3313
  */
 @Entity
 @Table(name = "FOLLOWERS")
@@ -84,11 +85,11 @@ public class Followers implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "Icona")
     private String icona;
-    @ManyToMany(mappedBy = "followersList")
+    @ManyToMany(mappedBy = "followersList", fetch = FetchType.EAGER)
     private List<Categorie> categorieList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utenteCreatore")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utenteCreatore", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "utente", fetch = FetchType.EAGER)
     private List<Recensioni> recensioniList;
 
     public Followers() {
@@ -222,7 +223,7 @@ public class Followers implements Serializable {
 
     @Override
     public String toString() {
-        return "POJO.Followers[ id=" + id + " ]";
+        return "pojo.Followers[ id=" + id + " ]";
     }
     
 }

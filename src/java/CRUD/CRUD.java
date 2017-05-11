@@ -146,7 +146,7 @@ public class CRUD {
     }
 
     /**
-     * Ritorna una lista contenente le recensioni scritte da un dato Follower
+     * Metodo che ritorna una lista contenente le recensioni scritte da un dato Follower
      *
      * @param id id dell'utente di cui si vigliono selezionare le recensioni
      * @return una lista contenente le recensioni scritte da un dato Follower
@@ -173,7 +173,7 @@ public class CRUD {
 
     /**
      * Metodo che cerca e stampa gli eventi più votati
-     *
+     
      * @return la lista degli eventi più votati
      */
     public List<String> ListaEventiPiuVotati() {
@@ -195,7 +195,31 @@ public class CRUD {
         return null;
     }
     
-    
+   /**
+    * Metodo per visualizzare tutte le recensioni relative ad un dato evento
+    * 
+     * @param id dell'evento di cui si vigliono selezionare le recensioni
+     * @return una lista contenente le recensioni scritte per un dato evento
+    */
+     public List<Recensioni> recensioniEvento(int id) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+
+            List<Recensioni> f = sessione.createQuery("FROM Recensioni where evento =" + id).list();
+
+            transazione.commit();
+            return f;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
 }
 
 

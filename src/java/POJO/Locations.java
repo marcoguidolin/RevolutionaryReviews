@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\guidolin3172
+ * @author FSEVERI\scolaro3313
  */
 @Entity
 @Table(name = "LOCATIONS")
@@ -68,7 +69,7 @@ public class Locations implements Serializable {
     @Size(max = 100)
     @Column(name = "SitoUfficiale")
     private String sitoUfficiale;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
 
     public Locations() {
@@ -165,7 +166,7 @@ public class Locations implements Serializable {
 
     @Override
     public String toString() {
-        return "POJO.Locations[ id=" + id + " ]";
+        return "pojo.Locations[ id=" + id + " ]";
     }
     
 }
