@@ -20,7 +20,7 @@ import org.hibernate.Transaction;
  * @author FSEVERI\guidolin3172
  */
 public class CRUD {
-
+/remanager.it/ph
     //Varibili di istanza
     private static SessionFactory factory;
 
@@ -118,6 +118,32 @@ public class CRUD {
         }
         return null;
     }
+    
+        /**
+     * Metodo per leggere un follower dato il suo id
+     *
+     * @param id id del follower
+     * @return le informozioni dell'evento
+     */
+    public Followers leggiFollower(Integer id) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            Followers e = (Followers) sessione.get(Followers.class, id);
+            transazione.commit();
+
+            return e;
+
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return null;
+    }
 
     /**
      *
@@ -148,7 +174,7 @@ public class CRUD {
     /**
      * Metodo che ritorna una lista contenente le recensioni scritte da un dato Follower
      *
-     * @param id id dell'utente di cui si vigliono selezionare le recensioni
+     * @param id id dell'utente di cui si vogliono selezionare le recensioni
      * @return una lista contenente le recensioni scritte da un dato Follower
      */
     public List<Recensioni> recensioniUtente(int id) {
@@ -173,7 +199,7 @@ public class CRUD {
 
     /**
      * Metodo che cerca e stampa gli eventi più votati
-     
+
      * @return la lista degli eventi più votati
      */
     public List<String> ListaEventiPiuVotati() {
@@ -220,6 +246,130 @@ public class CRUD {
         }
         return null;
     }
+    
+     /**
+     * Metodo che inserisce un nuovo evento 
+     * @param ev evento da aggiungere
+     * @return true se l'aggiunta è andata a buon fine, altrimenti false
+     */
+    public boolean aggiungiEvento(Eventi ev) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            sessione.save(ev);
+            transazione.commit();
+
+            return true;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
+
+    }
+    
+     /**
+     * Metodo che inserisce una nuova recensione 
+     * @param r recensione da aggiungere
+     * @return true se l'aggiunta è andata a buon fine, altrimenti false
+     */
+    public boolean aggiungiRecensione(Recensioni r) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            sessione.save(r);
+            transazione.commit();
+
+            return true;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
+    }
+        
+        
+     /**
+     * Metodo che inserisce una nuova location 
+     * @param l location da aggiungere
+     * @return true se l'aggiunta è andata a buon fine, altrimenti false
+     */
+    public boolean aggiungiLocation(Locations l) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            sessione.save(l);
+            transazione.commit();
+
+            return true;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
+    }
+    
+         /**
+     * Metodo che inserisce un nuovo artista
+     * @param a artista da aggiungere
+     * @return true se l'aggiunta è andata a buon fine, altrimenti false
+     */
+    public boolean aggiungiArtisti(Artisti a) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            sessione.save(a);
+            transazione.commit();
+
+            return true;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
+    }
+    
+    /**
+     * Metodo che inserisce un nuovo follower
+     * @param f follower da aggiungere
+     * @return tru se l'aggiunta è andata a buon fine, altrimenti false
+     */
+    public boolean aggiungiFollower(Followers f) {
+        Session sessione = factory.openSession();
+        Transaction transazione = null;
+        try {
+            transazione = sessione.beginTransaction();
+            sessione.save(f);
+            transazione.commit();
+
+            return true;
+        } catch (HibernateException e) {
+            if (transazione != null) {
+                transazione.rollback();
+            }
+        } finally {
+            sessione.close();
+        }
+        return false;
+    }
+    
+    
 }
 
 

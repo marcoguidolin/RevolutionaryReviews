@@ -119,6 +119,9 @@
         <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>
     
+
+    <h1>"${e}"</h1>
+
     <div class="row">
         <div class="col-md-4">
             <h3>Eventi in scadenza</h3>
@@ -151,6 +154,7 @@
         
     
       
+
 </body>
 
 </html>

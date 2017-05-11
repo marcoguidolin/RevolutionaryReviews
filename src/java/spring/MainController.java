@@ -2,8 +2,7 @@ package spring;
 
 
 import CRUD.CRUD;
-import POJO.Eventi;
-import POJO.Followers;
+import POJO.*;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,13 +29,25 @@ public class MainController
     public String index(ModelMap map)
     {        
 
-        map.put("listEventiPassati", crud.leggiEventiPassati());
+        /*map.put("listEventiPassati", crud.leggiEventiPassati());
         map.put("listEventiScadenza", crud.leggiEventiScadenza());
         map.put("listFollowers", crud.ListaUtenti());
         map.put("listEVotati", crud.ListaEventiPiuVotati());
         
 
+
+       map.put("recUt",crud.recensioniUtente(3));*/
+        Recensioni r = new Recensioni();
+        r.setCommento("Bellissimissimerrimo");
+        Eventi e = crud.leggiDettagliEvento(13);
+        Followers f = crud.leggiFollower(5);
+        r.setUtente(f);
+        r.setEvento(e);
+        r.setVotoEvento(5);
+        map.put("e",crud.aggiungiRecensione(r));
+
        //map.put("recUt",crud.recensioniUtente(3));
+
 
         return "index";
     }
