@@ -36,7 +36,7 @@ public class MainController
         map.put("listEVotati", crud.ListaEventiPiuVotati());
         
 
-       map.put("recUt",crud.recensioniUtente(3));
+       //map.put("recUt",crud.recensioniUtente(3));
 
         return "index";
     }
@@ -45,6 +45,7 @@ public class MainController
     public String dettaglioEvento(ModelMap map, @RequestParam(value = "id") Integer id)
     {
         Eventi e = crud.leggiDettagliEvento(id);
+        map.put("recensioni",crud.recensioniEvento(id));
         map.put("dettagli", e);
         
         return "dettagliEvento";
@@ -57,5 +58,13 @@ public class MainController
         
         return "listaFollower";
     }
+    
+    @RequestMapping(value = "/nuovoEvento", method = RequestMethod.GET)
+    public String nuovoEvento(ModelMap map)
+    {
+
+        return "nuovoEvento";
+    }
+    
      
 }

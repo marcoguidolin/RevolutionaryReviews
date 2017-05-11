@@ -18,8 +18,8 @@
     </head>
 
     <body>
-        
-        
+
+
     <nav class="navbar navbar-inverse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
@@ -29,50 +29,50 @@
             <li style="float: right;"><a href="#" style="padding: 0;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px"/></a></li>
         </ul>
     </nav>
-    
-    
+
+
     <div class="sfondo" align="center">
         <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>  
-    
+
     <h3>Eventi in scadenza</h3>
-        <div>
-            <c:forEach items="${listEventiScadenza}" var="eventoSca">
-                <p> ${eventoSca.getTitolo()} </p>
-            </c:forEach>
-        </div>
-    
-    
+    <div>
+        <c:forEach items="${listEventiScadenza}" var="eventoSca">
+            <p> ${eventoSca.getTitolo()} </p>
+        </c:forEach>
+    </div>
+
+
     <h3>Eventi passati</h3>
 
     <c:forEach items="${listEventiPassati}" var="evento">
         <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
     </c:forEach>
-        
+
     <h3> Eventi più votati </h3>
     <div>
-    <ol>
-        <c:forEach items="${listEVotati}" var="eventoVotato">
-            <li>${eventoVotato} </li>
-        </c:forEach>
-    </ol>
+        <ol>
+            <c:forEach items="${listEVotati}" var="eventoVotato">
+                <li>${eventoVotato} </li>
+                </c:forEach>
+        </ol>
     </div>
-      
-</body>
+
+    </body>
 </html>
 
 
 
 <style>
-    
+
     .navbar {
         margin-bottom: 0;
     }
-    
+
     .sfondo {
         height: 400px;
         background-image: url('http://mclarenwalltowall.com/static/images/map/header_bg.jpg');
         background-size: cover;
     }
-    
+
 </style>

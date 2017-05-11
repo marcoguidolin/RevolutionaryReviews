@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\guidolin3172
+ * @author FSEVERI\scolaro3313
  */
 @Entity
 @Table(name = "CATEGORIE")
@@ -36,8 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c"),
     @NamedQuery(name = "Categorie.findById", query = "SELECT c FROM Categorie c WHERE c.id = :id"),
-    @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione"),
     @NamedQuery(name = "Categorie.findByNome", query = "SELECT c FROM Categorie c WHERE c.nome = :nome"),
+    @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione"),
     @NamedQuery(name = "Categorie.findByIcona", query = "SELECT c FROM Categorie c WHERE c.icona = :icona")})
 public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -48,14 +49,14 @@ public class Categorie implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 1000)
-    @Column(name = "Descrizione")
-    private String descrizione;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Nome")
     private String nome;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1000)
+    @Column(name = "Descrizione")
+    private String descrizione;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -64,9 +65,9 @@ public class Categorie implements Serializable {
     @JoinTable(name = "CATEGORIA_FOLLOWERS", joinColumns = {
         @JoinColumn(name = "Categoria", referencedColumnName = "Id")}, inverseJoinColumns = {
         @JoinColumn(name = "Followers", referencedColumnName = "Id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Followers> followersList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
 
     public Categorie() {
@@ -76,10 +77,10 @@ public class Categorie implements Serializable {
         this.id = id;
     }
 
-    public Categorie(Integer id, String descrizione, String nome, String icona) {
+    public Categorie(Integer id, String nome, String descrizione, String icona) {
         this.id = id;
-        this.descrizione = descrizione;
         this.nome = nome;
+        this.descrizione = descrizione;
         this.icona = icona;
     }
 
@@ -91,20 +92,20 @@ public class Categorie implements Serializable {
         this.id = id;
     }
 
-    public String getDescrizione() {
-        return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
     public String getIcona() {
@@ -155,7 +156,7 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return "POJO.Categorie[ id=" + id + " ]";
+        return "pojo.Categorie[ id=" + id + " ]";
     }
     
 }

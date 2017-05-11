@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\guidolin3172
+ * @author FSEVERI\scolaro3313
  */
 @Entity
 @Table(name = "ARTISTI")
@@ -64,7 +65,7 @@ public class Artisti implements Serializable {
     @JoinTable(name = "EVENTI_ARTISTI", joinColumns = {
         @JoinColumn(name = "Artisti", referencedColumnName = "Id")}, inverseJoinColumns = {
         @JoinColumn(name = "Eventi", referencedColumnName = "Id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
 
     public Artisti() {
@@ -151,7 +152,7 @@ public class Artisti implements Serializable {
 
     @Override
     public String toString() {
-        return "POJO.Artisti[ id=" + id + " ]";
+        return "pojo.Artisti[ id=" + id + " ]";
     }
     
 }
