@@ -98,7 +98,17 @@ public class Followers implements Serializable {
     public Followers(Integer id) {
         this.id = id;
     }
-
+    
+    public Followers(String nickname, String password, String nome, String cognome, String provincia, String eMail, String icona) {
+        this.nickname = nickname;
+        this.password = password;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.provincia = provincia;
+        this.eMail = eMail;
+        this.icona = icona;
+    }
+    
     public Followers(Integer id, String nickname, String password, String nome, String cognome, String provincia, String eMail, String icona) {
         this.id = id;
         this.nickname = nickname;
@@ -109,6 +119,8 @@ public class Followers implements Serializable {
         this.eMail = eMail;
         this.icona = icona;
     }
+    
+    
 
     public Integer getId() {
         return id;
