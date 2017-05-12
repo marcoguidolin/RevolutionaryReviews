@@ -20,7 +20,7 @@ import org.hibernate.Transaction;
  * @author FSEVERI\guidolin3172
  */
 public class CRUD {
-/remanager.it/ph
+
     //Varibili di istanza
     private static SessionFactory factory;
 

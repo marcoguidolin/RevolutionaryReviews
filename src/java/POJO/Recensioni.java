@@ -70,10 +70,7 @@ public class Recensioni implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Followers utente;
     
-    @JoinColumn(name = "Evento", referencedColumnName = "Id")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Eventi evento;
-    
+
     public Recensioni() {
     }
 
