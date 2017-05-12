@@ -54,7 +54,7 @@
                                 <div class="row text-center">
                                     Accedi
                                 </div>
-                                <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
+                                <form class="form" method="POST" action="/RevolutionaryReviews/doLogin" id="login-nav">
                                     <div class="form-group">
                                         <label>Username</label>
                                         <input type="text" class="form-control" name="username" placeholder="Username" required>
@@ -71,7 +71,7 @@
                             <div class="bottom text-center">
                                 Non possiedi un account?
                                 <br/>
-                                <a href="/WebCommunity/registration"><b>Registrati</b></a>
+                                <a href="/RevolutionaryReviews/registrazione"><b>Registrati</b></a>
                             </div>
                         </div>
                     </li>
@@ -111,43 +111,7 @@
 
     </body>
 
-        
-
-    
-    
-    <div class="sfondo" align="center">
-        <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
-    </div>
-    
-
-    <h1>"${e}"</h1>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Eventi in scadenza</h3>
-            <div>
-                <c:forEach items="${listEventiScadenza}" var="eventoSca">
-                    <p> ${eventoSca.getTitolo()} </p>
-                </c:forEach>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h3>Eventi passati</h3>
-            <c:forEach items="${listEventiPassati}" var="evento">
-                <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-            </c:forEach>
-        </div>
-        <div class="col-md-4">
-            <h3> Eventi più votati </h3>
-            <div>
-            <ol>
-                <c:forEach items="${listEVotati}" var="eventoVotato">
-                    <li>${eventoVotato} </li>
-                </c:forEach>
-            </ol>
-            </div>
-        </div>
-    </div>
+  
     
     
     
