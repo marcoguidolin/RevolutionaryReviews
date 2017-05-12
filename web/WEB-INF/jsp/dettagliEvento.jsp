@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
+        <title> ${dettagli.titolo} </title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,17 +19,17 @@
 
     <body>
         <div>
-            
             ${dettagli.id}
             ${dettagli.titolo}
             ${dettagli.data}
+            </br>
             <c:forEach items="${recensioni}" var="rec">
-                <p>${rec.commento}</p>
+                </br>
+                <p>
+                    ${rec.commento}
+                </p>
             </c:forEach>
-            
-            
-            
-             
+
         </div>
     </body>
 </html>

@@ -34,10 +34,9 @@
                     Eventi <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
-                    <li><a href="#">Eventi principali</a></li>
-                    <li><a href="#">Eventi in scadenza</a></li>
-                    <li><a href="#">venti passati</a></li>
-                    <li<<a href="#">utti gli eventi</a></li>
+                    <li><a href="#" style="color:#00b0ff;">Eventi in scadenza</a></li>
+                    <li><a href="#" style="color:#00b0ff;">Eventi passati</a></li>
+                    <li><a href="#" style="color:#00b0ff;">Tutti gli eventi</a></li>
                 </ul>
             </li>
 
@@ -80,48 +79,10 @@
         </ul>
     </nav>
 
-
-
-    <div class="sfondo" align="center">
-        <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
-    </div>  
-
-    <h3>Eventi in scadenza</h3>
-    <div>
-        <c:forEach items="${listEventiScadenza}" var="eventoSca">
-            <p> ${eventoSca.getTitolo()} </p>
-        </c:forEach>
-    </div>
-
-
-    <h3>Eventi passati</h3>
-
-    <c:forEach items="${listEventiPassati}" var="evento">
-        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-    </c:forEach>
-
-    <h3> Eventi più votati </h3>
-    <div>
-        <ol>
-            <c:forEach items="${listEVotati}" var="eventoVotato">
-                <li>${eventoVotato} </li>
-                </c:forEach>
-        </ol>
-    </div>
-
-    </body>
-
-        
-
-    
-    
     <div class="sfondo" align="center">
         <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>
     
-
-    <h1>"${e}"</h1>
-
     <div class="row">
         <div class="col-md-4">
             <h3>Eventi in scadenza</h3>
@@ -135,6 +96,7 @@
             <h3>Eventi passati</h3>
             <c:forEach items="${listEventiPassati}" var="evento">
                 <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
+                </br>
             </c:forEach>
         </div>
         <div class="col-md-4">

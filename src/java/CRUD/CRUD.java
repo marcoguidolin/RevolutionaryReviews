@@ -20,7 +20,6 @@ import org.hibernate.Transaction;
  * @author FSEVERI\guidolin3172
  */
 public class CRUD {
-/remanager.it/ph
     //Varibili di istanza
     private static SessionFactory factory;
 
@@ -119,21 +118,21 @@ public class CRUD {
         return null;
     }
     
-        /**
-     * Metodo per leggere un follower dato il suo id
+    /** 
+     * Metodo per leggere le informazioni di un follower dato il suo id
      *
      * @param id id del follower
-     * @return le informozioni dell'evento
+     * @return le informozioni del follower
      */
     public Followers leggiFollower(Integer id) {
         Session sessione = factory.openSession();
         Transaction transazione = null;
         try {
             transazione = sessione.beginTransaction();
-            Followers e = (Followers) sessione.get(Followers.class, id);
+            Followers f = (Followers) sessione.get(Followers.class, id);
             transazione.commit();
 
-            return e;
+            return f;
 
         } catch (HibernateException e) {
             if (transazione != null) {
@@ -368,6 +367,7 @@ public class CRUD {
         }
         return false;
     }
+    
     
     
 }
