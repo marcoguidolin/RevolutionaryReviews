@@ -77,7 +77,8 @@ public class MainController
     public @ResponseBody
     @RequestMapping(value = "/nuovoEvento", method = RequestMethod.GET)
     public @ResponseBody
-    String aggiungiEvento(ModelMap map, @RequestParam(value = "Titolo") String titolo,
+    String aggiungiEvento(ModelMap map, 
+            @RequestParam(value = "Titolo") String titolo,
             @RequestParam(value = "Data") Date data,
             @RequestParam(value = "Programma") String programma,
             @RequestParam(value = "Descrizione") String descrizione,
