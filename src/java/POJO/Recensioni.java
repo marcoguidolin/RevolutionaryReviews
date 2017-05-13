@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -23,8 +18,8 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa RECENSIONI
+ * 
  */
 @Entity
 @Table(name = "RECENSIONI")
@@ -60,8 +55,6 @@ public class Recensioni implements Serializable {
     @Column(name = "VotoNeg")
     private Integer votoNeg;
 
-    
-
     @JoinColumn(name = "Evento", referencedColumnName = "Id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Eventi evento;
@@ -69,8 +62,6 @@ public class Recensioni implements Serializable {
     @JoinColumn(name = "Utente", referencedColumnName = "Id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Followers utente;
-    
-  
     
     public Recensioni() {
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -28,8 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa CATEGORIE
+ * 
  */
 @Entity
 @Table(name = "CATEGORIE")
@@ -47,26 +42,31 @@ public class Categorie implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Nome")
     private String nome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
     @Column(name = "Descrizione")
     private String descrizione;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Icona")
     private String icona;
+    
     @JoinTable(name = "CATEGORIA_FOLLOWERS", joinColumns = {
         @JoinColumn(name = "Categoria", referencedColumnName = "Id")}, inverseJoinColumns = {
         @JoinColumn(name = "Followers", referencedColumnName = "Id")})
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Followers> followersList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
 

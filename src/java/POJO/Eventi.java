@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -31,8 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa EVENTI
+ * 
  */
 @Entity
 @Table(name = "EVENTI")
@@ -56,26 +51,31 @@ public class Eventi implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Titolo")
     private String titolo;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Data")
     @Temporal(TemporalType.DATE)
     private Date data;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Programma")
     private String programma;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
     @Column(name = "Descrizione")
     private String descrizione;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "Durata")
@@ -83,26 +83,33 @@ public class Eventi implements Serializable {
     @Size(max = 50)
     @Column(name = "Sponsor")
     private String sponsor;
+    
     @Size(max = 100)
     @Column(name = "Social1")
     private String social1;
+    
     @Size(max = 100)
     @Column(name = "Social2")
     private String social2;
     @Size(max = 200)
     @Column(name = "Biglietti")
     private String biglietti;
+    
     @ManyToMany(mappedBy = "eventiList", fetch = FetchType.EAGER)
     private List<Artisti> artistiList;
+    
     @JoinColumn(name = "UtenteCreatore", referencedColumnName = "Id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Followers utenteCreatore;
+    
     @JoinColumn(name = "Categoria", referencedColumnName = "Id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Categorie categoria;
+    
     @JoinColumn(name = "Location", referencedColumnName = "Id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Locations location;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evento", fetch = FetchType.EAGER)
     private List<Recensioni> recensioniList;
 

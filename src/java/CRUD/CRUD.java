@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CRUD;
 
 import POJO.*;
@@ -16,8 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author FSEVERI\guidolin3172
+ * Classe CRUD
+ * 
  */
 public class CRUD {
     //Varibili di istanza
@@ -150,13 +145,13 @@ public class CRUD {
      *
      * @return la lista dei followers
      */
-    public List ListaUtenti() {
+    public List<Followers> ListaUtenti() {
         Session sessione = factory.openSession();
         Transaction transazione = null;
         try {
             transazione = sessione.beginTransaction();
 
-            List f = sessione.createQuery("FROM Followers").list();
+            List<Followers> f = sessione.createQuery("FROM Followers").list();
             transazione.commit();
 
             return f;

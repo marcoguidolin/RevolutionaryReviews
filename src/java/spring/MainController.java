@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Classe MainController
  *
- * @author 
  */
 @Controller
 public class MainController
@@ -33,7 +32,6 @@ public class MainController
 
         map.put("listEventiPassati", crud.leggiEventiPassati());
         map.put("listEventiScadenza", crud.leggiEventiScadenza());
-        map.put("listFollowers", crud.ListaUtenti());
         map.put("listEVotati", crud.ListaEventiPiuVotati());
         
 
@@ -62,17 +60,16 @@ public class MainController
         
         map.put("recensioni",crud.recensioniEvento(id));
         map.put("dettagli", e);
-       
-        
+
         return "dettagliEvento";
     }
     
-    @RequestMapping(value="/listaFollower", method=RequestMethod.GET)
-    public String ListaFollower(ModelMap map){
+    @RequestMapping(value="/followers", method=RequestMethod.GET)
+    public String leggiFollowers(ModelMap map){
         List<Followers> lista=crud.ListaUtenti();
-        map.put("lista",lista);
+        map.put("followers",lista);
         
-        return "listaFollower";
+        return "followers";
     }
    
     //SE QUALCUNO E' IN GRADO DI SISTEMARE QUESTO INSERIMENTO IO POI MI POSSO OCCUPARE DEGLI ALTRI

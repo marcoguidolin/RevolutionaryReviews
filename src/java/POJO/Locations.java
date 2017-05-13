@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -25,8 +20,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa LOCATIONS
+ * 
  */
 @Entity
 @Table(name = "LOCATIONS")
@@ -46,29 +41,35 @@ public class Locations implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Nome")
     private String nome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
     @Column(name = "Descrizione")
     private String descrizione;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "Provincia")
     private String provincia;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Indirizzo")
     private String indirizzo;
+    
     @Size(max = 100)
     @Column(name = "SitoUfficiale")
     private String sitoUfficiale;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
 

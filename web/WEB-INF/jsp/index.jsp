@@ -40,7 +40,7 @@
                 </ul>
             </li>
 
-            <li><a href="#">Utenti</a></li>
+            <li><a href="/RevolutionaryReviews/followers">Utenti</a></li>
             <li><a href="#">Chi siamo</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -26,8 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa ARTISTI
+ * 
  */
 @Entity
 @Table(name = "ARTISTI")
@@ -46,22 +41,27 @@ public class Artisti implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "Nome")
     private String nome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "Descrizione")
     private String descrizione;
+    
     @Size(max = 100)
     @Column(name = "SitoUfficiale")
     private String sitoUfficiale;
+    
     @Size(max = 100)
     @Column(name = "Social")
     private String social;
+    
     @JoinTable(name = "EVENTI_ARTISTI", joinColumns = {
         @JoinColumn(name = "Artisti", referencedColumnName = "Id")}, inverseJoinColumns = {
         @JoinColumn(name = "Eventi", referencedColumnName = "Id")})
