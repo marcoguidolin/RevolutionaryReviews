@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package POJO;
 
 import java.io.Serializable;
@@ -26,8 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
- * @author FSEVERI\scolaro3313
+ * Classe di mappa FOLLOWERS
+ * 
  */
 @Entity
 @Table(name = "FOLLOWERS")
@@ -49,46 +44,57 @@ public class Followers implements Serializable {
     @Basic(optional = false)
     @Column(name = "Id")
     private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "Nickname")
     private String nickname;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "Password")
     private String password;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
     @Column(name = "Nome")
     private String nome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "Cognome")
     private String cognome;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "Provincia")
     private String provincia;
+    
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "EMail")
     private String eMail;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "Icona")
     private String icona;
+    
     @ManyToMany(mappedBy = "followersList", fetch = FetchType.EAGER)
     private List<Categorie> categorieList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utenteCreatore", fetch = FetchType.EAGER)
     private List<Eventi> eventiList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "utente", fetch = FetchType.EAGER)
     private List<Recensioni> recensioniList;
 
