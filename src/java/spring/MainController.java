@@ -2,11 +2,14 @@ package spring;
 
 
 import CRUD.CRUD;
+import DAO.FollowersD;
 import POJO.*;
 
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,13 +105,45 @@ public class MainController
         return "registrazione";
     }
     
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile(ModelMap map)
+    {
+
+        return "profile";
+    }
+    
+    @RequestMapping(value = "/doLogin", params
+            =
+            {
+                "username", "password"
+            }, method = RequestMethod.POST)
+    public String doLogin(ModelMap map, HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "username") String username, @RequestParam(value = "password") String password)
+    {
+        Followers user = FollowersD.checkLogin(username, password);
+        if (user != null)
+        {
+            request.getSession().setAttribute("userinfo", user);
+            return "redirect:profile";
+        }
+        return "redirect:registrazione";
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap map, HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        session.setAttribute("username", null);
+        session.invalidate();
+        return "redirect:./";
+    }
+    
     @RequestMapping(value = "/faiRegistrazione",
             params={"nick", "pw", "nome", "cog", "pro", "email", "icon"}, method = RequestMethod.POST)
     public String faiRegistrazione(ModelMap map, HttpServletRequest request, @RequestParam(value = "nick") String nickname, @RequestParam(value = "pw") String password, @RequestParam(value = "nome") String nome, @RequestParam(value = "cog") String cognome, @RequestParam(value = "pro") String provincia, @RequestParam(value = "email") String email, @RequestParam(value = "icon") String icona)
     {
         Followers user = CRUD.registrazione(nickname, password, nome, cognome, provincia, email, icona);
         request.getSession().setAttribute("userinfo", user);
-        return "redirect:selectInterests";
+        return "redirect:profile";
     }
 } 
 
