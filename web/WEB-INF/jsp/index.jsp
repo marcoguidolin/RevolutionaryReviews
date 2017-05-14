@@ -43,7 +43,7 @@
                 </li>
 
                 <li><a href="/RevolutionaryReviews/followers">Followers</a></li>
-                <li><a href="#">Chi siamo</a></li>
+                <li><a href="/RevolutionaryReviews/chisiamo">Chi siamo</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
                 <li class="dropdown">

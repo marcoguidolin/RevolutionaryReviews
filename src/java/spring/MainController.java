@@ -93,7 +93,6 @@ public class MainController
             @RequestParam(value = "Social1") String social1,
             @RequestParam(value = "Social2") String social2,
             @RequestParam(value = "Biglietti") String biglietti) {
-
         return aggiungiEvento(titolo, data, programma, descrizione, durata, sponsor, social1, social2, biglietti);
     }
 */
@@ -145,5 +144,9 @@ public class MainController
         request.getSession().setAttribute("userinfo", user);
         return "redirect:profile";
     }
+    
+    @RequestMapping(value="/chisiamo", method=RequestMethod.GET)
+    public String chisiamo(ModelMap map){
+        return "chisiamo";
+    }
 } 
-
