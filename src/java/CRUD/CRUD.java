@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package CRUD;
 
 import POJO.*;
@@ -16,11 +11,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
- *
- * @author FSEVERI\guidolin3172
+ * Classe CRUD
+ * 
  */
 public class CRUD {
-/remanager.it/ph
     //Varibili di istanza
     private static SessionFactory factory;
 
@@ -119,21 +113,21 @@ public class CRUD {
         return null;
     }
     
-        /**
-     * Metodo per leggere un follower dato il suo id
+    /** 
+     * Metodo per leggere le informazioni di un follower dato il suo id
      *
      * @param id id del follower
-     * @return le informozioni dell'evento
+     * @return le informozioni del follower
      */
     public Followers leggiFollower(Integer id) {
         Session sessione = factory.openSession();
         Transaction transazione = null;
         try {
             transazione = sessione.beginTransaction();
-            Followers e = (Followers) sessione.get(Followers.class, id);
+            Followers f = (Followers) sessione.get(Followers.class, id);
             transazione.commit();
 
-            return e;
+            return f;
 
         } catch (HibernateException e) {
             if (transazione != null) {
@@ -151,13 +145,13 @@ public class CRUD {
      *
      * @return la lista dei followers
      */
-    public List ListaUtenti() {
+    public List<Followers> ListaUtenti() {
         Session sessione = factory.openSession();
         Transaction transazione = null;
         try {
             transazione = sessione.beginTransaction();
 
-            List f = sessione.createQuery("FROM Followers").list();
+            List<Followers> f = sessione.createQuery("FROM Followers").list();
             transazione.commit();
 
             return f;
@@ -367,12 +361,5 @@ public class CRUD {
             sessione.close();
         }
         return false;
-    }
-    
-    
+    }   
 }
-
-
-    
-
-

@@ -1,14 +1,13 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Crea un nuovo evento</title>
+        <title>Nuovo evento</title>
     </head>
     <body>
         <h1> Creazione di un nuovo evento </h1>
-        <form role="form" action="" method="post" class="login-form">
+        <form role="form" action="" method="get" class="login-form">
             <div class="form-group">
                 <label class="sr-only">Titolo</label>
                 <input type="text" name="Titolo" placeholder="Titolo...">
@@ -48,5 +47,6 @@
             <button type="submit" class="btn">Conferma</button>	
             <button type="submit" class="btn">Annulla</button>	
         </form>
+   
     </body>
 </html>
