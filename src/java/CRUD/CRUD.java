@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import spring.HibernateUtil;
 
 /**
  * Classe CRUD
@@ -363,4 +364,37 @@ public class CRUD {
         }
         return false;
     }   
+    
+    /**
+     * Metodo per la registrazione di un utente
+     * @param nickname nickname del nuovo utente
+     * @param password password dell'utente
+     * @param nome nome dell'untente
+     * @param cognome cognome dell'utente
+     * @param provincia provincia dell'utente
+     * @param email email dell'utente
+     * @param icona icona scelta dall'utente
+     * @return 
+     */
+     public static Followers registrazione(String nickname, String password, String nome, String cognome, String provincia, String email, String icona)
+    {   
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        Followers f = null;
+        try
+        {
+            transaction = session.beginTransaction();
+            f = new Followers(nickname, password, nome, cognome, provincia, email, icona);
+            session.save(f);
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+        return f;
+    }
 }

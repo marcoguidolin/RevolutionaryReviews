@@ -23,177 +23,95 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Eventi <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
+                        <li><a href="#" style="color:#9E9E9E;">Eventi in scadenza</a></li>
+                        <li><a href="#" style="color:#9E9E9E;">Eventi passati</a></li>
+                        <li><a href="#" style="color:#9E9E9E;">Tutti gli eventi</a>
+                        <ul class="submenu">
+                            <li><a href="#" style="color:#9E9E9E;">Oridnati alfabeticamente</a></li>
+                            <li><a href="#" style="color:#9E9E9E;">Ordinati per categoria</a></li>
+                            <li><a href="#" style="color:#9E9E9E;">CREA un evento</a></li>
+                        </ul> 
+                    </ul>
+                </li>
 
-
-    <nav class="navbar navbar-inverse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
-
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    Eventi <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
-                    <li><a href="#" style="color:#00b0ff;">Eventi in scadenza</a></li>
-                    <li><a href="#" style="color:#00b0ff;">Eventi passati</a></li>
-                    <li><a href="#" style="color:#00b0ff;">Tutti gli eventi</a>
-                    <ul class="submenu">
-                        <li><a href="#">Oridnati alfabeticamente</a></li>
-                        <li><a href="#">Ordinati per categoria</a></li>
-                        <li><a href="#">CREA un evento</a></li>
-                    </ul> 
-                </ul>
-            </li>
-
-            <li><a href="#">Utenti</a></li>
-            <li><a href="#">Chi siamo</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px" style="top: -15px; position: relative;"/></a>
-                <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
-                    <li>
-                        <div class="row">
-                            <div class="col-md-12" style="width: 250px;">
-                                <div class="row text-center">
-                                    Accedi
+                <li><a href="/RevolutionaryReviews/followers">Followers</a></li>
+                <li><a href="#">Chi siamo</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px" style="top: -15px; position: relative;"/></a>
+                    <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
+                    <div class="row">
+                        <div class="col-md-12" style="width: 250px;">
+                            <div class="row text-center">
+                                Accedi
+                            </div>
+                            <form class="form" method="POST" action="/RevolutionaryReviews/doLogin" id="login-nav">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
                                 </div>
-                                <form class="form" method="POST" action="/RevolutionaryReviews/doLogin" id="login-nav">
-                                    <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn  btn-block">Accedi</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="bottom text-center">
-                                Non possiedi un account?
-                                <br/>
-                                <a href="/RevolutionaryReviews/registrazione"><b>Registrati</b></a>
-       
-    <li><a href="/RevolutionaryReviews/followers">Utenti</a></li>
-    <li><a href="#">Chi siamo</a></li>
-</ul>
-<ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px" style="top: -15px; position: relative;"/></a>
-        <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
-            <li>
-                <div class="row">
-                    <div class="col-md-12" style="width: 250px;">
-                        <div class="row text-center">
-                            Accedi
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn  btn-block">Accedi</button>
+                                </div>
+                            </form>
                         </div>
-                        <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
-                            <div class="form-group">
-                                <label>Username</label>
-                                <input type="text" class="form-control" name="username" placeholder="Username" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Password" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn  btn-block">Accedi</button>
-                            </div>
-                        </form>
                     </div>
                     <div class="bottom text-center">
                         Non possiedi un account?
                         <br/>
-                        <a href="/WebCommunity/registration"><b>Registrati</b></a>
+                        <a href="/RevolutionaryReviews/registrazione.jsp" style="color:#9E9E9E;"><b>Registrati</b></a>
                     </div>
-                </div>
-            </li>
-        </ul>
-
-    </nav>
-
-
-
-    <div class="sfondo" align="center">
-        <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
-    </div>  
-
-    <h3>Eventi in scadenza</h3>
-    <div>
-        <c:forEach items="${listEventiScadenza}" var="eventoSca">
-            <p> ${eventoSca.getTitolo()} </p>
-        </c:forEach>
-    </div>
-
-
-    <h3>Eventi passati</h3>
-
-    <c:forEach items="${listEventiPassati}" var="evento">
-        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-    </c:forEach>
-
-    <h3> Eventi più votati </h3>
-    <div>
-        <ol>
-            <c:forEach items="${listEVotati}" var="eventoVotato">
-                <li>${eventoVotato} </li>
-                </c:forEach>
-        </ol>
-    </div>
-
-    </body>
-
-  
-    
-    
-    
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div class="sfondo" align="center">
+            <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
+        </div>  
         
     
-      
-
-    </li>
-</ul>
-</nav>
-
-<div class="sfondo" align="center">
-    <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h3>Eventi in scadenza</h3>
-        <div>
-            <c:forEach items="${listEventiScadenza}" var="eventoSca">
-                <p> ${eventoSca.getTitolo()} </p>
-            </c:forEach>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h3>Eventi passati</h3>
-        <c:forEach items="${listEventiPassati}" var="evento">
-            <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
-            </br>
-        </c:forEach>
-    </div>
-    <div class="col-md-4">
-        <h3> Eventi più votati </h3>
-        <div>
-            <ol>
-                <c:forEach items="${listEVotati}" var="eventoVotato">
-                    <li>${eventoVotato} </li>
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <h3>Eventi in scadenza</h3>
+                    <c:forEach items="${listEventiScadenza}" var="eventoSca">
+                        <p> ${eventoSca.getTitolo()} </p>
                     </c:forEach>
-            </ol>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <h3>Eventi passati</h3>
+                    <c:forEach items="${listEventiPassati}" var="evento">
+                        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
+                    </c:forEach>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3> Eventi più votati </h3>
+                <div>
+                    <ol>
+                        <c:forEach items="${listEVotati}" var="eventoVotato">
+                            <li>${eventoVotato} </li>
+                            </c:forEach>
+                    </ol>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-
-
-</body>
-
+    </body>
 </html>
 
 
@@ -209,5 +127,5 @@
         background-image: url('http://mclarenwalltowall.com/static/images/map/header_bg.jpg');
         background-size: cover;
     }
-
+    
 </style>

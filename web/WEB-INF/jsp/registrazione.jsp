@@ -28,15 +28,10 @@
     </head>
 
     <body>
-
-
     <nav class="navbar navbar-inverse">
         <li class="active"><a href="#">REGISTRATI<span class="sr-only">(current)</span></a></li><!--centralizzare-->
         
     </nav>
-
-
-
     <div class="sfondo" align="center">
         <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
     </div>  
@@ -44,7 +39,7 @@
     <h2>Modulo di Registrazione</h2>
 		<hr />
 		<br>inserisci i dati e spedisci il modulo</br>
-		<form action="/RevolutionaryReviews/faiRegistrazione" method="POST">
+		<form action="" method="POST">
 			Nickname:<input type="text" name="nick"><br />
 			Password:<input type="password" name="pw"><br />
 			Nome:<input type="text" name="nome"><br />

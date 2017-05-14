@@ -10,6 +10,61 @@
         <title>Followers</title>
     </head>
     <body>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Homepage<span class="sr-only">(current)</span></a></li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Eventi <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
+                        <li><a href="#" style="color:#9E9E9E;">Eventi in scadenza</a></li>
+                        <li><a href="#" style="color:#9E9E9E;">Eventi passati</a></li>
+                        <li><a href="#" style="color:#9E9E9E;">Tutti gli eventi</a>
+                        <ul class="submenu">
+                            <li><a href="#" style="color:#9E9E9E;">Oridnati alfabeticamente</a></li>
+                            <li><a href="#" style="color:#9E9E9E;">Ordinati per categoria</a></li>
+                            <li><a href="#" style="color:#9E9E9E;">CREA un evento</a></li>
+                        </ul> 
+                    </ul>
+                </li>
+
+                <li><a href="/RevolutionaryReviews/followers">Followers</a></li>
+                <li><a href="#">Chi siamo</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px" style="top: -15px; position: relative;"/></a>
+                    <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
+                    <div class="row">
+                        <div class="col-md-12" style="width: 250px;">
+                            <div class="row text-center">
+                                Accedi
+                            </div>
+                            <form class="form" method="POST" action="/RevolutionaryReviews/doLogin" id="login-nav">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn  btn-block">Accedi</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="bottom text-center">
+                        Non possiedi un account?
+                        <br/>
+                        <a href="/RevolutionaryReviews/registrazione.jsp" style="color:#9E9E9E;"><b>Registrati</b></a>
+                    </div>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
             <table class="table table-striped">
                 <tr>
                     <td><h4>Nome</h4></td>
