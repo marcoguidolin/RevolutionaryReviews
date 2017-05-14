@@ -44,6 +44,38 @@
                     </ul> 
                 </ul>
             </li>
+
+            <li><a href="#">Utenti</a></li>
+            <li><a href="#">Chi siamo</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" style="height: 50px;"><img src="/RevolutionaryReviews/resources/utente.ico" width="56px" style="top: -15px; position: relative;"/></a>
+                <ul class="dropdown-menu" style="color:#fff; background-color: #222;">
+                    <li>
+                        <div class="row">
+                            <div class="col-md-12" style="width: 250px;">
+                                <div class="row text-center">
+                                    Accedi
+                                </div>
+                                <form class="form" method="POST" action="/RevolutionaryReviews/doLogin" id="login-nav">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn  btn-block">Accedi</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="bottom text-center">
+                                Non possiedi un account?
+                                <br/>
+                                <a href="/RevolutionaryReviews/registrazione"><b>Registrati</b></a>
        
     <li><a href="/RevolutionaryReviews/followers">Utenti</a></li>
     <li><a href="#">Chi siamo</a></li>
@@ -80,6 +112,48 @@
                 </div>
             </li>
         </ul>
+
+    </nav>
+
+
+
+    <div class="sfondo" align="center">
+        <img src="/RevolutionaryReviews/resources/logo.png" width="40%"/>
+    </div>  
+
+    <h3>Eventi in scadenza</h3>
+    <div>
+        <c:forEach items="${listEventiScadenza}" var="eventoSca">
+            <p> ${eventoSca.getTitolo()} </p>
+        </c:forEach>
+    </div>
+
+
+    <h3>Eventi passati</h3>
+
+    <c:forEach items="${listEventiPassati}" var="evento">
+        <a href="/RevolutionaryReviews/dettagliEvento?id=${evento.id}">${evento.titolo}</a>
+    </c:forEach>
+
+    <h3> Eventi più votati </h3>
+    <div>
+        <ol>
+            <c:forEach items="${listEVotati}" var="eventoVotato">
+                <li>${eventoVotato} </li>
+                </c:forEach>
+        </ol>
+    </div>
+
+    </body>
+
+  
+    
+    
+    
+        
+    
+      
+
     </li>
 </ul>
 </nav>
@@ -115,10 +189,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 

@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
  * 
  */
 public class CRUD {
+
     //Varibili di istanza
     private static SessionFactory factory;
 
