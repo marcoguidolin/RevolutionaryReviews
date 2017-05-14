@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import spring.HibernateUtil;
 
 /**
  * Classe CRUD
@@ -18,6 +19,34 @@ public class CRUD {
 
     //Varibili di istanza
     private static SessionFactory factory;
+
+    public static Followers registrazione(String nickname, String password, String nome, String cognome, String provincia, String email, String icona)
+    {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
+        Followers f = null;
+        
+        try
+        {
+            transaction = session.beginTransaction();
+
+            f = new Followers(nickname, password, nome, cognome, provincia, email, icona);
+            
+            session.save(f);
+
+            transaction.commit();
+        } catch (HibernateException e)
+        {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return f;
+    }
 
     /**
      * Costruttore parametrico completo

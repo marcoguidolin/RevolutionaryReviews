@@ -63,4 +63,22 @@ public class FollowersD
         return f;
     }
 
+    public static Followers checkLogin(String username, String password)
+    {        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        
+        
+        String hql = "FROM Followers WHERE nickname = :nick";
+        Query query = session.createQuery(hql);
+        query.setString("nick", username);
+        Followers registered = (Followers) query.uniqueResult();
+
+        if (registered != null && (username.equals(registered.getNickname()) && password.equals(registered.getPassword())))
+        {
+            return registered;
+        }
+        return null;
+    }
+
 }
