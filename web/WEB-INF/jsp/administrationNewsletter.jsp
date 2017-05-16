@@ -1,9 +1,3 @@
-<%-- 
-    Document   : newsletter
-    Created on : 8-apr-2017, 19.43.21
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Newsletter | Amministrazione</title>
 
@@ -84,8 +77,8 @@
                             <div class="form-group">
                                 <label>Destinatari</label>
                                 <select class="form-control" multiple="multiple" disabled="true">
-                                    <c:forEach items="${usersList}" var="usersItem">
-                                        <option>${usersItem.mail}</option>
+                                    <c:forEach items="${listaFollowers}" var="follower">
+                                        <option>${follower.mail}</option>
                                     </c:forEach>
                                 </select>
                             </div>

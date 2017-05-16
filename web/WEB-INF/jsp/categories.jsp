@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24-mar-2017, 17.25.56
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,7 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Categorie | SoundZone</title>
 
@@ -78,8 +71,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -113,7 +106,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
+                                            Ciao ${userinfo.nickname}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -145,14 +138,14 @@
                             <td><span style="font-weight: bold;">Categoria</span></td>
                             <td><span style="font-weight: bold; float:right;">Eventi</span></td>
                         </tr>
-                    <c:forEach items="${catList}" var="catItem">
+                    <c:forEach items="${listaCategorie}" var="categoria">
                         <tr>
-                        <a href="events?category=${catItem.id}&name=${catItem.nome}">
+                        <a href="events?category=${categoria.id}&name=${categoria.nome}">
                             <td>
-                                <a href="events?category=${catItem.id}&name=${catItem.nome}">${catItem.nome}</a>
+                                <a href="events?category=${categoria.id}&name=${categoria.nome}">${categoria.nome}</a>
                             </td>
                             <td>
-                                <span class="badge" style="float:right;">${catItem.getEventoList().size()}</span>
+                                <span class="badge" style="float:right;">${categoria.getEventoList().size()}</span>
                             </td>
                         </a>
                         </tr>

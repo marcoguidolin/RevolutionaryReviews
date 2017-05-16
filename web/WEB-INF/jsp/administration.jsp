@@ -1,9 +1,3 @@
-<%-- 
-    Document   : administration
-    Created on : 8-apr-2017, 18.35.28
-    Author     : matte
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
+ 
 
         <title>Dashboard | Amministrazione</title>
 

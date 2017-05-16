@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dao;
 
 import hibernate.HibernateUtil;
@@ -13,36 +9,42 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.Artista;
 
-/**
- *
- * @author matte
- */
+
 public class ArtistiDao
 {
-    public static List<Artista> retrieveAll()
+    /**
+     * 
+     * @return 
+     */
+    public static List<Artista> infoAristi()
     {
         return HibernateUtil.getSessionFactory().openSession().createCriteria(Artista.class).list();
     }
     
-    public static Artista retrieveSingle(Integer id)
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    public static Artista infoArtista(Integer id)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        
         return (Artista) session.get(Artista.class, id);
     }
     
-    public static void addArtista(String nome, String cognome, String immagine){
+    /**
+     * 
+     * @param nome
+     * @param cognome 
+     */
+    public static void aggiungi(String nome, String cognome){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
-        
         Artista artista = new Artista(nome, cognome);
-        
         try
         {
             transaction = session.beginTransaction();
-            
             session.save(artista);
-
             transaction.commit();
         } catch (HibernateException e)
         {
@@ -52,24 +54,24 @@ public class ArtistiDao
         {
             session.close();
         }
-        
-        
+    
     }
     
-    public static void remove(Integer id)
+    /**
+     * 
+     * @param id 
+     */
+    public static void cancella(Integer id)
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
-        
         try
         {
             transaction = session.beginTransaction();
-
             String hql = "DELETE FROM Artista WHERE id = :artistID";
             Query query = session.createQuery(hql);
             query.setParameter("artistID", id);
             query.executeUpdate();
-            
             transaction.commit();
         } catch (HibernateException e)
         {

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24-mar-2017, 17.25.56
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
+
 
         <title>Home | SoundZone</title>
 
@@ -82,8 +76,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -117,7 +111,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            <h4>Ciao ${userinfo.username}</h4>
+                                            <h4>Ciao ${userinfo.nickname}</h4>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
                                         <br>
@@ -147,9 +141,8 @@
                     <div class="carousel slide" id="myCarousel">
                         <div class="carousel-inner">
                         <c:set var="isSet" value="${0}"></c:set>
-                            <c:if test="${fn:length(eventsList) eq 0}">
+                            <c:if test="${fn:length(listaEventi) eq 0}">
                                 <div class="item active">
-                                    <img class="img-responsive" style="margin-bottom: 25px;" src="/WebCommunity/resources/event.png" alt="Event picture"/>
                                     <div class="container">
                                         <div class="carousel-caption">
                                             <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">Nessun evento disponibile</h1>
@@ -159,7 +152,7 @@
                                     </div>
                                 </div>
                             </c:if>
-                            <c:forEach items="${eventsList}" var="eventItem">
+                            <c:forEach items="${listaEventi}" var="evento">
                                 <div
                                     <c:choose>
                                         <c:when test="${isSet == 0}">
@@ -170,22 +163,13 @@
                                             class="item"
                                         </c:otherwise>
                                     </c:choose>
-                                      >
-                                    <img class="img-responsive" style="margin-bottom: 25px;" src="
-                                         <c:choose>
-                                             <c:when test="${eventItem.immagine != null}">
-                                                 data:image/png;base64,${eventItem.getImmagineString()}
-                                             </c:when>
-                                             <c:otherwise>
-                                                 /WebCommunity/resources/event.png
-                                             </c:otherwise>
-                                         </c:choose>
-                                         " alt="Event picture"/>
+                                    >
+                                    
                                     <div class="container">
                                         <div class="carousel-caption">
-                                            <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${eventItem.titolo}</h1>
-                                            <p>${eventItem.descrizione}</p>
-                                            <p><a class="btn btn-large btn-primary" href="/WebCommunity/eventDetail?id=${eventItem.id}">Guarda</a></p>
+                                            <h1 style="text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);">${evento.titolo}</h1>
+                                            <p>${evento.descrizione}</p>
+                                            <p><a class="btn btn-large btn-primary" href="/WebCommunity/eventDetail?id=${evento.id}">Guarda</a></p>
                                         </div>
                                     </div>
                                 </div>

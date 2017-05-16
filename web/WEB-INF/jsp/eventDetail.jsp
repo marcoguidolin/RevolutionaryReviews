@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24-mar-2017, 17.25.56
-    Author     : guglielmo
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,7 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Categorie | SoundZone</title>
 
@@ -87,8 +80,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -122,7 +115,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
+                                            Ciao ${userinfo.nickname}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -145,31 +138,19 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#${eventDetail.titolo}</span> <small><!----></small></h1>
+                        <h1><span class="popcolor">#${evento.titolo}</span> <small><!----></small></h1>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="
-                        <c:choose>
-                            <c:when test="${eventDetail.immagine != null}">
-                                data:image/png;base64,${eventDetail.getImmagineString()}
-                            </c:when>
-                            <c:otherwise>
-                                /WebCommunity/resources/event.png
-                            </c:otherwise>
-                        </c:choose>
-                    " alt="Event picture">
-                    </div>
                     <div class="col-md-10">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title">${eventDetail.titolo}</h3>
+                                <h3 class="panel-title">${evento.titolo}</h3>
                             </div>
                             <div class="panel-body">
-                                Luogo: ${eventDetail.luogo}<br>
-                                Data: ${eventDetail.data}<br>
-                                Descrizione: ${eventDetail.descrizione}
+                                Luogo: ${evento.location}<br>
+                                Data: ${evento.data}<br>
+                                Descrizione: ${evento.descrizione}
+                                Programma: ${evento.programma}
                             </div>
                         </div>
                     </div>
@@ -179,24 +160,14 @@
                         <h3><span class="popcolor">#Artisti partecipanti</span> <small><!----></small></h3>
                     </div>
                     <c:choose>
-                        <c:when test="${empty eventDetail.artistaList}">
+                        <c:when test="${empty evento.listaArtisti}">
                             <center><h3>Nessun artista partecipa a questo evento.</h3><center>
                         </c:when>
                         <c:otherwise>
                             <div class="row">
-                                <c:forEach items="${eventDetail.artistaList}" var="artistaItem">
+                                <c:forEach items="${evento.ListaArtisti}" var="artista">
                                     <div class="col-md-4" style="margin-bottom: 25px;">
-                                        <img src="
-                                            <c:choose>
-                                               <c:when test="${artistaItem.immagine != null}">
-                                                   data:image/png;base64,${artistaItem.getImmagineString()}
-                                               </c:when>
-                                               <c:otherwise>
-                                                   /WebCommunity/resources/artist.png
-                                               </c:otherwise>
-                                           </c:choose>
-                                        " alt="user-picture" class="img-circle user-img-circle-xsmall" style="float: left;">
-                                        <h3 style="float: left; margin-left: 15px;">${artistaItem.nome} ${artistaItem.cognome}</h3>
+                                        <h3 style="float: left; margin-left: 15px;">${artista.nome} ${artista.cognome}</h3>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -213,7 +184,7 @@
                         if ((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == "")) {
                     %>
                     <center>
-                        <h3>Per rilasciare un commento devi essere un utente registrato.</h3>
+                        <h3>Per poter scrivere un commento devi Registrarti !</h3>
                         <h4>Se non possiedi un account puoi registrarti <a href="/WebCommunity/registration" style="color: rgb(241, 26, 147)">qui →</a></h4>
                     </center>
                     <br/>
@@ -224,7 +195,7 @@
                         <div class="form-group">
                             <label>Inserisci il tuo commento</label>
                             <input type="text" class="form-control" name="comm" placeholder="Inserisci il tuo commento qui" required>
-                            <input type="hidden" name="evento" value="${eventDetail.id}" />
+                            <input type="hidden" name="evento" value="${evento.id}" />
                         </div>
                         <div class="form-group">
                             <input type="hidden" class="rating" value="3" name="voto"/>
@@ -240,11 +211,11 @@
                 </div>
                 <div class="row">
                     <c:choose>
-                        <c:when test="${empty postList}">
-                            <center><h3>Nessun commento pubblicato. Sii tu il primo!</h3><center>
+                        <c:when test="${empty listaPost}">
+                            <center><h3>Nessun commento pubblicato.</h3><center>
                         </c:when>
                         <c:otherwise>
-                            <c:forEach items="${postList}" var="post">
+                            <c:forEach items="${listaPost}" var="post">
                                 <div class="media" style="margin-bottom: 20px;">
                                     <div class="media-left">
                                         <img src="
@@ -259,7 +230,7 @@
                                         " alt="user-picture" class="img-circle user-img-circle-xsmall">
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="media-heading">${post.membro1.username}</h4>
+                                        <h4 class="media-heading">${post.membro1.nickname}</h4>
                                         <p>${post.commento}</p>
                                         <input type="hidden" class="rating" data-readonly value="${post.voto}"/>
                                     </div>

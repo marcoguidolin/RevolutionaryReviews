@@ -1,9 +1,3 @@
-<%-- 
-    Document   : events
-    Created on : 24-mar-2017, 17.25.56
-    Author     : guglielmo
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,7 +11,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Eventi | SoundZone</title>
 
@@ -82,8 +75,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -117,7 +110,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
+                                            Ciao ${userinfo.nickname}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -140,7 +133,7 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#${categoryName}</span> <small>${subtitle}</small></h1>
+                        <h1><span class="popcolor">#${categoria}</span> <small>${subtitle}</small></h1>
                         <ul class="list-inline" style="float: right; z-index: 2; top: -6px; position: relative;">
                             <%
                                 if (!((session.getAttribute("userinfo") == null) || (session.getAttribute("userinfo") == ""))) {
@@ -171,31 +164,19 @@
                 </div>
                 <div class="row" style="text-align: center !important;">
                     <div class="card-deck">
-                        <c:forEach items="${eventList}" var="eventItem">
+                        <c:forEach items="${listaEventi}" var="eventItem">
                             <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
-                                <center>
-                                    <img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="
-                                    <c:choose>
-                                        <c:when test="${eventItem.immagine != null}">
-                                            data:image/png;base64,${eventItem.getImmagineString()}
-                                        </c:when>
-                                        <c:otherwise>
-                                            /WebCommunity/resources/event.png
-                                        </c:otherwise>
-                                    </c:choose>
-                                " alt="Event picture">
-                                </center>
-                                <c:if test="${eventItem.getAverage() != 'NaN'}">
-                                    <div class="rating"><h3>${eventItem.getAverage()}★</h3></div>
+                                <c:if test="${evento.getAverage() != 'NaN'}">
+                                    <div class="rating"><h3>${evento.getAverage()}★</h3></div>
                                 </c:if>
                                 <div class="card-block">
-                                    <h4 class="card-title text-center">${eventItem.titolo}</h4>
+                                    <h4 class="card-title text-center">${evento.titolo}</h4>
                                     <p class="card-text text-justify">
-                                        ${fn:substring(eventItem.descrizione, 0, 85)}...
+                                        ${fn:substring(evento.descrizione, 0, 85)}...
                                     </p>
                                 </div>
                                 <div class="card-footer">
-                                    <center><a href="eventDetail?id=${eventItem.id}" class="btn">Guarda</a></center>
+                                    <center><a href="eventDetail?id=${evento.id}" class="btn">Guarda</a></center>
                                 </div>
                             </div>
                         </c:forEach>
@@ -226,13 +207,13 @@
                                 } else
                                 {
                             %>
-                            <input type="hidden" name="promotore" value="${userinfo.username}" required>
+                            <input type="hidden" name="promotore" value="${userinfo.nickname}" required>
                             <div class="form-group">
                                 <label>Titolo</label>
                                 <input type="text" class="form-control" name="titolo" placeholder="Titolo" required>
                             </div>
                             <div class="form-group">
-                                <label>Luogo</label>
+                                <label>Location</label>
                                 <input type="text" class="form-control" name="luogo" placeholder="Luogo" required>
                             </div>
                             <div class="form-group">
@@ -242,8 +223,8 @@
                             <div class="form-group">
                                 <label>Categoria</label>
                                 <select class="form-control" name="categoria">
-                                    <c:forEach items="${categoriesList}" var="categoryItem">
-                                        <option value="${categoryItem.id}">${categoryItem.nome}</option>
+                                    <c:forEach items="${listaCategorie}" var="categoria">
+                                        <option value="${categoria.id}">${categoria.nome}</option>
                                     </c:forEach>
                                 </select>
                             </div>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : registration
-    Created on : 24-mar-2017, 11.29.17
-    Author     : FSEVERI\guglielmo3238
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,7 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Registrazione | SoundZone</title>
 
@@ -82,8 +75,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -118,7 +111,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
+                                            Ciao ${userinfo.nickname}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -141,7 +134,7 @@
             <div class="container bs-docs-container transition-page">
                 <div class="row">
                     <div class="page-header">
-                        <h1><span class="popcolor">#Registrati</span> <small>Entra a far parte della community!</small></h1>
+                        <h1><span class="popcolor">#Registrati</span> </h1>
                     </div>
                 </div>
                 <div class="row">
@@ -161,27 +154,27 @@
                                     <input type="text" class="form-control" name="surname" placeholder="Cognome" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Zona</label>
-                                    <input type="text" class="form-control" name="zone" placeholder="Zona" required>
+                                    <label>Provincia</label>
+                                    <input type="text" class="form-control" name="prov" placeholder="Provincia" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                    <label>Nickname</label>
+                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                 </div>
                                 <label>Password</label>
                                 <div class="form-inline row">
                                     <div class="form-group col-sm-6">
                                         <input type="password" data-minlength="6" class="form-control" id="password" name="password" placeholder="Password" required>
-                                        <div class="help-block">La password deve essere lunga almeno 6 caratteri.</div>
+                                        <div class="help-block">La password deve essere almeno di 6 caratteri.</div>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input type="password" class="form-control" data-match="#password" data-match-error="Le password inserite non corrispondono" placeholder="Conferma" required>
+                                        <input type="password" class="form-control" data-match="#password" data-match-error="Le password NON corrispondono" placeholder="Conferma" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Mail</label>
-                                    <input type="email" class="form-control" name="mail" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <center><button type="submit" class="btn" style="padding-left: 50px; padding-right: 50px;">Registrati</button></center>

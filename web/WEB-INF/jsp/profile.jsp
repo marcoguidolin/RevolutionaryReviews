@@ -1,9 +1,3 @@
-<%-- 
-    Document   : profile
-    Created on : 25-mar-2017, 12.33.20
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,7 +10,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Profilo | SoundZone</title>
 
@@ -85,8 +78,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -120,7 +113,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            <h4>Ciao ${userinfo.username}</h4>
+                                            <h4>Ciao ${userinfo.nickname}</h4>
                                         </div>
                                         <br> 
                                         <div class="bottom">
@@ -189,8 +182,8 @@
                             <div class="col-md-8">
                                 <div class="row">
                                     <h2 class="popcolor">#Le tue informazioni</h2>
-                                    <h4><span class="glyphicon glyphicon-sunglasses" aria-hidden="true" style="margin-right: 10px;"></span>${userinfo.username}</h4>
-                                    <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="margin-right: 10px;"></span> ${userinfo.mail}</h5>
+                                    <h4><span class="glyphicon glyphicon-sunglasses" aria-hidden="true" style="margin-right: 10px;"></span>${userinfo.nickname}</h4>
+                                    <h5><span class="glyphicon glyphicon-envelope" aria-hidden="true" style="margin-right: 10px;"></span> ${userinfo.email}</h5>
                                     <h5><span class="glyphicon glyphicon-user" aria-hidden="true" style="margin-right: 10px;"></span> ${userinfo.nome} ${userinfo.cognome}</h5>
                                     <h5></h5>
                                 </div>
@@ -202,17 +195,17 @@
                                     <h2 class="popcolor">#I tuoi interessi</h2>
                                     
                                     <c:choose>
-                                        <c:when test="${empty userinfo.categoriaList}">
+                                        <c:when test="${empty userinfo.listaCategorie}">
                                             <h4>Non stai seguendo interessi.</h4>
                                             <button type="button" class="btn" data-toggle="modal" data-target="#updateInterests">Aggiungi interessi</button>
                                         </c:when>
                                         <c:otherwise>
                                             <ul class="list-inline">
-                                                <c:forEach items="${userinfo.categoriaList}" var="categoriesItem">
+                                                <c:forEach items="${userinfo.listaCategorie}" var="categorie">
                                                     <li>
                                                         <div class="btn-group" role="group" style="margin-bottom: 5px;">
-                                                            <a href="/WebCommunity/events?category=${categoriesItem.id}&name=${categoriesItem.nome}"  class="btn btn-default" style="color: black !important;">${categoriesItem.nome}</a>
-                                                            <a href="/WebCommunity/deleteInterest?id=${categoriesItem.id}" class="btn btn-default" style="height: 32px;"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                            <a href="/WebCommunity/events?category=${categorie.id}&name=${categorie.nome}"  class="btn btn-default" style="color: black !important;">${categorie.nome}</a>
+                                                            <a href="/WebCommunity/deleteInterest?id=${categorie.id}" class="btn btn-default" style="height: 32px;"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="line-height: 18px;"></span></a>
                                                         </div>
                                                     </li>
                                                 </c:forEach>
@@ -231,35 +224,23 @@
                                     <br>
                                     <h2 class="popcolor">#I tuoi commenti</h2>
                                     <c:choose>
-                                        <c:when test="${empty userinfo.postList}">
+                                        <c:when test="${empty userinfo.listaPost}">
                                             <h4>Non hai pubblicato commenti.</h4>
                                         </c:when>
                                         <c:otherwise>
-                                            <c:forEach items="${userinfo.postList}" var="postItem">
+                                            <c:forEach items="${userinfo.listaPost}" var="post">
                                                 <div class="row">
                                                     <div class="col-md-10 col-xs-10">
                                                         <div class="media" style="margin-bottom: 20px;">
-                                                            <div class="media-left">
-                                                                <img class="media-object img-circle user-img-circle-xsmall" src="
-                                                                    <c:choose>
-                                                                       <c:when test="${postItem.evento1.immagine != null}">
-                                                                           data:image/png;base64,${postItem.evento1.getImmagineString()}
-                                                                       </c:when>
-                                                                       <c:otherwise>
-                                                                           /WebCommunity/resources/event.png
-                                                                       </c:otherwise>
-                                                                   </c:choose>
-                                                                " alt="Event picture"/>
-                                                            </div>
                                                             <div class="media-body">
-                                                                <h4 class="media-heading">${postItem.evento1.titolo}</h4>
-                                                                <p>${postItem.commento}</p>
-                                                                <input type="hidden" class="rating" data-readonly value="${postItem.voto}"/>
+                                                                <h4 class="media-heading">${post.evento1.titolo}</h4>
+                                                                <p>${post.commento}</p>
+                                                                <input type="hidden" class="rating" data-readonly value="${post.voto}"/>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-xs-2">
-                                                        <a href="/WebCommunity/deletePost?id=${postItem.evento1.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        <a href="/WebCommunity/deletePost?id=${post.evento1.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -271,35 +252,23 @@
                                     <br>
                                     <h2 class="popcolor">#I tuoi eventi</h2>
                                     <c:choose>
-                                        <c:when test="${empty userinfo.eventoList}">
+                                        <c:when test="${empty userinfo.listaEventi}">
                                             <h4>Non hai pubblicato eventi.</h4>
                                         </c:when>
                                         <c:otherwise>
-                                            <c:forEach items="${userinfo.eventoList}" var="eventItem">
+                                            <c:forEach items="${userinfo.listaEventi}" var="evento">
                                                 <div class="row">
                                                     <div class="col-md-10 col-xs-10">
                                                         <div class="media" style="margin-bottom: 20px;">
-                                                            <div class="media-left">
-                                                                <img class="media-object img-circle user-img-circle-xsmall" src="
-                                                                    <c:choose>
-                                                                       <c:when test="${eventItem.immagine != null}">
-                                                                           data:image/png;base64,${eventItem.getImmagineString()}
-                                                                       </c:when>
-                                                                       <c:otherwise>
-                                                                           /WebCommunity/resources/event.png
-                                                                       </c:otherwise>
-                                                                   </c:choose>
-                                                                " alt="Event picture"/>
-                                                            </div>
                                                             <div class="media-body">
-                                                                <h4 class="media-heading">${eventItem.titolo}</h4>
-                                                                <p>${eventItem.luogo}</p>
+                                                                <h4 class="media-heading">${evento.titolo}</h4>
+                                                                <p>${evento.location}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-xs-2">
-                                                        <a href="/WebCommunity/removeUserEvent?id=${eventItem.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
-                                                        <a href="#" data-toggle="modal" data-target="#updateEvent" onclick="document.getElementById('eventoID').value = '${eventItem.id}';document.getElementById('titolo').value = '${eventItem.titolo}';document.getElementById('luogo').value = '${eventItem.luogo}';document.getElementById('descrizione').value = '${eventItem.descrizione}'" class="btn btn-circle" style="margin-top: 25px;  margin-right: 10px; float: right;"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        <a href="/WebCommunity/removeUserEvent?id=${evento.id}" class="btn btn-circle" style="margin-top: 25px; float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="line-height: 18px;"></span></a>
+                                                        <a href="#" data-toggle="modal" data-target="#updateEvent" onclick="document.getElementById('eventoID').value = '${evento.id}';document.getElementById('titolo').value = '${evento.titolo}';document.getElementById('luogo').value = '${evento.location}';document.getElementById('descrizione').value = '${evento.descrizione}'" class="btn btn-circle" style="margin-top: 25px;  margin-right: 10px; float: right;"><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="line-height: 18px;"></span></a>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -315,40 +284,7 @@
                 </div>
             </div>
         </div>
-                
-        <!-- Modal -->
-        <div class="modal fade" id="changeProfilePicture" role="dialog">
-            <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Cambia immagine profilo</h4>
-                    </div>
-                    <form method="POST" action="/WebCommunity/uploadFile" enctype="multipart/form-data">
-                        <div class="modal-body">
-                            <center>    
-                                Seleziona l'immagine da caricare poi fai click su Cambia immagine
-                                <br><br>
-                                <input type="file" class="btn" name="file"/>
-                                <br>
-                                <div class="progress progress-striped active" id="uploadState" style="width: 70%; visibility: collapse;">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"/>
-                                </div>
-                            </center>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn" onclick="document.getElementById('uploadState').style.visibility = 'visible'">
-                                Cambia immagine
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
         <!-- Modal -->
         <div class="modal fade" id="changePassword" role="dialog">
             <div class="modal-dialog">
@@ -366,10 +302,10 @@
                                 <div class="form-inline row">
                                     <div class="form-group col-sm-6">
                                         <input type="password" data-minlength="6" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
-                                        <div class="help-block">La password deve essere lunaga almeno 6 caratteri.</div>
+                                        <div class="help-block">La password deve essere almeno di 6 caratteri.</div>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Le password inserite non corrispondono" placeholder="Conferma" required>
+                                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Le password NON corrispondono" placeholder="Conferma" required>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
@@ -403,8 +339,8 @@
                                 <input type="text" class="form-control" id="titolo" name="titolo" placeholder="Titolo" required>
                             </div>
                             <div class="form-group">
-                                <label>Luogo</label>
-                                <input type="text" class="form-control" id="luogo" name="luogo" placeholder="Luogo" required>
+                                <label>Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="Location" required>
                             </div>
                             <div class="form-group">
                                 <label>Data</label>
@@ -414,8 +350,8 @@
                             <div class="form-group">
                                 <label>Categoria</label>
                                 <select class="form-control" id="categoria" name="categoria">
-                                    <c:forEach items="${categoriesList}" var="categoryItem">
-                                        <option value="${categoryItem.id}">${categoryItem.nome}</option>
+                                    <c:forEach items="${listaCategorie}" var="categoria">
+                                        <option value="${categoria.id}">${categoria.nome}</option>
                                     </c:forEach>
                                 </select>
                                 <div class="help-block">Questo campo deve essere riportato manualmente.</div>
@@ -457,7 +393,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Mail</label>
-                                <input type="email" class="form-control" name="mail" value="${userinfo.mail}" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
+                                <input type="email" class="form-control" name="mail" value="${userinfo.email}" placeholder="Mail" data-error="La mail specificata non è valida. Assicurati che sia nel formato: example@example.com" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -470,31 +406,7 @@
 
             </div>
         </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="deleteProfile" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Elimina account</h4>
-                    </div>
-                    <form action="/WebCommunity/doRemove" method="GET">
-                        <div class="modal-body">
-                            Eliminando il tuo account verranno eliminati anche tutti i post pubblicati e gli eventi da te creati. Sei sicuro di voler continuare?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn">Elimina</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-        
+                                
         <!-- Modal -->
         <div class="modal fade" id="updateInterests" role="dialog">
             <div class="modal-dialog">
@@ -508,12 +420,12 @@
                     <form action="/WebCommunity/doInterests" method="POST">
                         <div class="modal-body">
                             <ul>
-                                <c:forEach items="${categoriesList}" var="categoriesItem">
+                                <c:forEach items="${listaCategorie}" var="categorie">
                                     <li style="display:inline;">
                                         <div class="form-check">
                                             <label class="form-check-label">
-                                                <input type="checkbox" class="form-check-input" name="categories" value="${categoriesItem.id}">
-                                                ${categoriesItem.nome}
+                                                <input type="checkbox" class="form-check-input" name="categories" value="${categorie.id}">
+                                                ${categorie.nome}
                                             </label>
                                         </div>
                                     </li>

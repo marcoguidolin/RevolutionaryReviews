@@ -1,9 +1,3 @@
-<%-- 
-    Document   : events
-    Created on : 24-mar-2017, 17.25.56
-    Author     : guglielmo
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -16,8 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
-
+        
         <title>Eventi | SoundZone</title>
 
         <!-- Bootstrap Core CSS -->
@@ -78,8 +71,8 @@
                                             </div>
                                             <form class="form" method="POST" action="/WebCommunity/doLogin" id="login-nav">
                                                 <div class="form-group">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                                                    <label>Nickname</label>
+                                                    <input type="text" class="form-control" name="nickname" placeholder="Nickname" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label>
@@ -113,7 +106,7 @@
                                             " alt="user-picture" class="img-circle user-img-circle-small">
                                         </div>
                                         <div class="row">
-                                            Ciao ${userinfo.username}
+                                            Ciao ${userinfo.nickname}
                                             <br>
                                             <a href="/WebCommunity/profile"><b>Vai al tuo profilo</b></a>
                                         </div>
@@ -141,11 +134,11 @@
                 </div>
                 <div class="row">
                     <div class="card-deck">
-                        <c:forEach items="${artistsList}" var="artistItem">
+                        <c:forEach items="${listaArtisti}" var="artista">
                             <div class="card" style="width: 20rem; float: left; margin: 25px 10px 10px 10px;">
                                 <center><img class="card-img-top img-circle user-img-circle-large" style="margin-bottom: 25px;" src="/WebCommunity/resources/artist.png" alt="Artist picture"></center>
                                 <div class="card-block">
-                                    <h4 class="card-title text-center">${artistItem.nome} ${artistItem.cognome}</h4>
+                                    <h4 class="card-title text-center">${artista.nome} ${artista.cognome}</h4>
                                 </div>
                                 <div class="card-footer">
                                     <center><a href="#" class="btn">Guarda</a></center>

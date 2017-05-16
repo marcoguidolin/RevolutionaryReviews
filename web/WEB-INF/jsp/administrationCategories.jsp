@@ -1,9 +1,3 @@
-<%-- 
-    Document   : administrationCategories
-    Created on : 9-apr-2017, 19.45.27
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Categorie | Amministrazione</title>
 
@@ -84,21 +77,21 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Id</th>
                                 <th>Nome</th>
                                 <th>Immagine</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${categoriesList}" var="categoriesItem">
+                            <c:forEach items="${listaCategorie}" var="categorie">
                                 <tr>
-                                    <td>${categoriesItem.id}</td>
-                                    <td>${categoriesItem.nome}</td>
+                                    <td>${categorie.id}</td>
+                                    <td>${categorie.nome}</td>
                                     <td width="64px">
                                         <img src="
                                             <c:choose>
-                                                <c:when test="${categoriesItem.immagine != null}">
-                                                    data:image/png;base64,${categoriesItem.getImmagineString()}
+                                                <c:when test="${categorie.immagine != null}">
+                                                    data:image/png;base64,${categorie.getImmagineString()}
                                                 </c:when>
                                                 <c:otherwise>
                                                     /WebCommunity/resources/category.png
@@ -107,13 +100,13 @@
                                         " alt="user-picture" class="img-circle"/>
                                     </td>
                                     <td>
-                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveCategory?id=${categoriesItem.id}'" class="btn btn-default" style="float: right;">
+                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveCategory?id=${categorie.id}'" class="btn btn-default" style="float: right;">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#changePicture" class="btn btn-default" onclick="document.getElementById('cameraFormID').value = '${categoriesItem.id}'" style="float: right;">
+                                        <a href="#" data-toggle="modal" data-target="#changePicture" class="btn btn-default" onclick="document.getElementById('cameraFormID').value = '${categorie.id}'" style="float: right;">
                                             <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#updateCategory" class="btn btn-default" onclick="document.getElementById('categoriaID').value = '${categoriesItem.id}';document.getElementById('nome').value = '${categoriesItem.nome}';" style="float: right;">
+                                        <a href="#" data-toggle="modal" data-target="#updateCategory" class="btn btn-default" onclick="document.getElementById('categoriaID').value = '${categorie.id}';document.getElementById('nome').value = '${categorie.nome}';" style="float: right;">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
                                     </td>    
@@ -178,41 +171,6 @@
                 </div>
 
             </div>
-        </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="changePicture" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Cambia immagine</h4>
-                    </div>
-                    <form method="POST" action="/WebCommunity/administrationUploadCategoryImage" enctype="multipart/form-data">
-                        <input type="hidden" id="cameraFormID" name="categoryID" value="" />
-                        <div class="modal-body">
-                            <center>    
-                                Seleziona l'immagine da caricare poi fai click su Cambia immagine
-                                <br><br>
-                                <input type="file" class="btn" name="file"/>
-                                <br>
-                                <div class="progress progress-striped active" id="uploadState" style="width: 70%; visibility: collapse;">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"/>
-                                </div>
-                            </center>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn" onclick="document.getElementById('uploadState').style.visibility = 'visible'">
-                                Cambia immagine
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
+        </div>   
     </body>
 </html>

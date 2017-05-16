@@ -1,9 +1,3 @@
-<%-- 
-    Document   : administrationUsers
-    Created on : 9-apr-2017, 19.35.50
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +9,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
 
         <title>Utenti | Amministrazione</title>
 
@@ -82,21 +75,21 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Username</th>
+                                <th>Nickname</th>
                                 <th>Nome</th>
                                 <th>Cognome</th>
-                                <th>Mail</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${usersList}" var="userItem">
+                            <c:forEach items="${listaFollowers}" var="follower">
                                 <tr>
-                                    <td>${userItem.username}</td>
-                                    <td>${userItem.nome}</td>
-                                    <td>${userItem.cognome}</td>
-                                    <td>${userItem.mail}</td>
+                                    <td>${follower.nickname}</td>
+                                    <td>${follower.nome}</td>
+                                    <td>${follower.cognome}</td>
+                                    <td>${follower.email}</td>
                                     <td>
-                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveUser?username=${userItem.username}'" class="btn btn-default" style="float: right;">
+                                        <a onclick="window.location.href='/WebCommunity/administrationRemoveUser?username=${follower.nickname}'" class="btn btn-default" style="float: right;">
                                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                         </a>
                                     </td>

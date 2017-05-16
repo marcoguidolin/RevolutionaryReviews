@@ -1,9 +1,3 @@
-<%-- 
-    Document   : administrationArtists
-    Created on : 9-apr-2017, 19.48.57
-    Author     : matte
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Shopping List MVC">
-        <meta name="author" content="Matteo Parlato">
+
 
         <title>Artisti | Amministrazione</title>
 
@@ -82,13 +76,13 @@
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Cognome</th>
-                    <c:forEach items="${artistsList}" var="artistItemz">
+                    <c:forEach items="${listaArtisti}" var="artisti">
                         <tr>
-                            <td>${artistItemz.id}</td>
-                            <td>${artistItemz.nome}</td>
-                            <td>${artistItemz.cognome}</td>
+                            <td>${artisti.id}</td>
+                            <td>${artisti.nome}</td>
+                            <td>${artisti.cognome}</td>
                             <td>
-                                <a onclick="window.location.href='/WebCommunity/doRemoveArtistAdmin?id=${artistItemz.id}'" class="btn btn-default" style="float: right;">
+                                <a onclick="window.location.href='/WebCommunity/doRemoveArtistAdmin?id=${artisti.id}'" class="btn btn-default" style="float: right;">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </a>
                             </td>
